@@ -1,0 +1,107 @@
+Thu Apr  2 09:45:23 PM CDT 2026 === SWEEP 2 GPU0 START ===
+Thu Apr  2 09:45:23 PM CDT 2026 === s2_layers9 ===
+  s2_layers9: val=3.69595309 sliding=— artifact=5.89MB step_ms=1268.27 params=24703564
+Thu Apr  2 09:50:29 PM CDT 2026 === s2_layers10 ===
+  s2_layers10: val=3.72891959 sliding=— artifact=6.49MB step_ms=1420.43 params=27327572
+Thu Apr  2 09:55:56 PM CDT 2026 === s2_layers11 ===
+  s2_layers11: val=3.75774353 sliding=— artifact=7.10MB step_ms=1559.89 params=29951068
+Thu Apr  2 10:01:02 PM CDT 2026 === s2_layers12 ===
+  s2_layers12: val=3.78339209 sliding=— artifact=7.62MB step_ms=1688.61 params=32575076
+Thu Apr  2 10:07:21 PM CDT 2026 === s2_layers13 ===
+  s2_layers13: val=3.80036347 sliding=— artifact=8.23MB step_ms=1819.75 params=35198572
+Thu Apr  2 10:14:08 PM CDT 2026 === s2_layers14 ===
+  s2_layers14: val=3.82592655 sliding=— artifact=8.85MB step_ms=1953.28 params=37822580
+Thu Apr  2 10:21:21 PM CDT 2026 === s2_qk1.0_sc20.0 ===
+  s2_qk1.0_sc20.0: val=3.75578981 sliding=— artifact=7.10MB step_ms=1550.24 params=29951068
+Thu Apr  2 10:27:02 PM CDT 2026 === s2_qk1.0_sc30.0 ===
+  s2_qk1.0_sc30.0: val=3.75773482 sliding=— artifact=7.08MB step_ms=1559.25 params=29951068
+Thu Apr  2 10:32:03 PM CDT 2026 === s2_qk1.0_sc50.0 ===
+  s2_qk1.0_sc50.0: val=3.75936335 sliding=— artifact=7.10MB step_ms=1550.42 params=29951068
+Thu Apr  2 10:37:45 PM CDT 2026 === s2_qk1.5_sc20.0 ===
+  s2_qk1.5_sc20.0: val=3.75574122 sliding=— artifact=7.09MB step_ms=1562.02 params=29951068
+Thu Apr  2 10:42:45 PM CDT 2026 === s2_qk1.5_sc30.0 ===
+  s2_qk1.5_sc30.0: val=3.75773804 sliding=— artifact=7.10MB step_ms=1560.02 params=29951068
+Thu Apr  2 10:47:49 PM CDT 2026 === s2_qk1.5_sc50.0 ===
+  s2_qk1.5_sc50.0: val=3.75920757 sliding=— artifact=7.09MB step_ms=1561.49 params=29951068
+Thu Apr  2 10:52:48 PM CDT 2026 === s2_qk2.0_sc20.0 ===
+  s2_qk2.0_sc20.0: val=3.75574898 sliding=— artifact=7.10MB step_ms=1562.78 params=29951068
+Thu Apr  2 10:57:49 PM CDT 2026 === s2_qk2.0_sc30.0 ===
+  s2_qk2.0_sc30.0: val=3.75773778 sliding=— artifact=7.09MB step_ms=1561.45 params=29951068
+Thu Apr  2 11:02:52 PM CDT 2026 === s2_qk2.0_sc50.0 ===
+  s2_qk2.0_sc50.0: val=3.75923135 sliding=— artifact=7.05MB step_ms=1562.61 params=29951068
+Thu Apr  2 11:07:51 PM CDT 2026 === s2_qk2.5_sc20.0 ===
+  s2_qk2.5_sc20.0: val=3.75578368 sliding=— artifact=7.09MB step_ms=1563.53 params=29951068
+Thu Apr  2 11:12:50 PM CDT 2026 === s2_qk2.5_sc30.0 ===
+  s2_qk2.5_sc30.0: val=3.75773322 sliding=— artifact=7.09MB step_ms=1563.96 params=29951068
+Thu Apr  2 11:17:49 PM CDT 2026 === s2_qk2.5_sc50.0 ===
+  s2_qk2.5_sc50.0: val=3.75931451 sliding=— artifact=7.10MB step_ms=1562.80 params=29951068
+Thu Apr  2 11:22:48 PM CDT 2026 === s2_ema0.99 ===
+  s2_ema0.99: val=3.53595543 sliding=— artifact=7.19MB step_ms=1561.95 params=29951068
+Thu Apr  2 11:27:48 PM CDT 2026 === s2_ema0.995 ===
+  s2_ema0.995: val=3.61763765 sliding=— artifact=7.11MB step_ms=1560.97 params=29951068
+Thu Apr  2 11:32:47 PM CDT 2026 === s2_ema0.997 ===
+  s2_ema0.997: val=3.75772027 sliding=— artifact=7.09MB step_ms=1563.70 params=29951068
+Thu Apr  2 11:37:45 PM CDT 2026 === s2_ema0.999 ===
+  s2_ema0.999: val=3.99709298 sliding=— artifact=6.96MB step_ms=1563.76 params=29951068
+Thu Apr  2 11:42:44 PM CDT 2026 === s2_ema0.9995 ===
+  s2_ema0.9995: val=4.05641328 sliding=— artifact=7.01MB step_ms=1563.51 params=29951068
+Thu Apr  2 11:47:43 PM CDT 2026 === s2_batch393216 ===
+  s2_batch393216: val=3.58583581 sliding=— artifact=7.16MB step_ms=774.16 params=29951068
+Thu Apr  2 11:52:56 PM CDT 2026 === s2_batch524288 ===
+  s2_batch524288: val=3.64290419 sliding=— artifact=7.11MB step_ms=1031.40 params=29951068
+Thu Apr  2 11:58:17 PM CDT 2026 === s2_batch786432 ===
+  s2_batch786432: val=3.75773832 sliding=— artifact=7.05MB step_ms=1564.01 params=29951068
+Fri Apr  3 12:03:16 AM CDT 2026 === s2_batch1048576 ===
+  s2_batch1048576: val=3.83400206 sliding=— artifact=7.02MB step_ms=2071.53 params=29951068
+
+Fri Apr  3 12:09:00 AM CDT 2026 === SWEEP 2 GPU0 COMPLETE ===
+All results:
+  s2_12L_brotli: val=3.79994665 sliding=— artifact=6.56MB step_ms=1771.69 params=32575076
+  s2_12L_lzma: val=3.79994570 sliding=— artifact=6.89MB step_ms=1774.70 params=32575076
+  s2_12L_m6_a5: val=3.79996442 sliding=— artifact=4.35MB step_ms=1773.80 params=32575076
+  s2_12L_m8_a4: val=3.7809 sliding=— artifact=—MB step_ms=1774.42 params=32575076
+  s2_12L_m8_a5: val=3.79993919 sliding=— artifact=6.88MB step_ms=1772.36 params=32575076
+  s2_12L_m8_a6: val=3.79995122 sliding=— artifact=7.63MB step_ms=1773.30 params=32575076
+  s2_13L_m6_a5: val=3.81743977 sliding=— artifact=4.67MB step_ms=1918.64 params=35198572
+  s2_13L_m8_a4: val=3.7982 sliding=— artifact=—MB step_ms=1912.09 params=35198572
+  s2_13L_m8_a5: val=3.81734488 sliding=— artifact=7.43MB step_ms=1908.57 params=35198572
+  s2_batch1048576: val=3.83400206 sliding=— artifact=7.02MB step_ms=2071.53 params=29951068
+  s2_batch393216: val=3.58583581 sliding=— artifact=7.16MB step_ms=774.16 params=29951068
+  s2_batch524288: val=3.64290419 sliding=— artifact=7.11MB step_ms=1031.40 params=29951068
+  s2_batch786432: val=3.75773832 sliding=— artifact=7.05MB step_ms=1564.01 params=29951068
+  s2_ema0.995: val=3.61763765 sliding=— artifact=7.11MB step_ms=1560.97 params=29951068
+  s2_ema0.997: val=3.75772027 sliding=— artifact=7.09MB step_ms=1563.70 params=29951068
+  s2_ema0.9995: val=4.05641328 sliding=— artifact=7.01MB step_ms=1563.51 params=29951068
+  s2_ema0.999: val=3.99709298 sliding=— artifact=6.96MB step_ms=1563.76 params=29951068
+  s2_ema0.99: val=3.53595543 sliding=— artifact=7.19MB step_ms=1561.95 params=29951068
+  s2_layers10: val=3.72891959 sliding=— artifact=6.49MB step_ms=1420.43 params=27327572
+  s2_layers11: val=3.75774353 sliding=— artifact=7.10MB step_ms=1559.89 params=29951068
+  s2_layers12: val=3.78339209 sliding=— artifact=7.62MB step_ms=1688.61 params=32575076
+  s2_layers13: val=3.80036347 sliding=— artifact=8.23MB step_ms=1819.75 params=35198572
+  s2_layers14: val=3.82592655 sliding=— artifact=8.85MB step_ms=1953.28 params=37822580
+  s2_layers9: val=3.69595309 sliding=— artifact=5.89MB step_ms=1268.27 params=24703564
+  s2_mlp3.0_13L_q85: val=3.80020272 sliding=— artifact=6.75MB step_ms=1805.87 params=31790700
+  s2_mlp3.0_14L_q85: val=3.81732940 sliding=— artifact=7.25MB step_ms=1938.58 params=34152564
+  s2_mlp3.5_11L_q85: val=3.77330850 sliding=— artifact=6.42MB step_ms=1625.61 params=29951068
+  s2_mlp3.5_12L_q85: val=3.79994752 sliding=— artifact=6.89MB step_ms=1773.40 params=32575076
+  s2_mlp3.5_13L_q85: val=3.81737143 sliding=— artifact=7.43MB step_ms=1913.55 params=35198572
+  s2_mlp4.0_11L_q85: val=3.78353009 sliding=— artifact=6.91MB step_ms=1709.21 params=32834652
+  s2_mlp4.0_12L_q85: val=3.80782344 sliding=— artifact=7.49MB step_ms=1847.24 params=35720804
+  s2_qk1.0_sc20.0: val=3.75578981 sliding=— artifact=7.10MB step_ms=1550.24 params=29951068
+  s2_qk1.0_sc30.0: val=3.75773482 sliding=— artifact=7.08MB step_ms=1559.25 params=29951068
+  s2_qk1.0_sc50.0: val=3.75936335 sliding=— artifact=7.10MB step_ms=1550.42 params=29951068
+  s2_qk1.5_sc20.0: val=3.75574122 sliding=— artifact=7.09MB step_ms=1562.02 params=29951068
+  s2_qk1.5_sc30.0: val=3.75773804 sliding=— artifact=7.10MB step_ms=1560.02 params=29951068
+  s2_qk1.5_sc50.0: val=3.75920757 sliding=— artifact=7.09MB step_ms=1561.49 params=29951068
+  s2_qk2.0_sc20.0: val=3.75574898 sliding=— artifact=7.10MB step_ms=1562.78 params=29951068
+  s2_qk2.0_sc30.0: val=3.75773778 sliding=— artifact=7.09MB step_ms=1561.45 params=29951068
+  s2_qk2.0_sc50.0: val=3.75923135 sliding=— artifact=7.05MB step_ms=1562.61 params=29951068
+  s2_qk2.5_sc20.0: val=3.75578368 sliding=— artifact=7.09MB step_ms=1563.53 params=29951068
+  s2_qk2.5_sc30.0: val=3.75773322 sliding=— artifact=7.09MB step_ms=1563.96 params=29951068
+  s2_qk2.5_sc50.0: val=3.75931451 sliding=— artifact=7.10MB step_ms=1562.80 params=29951068
+  s2_quant_m6_a5: val=3.77340778 sliding=— artifact=4.09MB step_ms=1627.58 params=29951068
+  s2_quant_m6_a6: val=3.77335128 sliding=— artifact=4.77MB step_ms=1629.35 params=29951068
+  s2_quant_m8_a4: val=3.7560 sliding=— artifact=—MB step_ms=1631.10 params=29951068
+  s2_quant_m8_a5: val=3.77337171 sliding=— artifact=6.41MB step_ms=1627.40 params=29951068
+  s2_quant_m8_a6: val=3.76524198 sliding=— artifact=7.08MB step_ms=1611.42 params=29951068
+  s2_quant_m8_a8: val=3.77334260 sliding=— artifact=8.30MB step_ms=1628.65 params=29951068

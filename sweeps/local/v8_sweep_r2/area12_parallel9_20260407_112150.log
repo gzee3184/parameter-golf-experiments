@@ -1,0 +1,119 @@
+logs/d6c489be-9292-4ded-b25b-b599b85cda14.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:34524255
+arch_config: vocab_size=4096 num_layers=11 model_dim=512 mlp_mult=4.0 muon_wd=0.09 adam_wd=0.02 embed_wd=0.09 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True qk_gain_init=5.0 recur_layers=[3, 4, 5] recur_start_step=2000 ve_enabled=True ve_dim=128 ve_layers=[9, 10] parallel_start_layer=9
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:10800.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3151 val_bpb:3.6136 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3144 train_time:1515ms step_avg:1514.88ms
+step:2/20000 train_loss:13.9825 train_time:3016ms step_avg:1508.10ms
+step:3/20000 train_loss:12.0610 train_time:4659ms step_avg:1553.08ms
+step:4/20000 train_loss:9.8606 train_time:6309ms step_avg:1577.17ms
+step:5/20000 train_loss:8.2496 train_time:7961ms step_avg:1592.29ms
+step:6/20000 train_loss:7.3107 train_time:9614ms step_avg:1602.38ms
+step:7/20000 train_loss:6.8760 train_time:11267ms step_avg:1609.55ms
+step:8/20000 train_loss:6.7592 train_time:12921ms step_avg:1615.08ms
+step:9/20000 train_loss:6.6397 train_time:14575ms step_avg:1619.40ms
+step:10/20000 train_loss:6.5166 train_time:16231ms step_avg:1623.13ms
+step:100/20000 train_loss:4.1795 train_time:166705ms step_avg:1667.05ms
+step:200/20000 train_loss:3.3949 train_time:332937ms step_avg:1664.68ms
+step:300/20000 train_loss:3.1981 train_time:499279ms step_avg:1664.26ms
+step:400/20000 train_loss:3.0972 train_time:665429ms step_avg:1663.57ms
+step:500/20000 train_loss:3.0455 train_time:831557ms step_avg:1663.11ms
+step:600/20000 train_loss:2.9840 train_time:997713ms step_avg:1662.85ms
+step:700/20000 train_loss:2.9790 train_time:1164010ms step_avg:1662.87ms
+step:800/20000 train_loss:2.9532 train_time:1330237ms step_avg:1662.80ms
+step:900/20000 train_loss:2.9279 train_time:1496635ms step_avg:1662.93ms
+step:1000/20000 train_loss:2.9209 train_time:1662952ms step_avg:1662.95ms
+step:1100/20000 train_loss:2.9132 train_time:1829228ms step_avg:1662.93ms
+step:1200/20000 train_loss:2.8778 train_time:1995393ms step_avg:1662.83ms
+step:1300/20000 train_loss:2.8885 train_time:2161594ms step_avg:1662.76ms
+step:1400/20000 train_loss:2.8634 train_time:2327993ms step_avg:1662.85ms
+step:1500/20000 train_loss:2.8391 train_time:2494584ms step_avg:1663.06ms
+step:1600/20000 train_loss:2.8517 train_time:2661140ms step_avg:1663.21ms
+step:1700/20000 train_loss:2.8369 train_time:2827863ms step_avg:1663.45ms
+step:1800/20000 train_loss:2.7888 train_time:2994735ms step_avg:1663.74ms
+step:1900/20000 train_loss:2.8008 train_time:3161563ms step_avg:1663.98ms
+step:2000/20000 train_loss:2.8213 train_time:3328415ms step_avg:1664.21ms
+recurrence:activated at step 2000, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+step:2100/20000 train_loss:2.8041 train_time:3565882ms step_avg:1698.04ms
+step:2200/20000 train_loss:2.8098 train_time:3786129ms step_avg:1720.97ms
+step:2300/20000 train_loss:2.7783 train_time:4006263ms step_avg:1741.85ms
+step:2400/20000 train_loss:2.8067 train_time:4226478ms step_avg:1761.03ms
+step:2500/20000 train_loss:2.8022 train_time:4446704ms step_avg:1778.68ms
+step:2600/20000 train_loss:2.7754 train_time:4666718ms step_avg:1794.89ms
+step:2700/20000 train_loss:2.8042 train_time:4886850ms step_avg:1809.94ms
+step:2800/20000 train_loss:2.7383 train_time:5107023ms step_avg:1823.94ms
+step:2900/20000 train_loss:2.7466 train_time:5327018ms step_avg:1836.90ms
+step:3000/20000 train_loss:2.7205 train_time:5547107ms step_avg:1849.04ms
+step:3100/20000 train_loss:2.7057 train_time:5767058ms step_avg:1860.34ms
+step:3200/20000 train_loss:2.7244 train_time:5987134ms step_avg:1870.98ms
+step:3300/20000 train_loss:2.7158 train_time:6207303ms step_avg:1881.00ms
+step:3400/20000 train_loss:2.7208 train_time:6427565ms step_avg:1890.46ms
+step:3500/20000 train_loss:2.6972 train_time:6647493ms step_avg:1899.28ms
+step:3600/20000 train_loss:2.6961 train_time:6867494ms step_avg:1907.64ms
+step:3700/20000 train_loss:2.6877 train_time:7087440ms step_avg:1915.52ms
+step:3800/20000 train_loss:2.6832 train_time:7307587ms step_avg:1923.05ms
+step:3900/20000 train_loss:2.6743 train_time:7527880ms step_avg:1930.23ms
+step:4000/20000 train_loss:2.6589 train_time:7747824ms step_avg:1936.96ms
+step:4000/20000 val_loss:2.6555 val_bpb:1.1540 train_time:7747967ms step_avg:1936.99ms
+step:4100/20000 train_loss:2.6563 train_time:7968031ms step_avg:1943.42ms
+step:4200/20000 train_loss:2.6507 train_time:8188053ms step_avg:1949.54ms
+step:4300/20000 train_loss:2.6423 train_time:8408005ms step_avg:1955.35ms
+step:4400/20000 train_loss:2.6200 train_time:8627781ms step_avg:1960.86ms
+step:4500/20000 train_loss:2.6239 train_time:8847638ms step_avg:1966.14ms
+step:4600/20000 train_loss:2.6366 train_time:9067277ms step_avg:1971.15ms
+step:4700/20000 train_loss:2.6155 train_time:9286945ms step_avg:1975.95ms
+step:4800/20000 train_loss:2.6331 train_time:9506537ms step_avg:1980.53ms
+step:4900/20000 train_loss:2.6238 train_time:9725996ms step_avg:1984.90ms
+step:5000/20000 train_loss:2.5595 train_time:9945484ms step_avg:1989.10ms
+step:5100/20000 train_loss:2.5834 train_time:10164974ms step_avg:1993.13ms
+step:5200/20000 train_loss:2.5767 train_time:10384510ms step_avg:1997.02ms
+step:5300/20000 train_loss:2.5466 train_time:10604345ms step_avg:2000.82ms
+step:5390/20000 val_loss:2.5369 val_bpb:1.1025 train_time:10802228ms step_avg:2004.12ms
+stopping_early: wallclock_cap train_time:10802228ms step:5390/20000
+peak memory allocated: 32604 MiB reserved: 32946 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:2.5344 val_bpb:1.1014 eval_time:36967ms
+Serialized model: 132872951 bytes
+Code size: 100344 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (64 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 64 sequences in 211.7s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 67 layers
+quant_config: bits_mlp=6 bits_attn=6 bits_embed=8
+budget: artifact_limit=16777216 code=100344 model_budget=16676872 (15.90MB)
+selective_prune: 8552014 +/-1 candidates, model_unpruned=15.88MB model_budget=15.90MB
+selective_prune: already fits, no pruning needed
+Serialized model brotli: 16656176 bytes
+Total submission size brotli: 16756520 bytes
+final_int6_roundtrip val_loss:2.5696 val_bpb:1.1167 eval_time:45278ms
+final_int6_roundtrip_exact val_loss:2.56963656 val_bpb:1.11673445

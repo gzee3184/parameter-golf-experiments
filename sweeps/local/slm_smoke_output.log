@@ -1,0 +1,72 @@
+
+Sat Apr  4 05:16:30 AM CDT 2026 ═══════════════════════════════════════
+  TEST: backward_compat_5L
+═══════════════════════════════════════
+  backward_compat_5L: prequant=3.2494 quant=3.26531555 steps=79 art=2.35MB params=16526376
+  slm_config: attn_pattern='' attn_layers=[0, 1, 2, 3, 4] num_attn=5/5 unique_attn_banks=5
+
+Sat Apr  4 05:20:03 AM CDT 2026 ═══════════════════════════════════════
+  TEST: slm_7L_uniform2
+═══════════════════════════════════════
+  FAILED (exit code 1)
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+<project>/local_tests/train_gpt_slm.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-04_05:20:07
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 446211)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+
+Sat Apr  4 05:20:07 AM CDT 2026 ═══════════════════════════════════════
+  TEST: slm_7L_sandwich2
+═══════════════════════════════════════
+  FAILED (exit code 1)
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+<project>/local_tests/train_gpt_slm.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-04_05:20:11
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 446405)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+
+Sat Apr  4 05:20:12 AM CDT 2026 ═══════════════════════════════════════
+  TEST: shared_attn_7L_3unique
+═══════════════════════════════════════
+  shared_attn_7L_3unique: prequant=3.3356 quant=3.34967186 steps=57 art=2.65MB params=19152440
+  slm_config: attn_pattern='' attn_layers=[0, 1, 2, 3, 4, 5, 6] num_attn=7/7 unique_attn_banks=3
+
+Sat Apr  4 05:24:32 AM CDT 2026 ═══════════════════════════════════════
+  TEST: combined_9L_5attn_3unique
+═══════════════════════════════════════
+  combined_9L_5attn_3unique: prequant=3.3321 quant=3.34655082 steps=58 art=3.05MB params=23349288
+  slm_config: attn_pattern='uniform:2' attn_layers=[0, 2, 4, 6, 8] num_attn=5/9 unique_attn_banks=3
+
+Sat Apr  4 05:28:49 AM CDT 2026 ═══════════════════════════════════════
+  SOME TESTS FAILED
+═══════════════════════════════════════

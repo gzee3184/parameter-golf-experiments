@@ -1,0 +1,20 @@
+Fri Apr  3 08:34:27 PM CDT 2026 ═══════════════════════════════════════
+  13L + int6/int5 — submission-ready artifact
+═══════════════════════════════════════
+Fri Apr  3 08:34:27 PM CDT 2026 === v4R_13L_q65 ===
+v4R_13L_q65 FAILED
+  v4R_13L_q65: prequant= quant= sliding= steps=20 step_ms= art=—MB params=39613544
+
+Fri Apr  3 08:35:19 PM CDT 2026 ═══════════════════════════════════════
+  TTT on 13L int6/int5 model
+═══════════════════════════════════════
+Fri Apr  3 08:35:19 PM CDT 2026 === v4R_q65_ttt_adamw_con ===
+v4R_q65_ttt_adamw_con FAILED
+  v4R_q65_ttt_adamw_con: ttt= roundtrip= sliding=
+Fri Apr  3 08:35:23 PM CDT 2026 === v4R_q65_ttt_adamw_mod ===
+v4R_q65_ttt_adamw_mod FAILED
+  v4R_q65_ttt_adamw_mod: ttt= roundtrip= sliding=
+
+Fri Apr  3 08:35:27 PM CDT 2026 ═══════════════════════════════════════
+  ALL DONE
+═══════════════════════════════════════

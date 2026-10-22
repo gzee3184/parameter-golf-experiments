@@ -1,0 +1,56 @@
+logs/41de2cde-a708-490a-811c-2c1bd32c153f.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:34647138
+arch_config: vocab_size=4096 num_layers=11 model_dim=512 mlp_mult=4.0 muon_wd=0.09 adam_wd=0.02 embed_wd=0.09 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True qk_gain_init=5.0 recur_layers=[3, 4, 5] recur_start_step=2000 ve_enabled=True ve_dim=128 ve_layers=[9, 10] parallel_start_layer=7
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:10800.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+W0409 03:00:15.058000 1921868 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0409 03:00:15.058000 1921868 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 1921958 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 1921868 got signal: 15

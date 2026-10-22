@@ -1,0 +1,204 @@
+Wed Apr  8 05:16:57 AM CDT 2026 ── Test E: Parallel Scalar Grad Scale (2.5x) on GPU 1 ──
+Log: <project>/local_tests/v8.5_sweep/E_parallel_grad_scale_20260408_051657.log
+logs/e1b52b3e-537d-450b-aa16-872dd5c64a85.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:34524255
+arch_config: vocab_size=4096 num_layers=11 model_dim=512 mlp_mult=4.0 muon_wd=0.09 adam_wd=0.02 embed_wd=0.09 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True qk_gain_init=5.0 recur_layers=[3, 4, 5] recur_start_step=2000 ve_enabled=True ve_dim=128 ve_layers=[9, 10] parallel_start_layer=7
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:10800.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+parallel_scalar_grad_scale=2.5 on 16 params (blocks 7-10)
+step:0/20000 val_loss:8.3151 val_bpb:3.6136 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3144 train_time:1521ms step_avg:1521.01ms
+step:2/20000 train_loss:12.3122 train_time:3029ms step_avg:1514.70ms
+step:3/20000 train_loss:10.1235 train_time:4678ms step_avg:1559.29ms
+step:4/20000 train_loss:8.1193 train_time:6330ms step_avg:1582.60ms
+step:5/20000 train_loss:7.0413 train_time:7983ms step_avg:1596.65ms
+step:6/20000 train_loss:6.6018 train_time:9637ms step_avg:1606.22ms
+step:7/20000 train_loss:6.4168 train_time:11294ms step_avg:1613.49ms
+step:8/20000 train_loss:6.3505 train_time:12953ms step_avg:1619.14ms
+step:9/20000 train_loss:6.2372 train_time:14613ms step_avg:1623.70ms
+step:10/20000 train_loss:6.1021 train_time:16275ms step_avg:1627.49ms
+step:100/20000 train_loss:4.1918 train_time:167378ms step_avg:1673.78ms
+step:200/20000 train_loss:3.3883 train_time:333913ms step_avg:1669.57ms
+step:300/20000 train_loss:3.1854 train_time:500560ms step_avg:1668.53ms
+step:400/20000 train_loss:3.0909 train_time:667359ms step_avg:1668.40ms
+step:500/20000 train_loss:3.0583 train_time:834248ms step_avg:1668.50ms
+step:600/20000 train_loss:2.9842 train_time:1001279ms step_avg:1668.80ms
+step:700/20000 train_loss:2.9777 train_time:1168296ms step_avg:1668.99ms
+step:800/20000 train_loss:2.9519 train_time:1335346ms step_avg:1669.18ms
+step:900/20000 train_loss:2.9257 train_time:1502362ms step_avg:1669.29ms
+step:1000/20000 train_loss:2.9200 train_time:1669440ms step_avg:1669.44ms
+step:1100/20000 train_loss:2.9106 train_time:1836849ms step_avg:1669.86ms
+step:1200/20000 train_loss:2.8765 train_time:2004312ms step_avg:1670.26ms
+step:1300/20000 train_loss:2.8881 train_time:2171550ms step_avg:1670.42ms
+step:1400/20000 train_loss:2.8611 train_time:2338888ms step_avg:1670.63ms
+step:1500/20000 train_loss:2.8385 train_time:2506343ms step_avg:1670.90ms
+step:1600/20000 train_loss:2.8478 train_time:2674093ms step_avg:1671.31ms
+step:1700/20000 train_loss:2.8372 train_time:2842043ms step_avg:1671.79ms
+step:1800/20000 train_loss:2.7861 train_time:3010121ms step_avg:1672.29ms
+step:1900/20000 train_loss:2.7970 train_time:3178250ms step_avg:1672.76ms
+step:2000/20000 train_loss:2.8173 train_time:3346384ms step_avg:1673.19ms
+recurrence:activated at step 2000, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+step:2100/20000 train_loss:2.7946 train_time:3584449ms step_avg:1706.88ms
+step:2200/20000 train_loss:2.8031 train_time:3805780ms step_avg:1729.90ms
+step:2300/20000 train_loss:2.7672 train_time:4027235ms step_avg:1750.97ms
+step:2400/20000 train_loss:2.7987 train_time:4248376ms step_avg:1770.16ms
+step:2500/20000 train_loss:2.7996 train_time:4469600ms step_avg:1787.84ms
+step:2600/20000 train_loss:2.7785 train_time:4690844ms step_avg:1804.17ms
+step:2700/20000 train_loss:2.7856 train_time:4912048ms step_avg:1819.28ms
+step:2800/20000 train_loss:2.7629 train_time:5133392ms step_avg:1833.35ms
+step:2900/20000 train_loss:2.7578 train_time:5354741ms step_avg:1846.46ms
+step:3000/20000 train_loss:2.7427 train_time:5575767ms step_avg:1858.59ms
+step:3100/20000 train_loss:2.7272 train_time:5796936ms step_avg:1869.98ms
+step:3200/20000 train_loss:2.7533 train_time:6018076ms step_avg:1880.65ms
+step:3300/20000 train_loss:2.7456 train_time:6239209ms step_avg:1890.67ms
+step:3400/20000 train_loss:2.7537 train_time:6460577ms step_avg:1900.17ms
+step:3500/20000 train_loss:2.7402 train_time:6681884ms step_avg:1909.11ms
+step:3600/20000 train_loss:2.7414 train_time:6903092ms step_avg:1917.53ms
+step:3700/20000 train_loss:2.7436 train_time:7124218ms step_avg:1925.46ms
+step:3800/20000 train_loss:2.7389 train_time:7345302ms step_avg:1932.97ms
+step:3900/20000 train_loss:2.7378 train_time:7566370ms step_avg:1940.09ms
+step:4000/20000 train_loss:2.7303 train_time:7787427ms step_avg:1946.86ms
+step:4000/20000 val_loss:2.7254 val_bpb:1.1844 train_time:7787565ms step_avg:1946.89ms
+step:4100/20000 train_loss:2.7316 train_time:8009340ms step_avg:1953.50ms
+step:4200/20000 train_loss:2.7174 train_time:8230543ms step_avg:1959.65ms
+step:4300/20000 train_loss:2.7053 train_time:8451976ms step_avg:1965.58ms
+step:4400/20000 train_loss:2.6799 train_time:8673138ms step_avg:1971.17ms
+step:4500/20000 train_loss:2.6807 train_time:8894010ms step_avg:1976.45ms
+step:4600/20000 train_loss:2.6906 train_time:9115282ms step_avg:1981.58ms
+step:4700/20000 train_loss:2.6640 train_time:9336925ms step_avg:1986.58ms
+step:4800/20000 train_loss:2.6772 train_time:9558308ms step_avg:1991.31ms
+step:4900/20000 train_loss:2.6633 train_time:9779558ms step_avg:1995.83ms
+step:5000/20000 train_loss:2.5934 train_time:10000581ms step_avg:2000.12ms
+step:5100/20000 train_loss:2.6124 train_time:10221520ms step_avg:2004.22ms
+step:5200/20000 train_loss:2.5987 train_time:10442584ms step_avg:2008.19ms
+step:5300/20000 train_loss:2.5638 train_time:10663283ms step_avg:2011.94ms
+step:5362/20000 val_loss:2.5531 val_bpb:1.1095 train_time:10800178ms step_avg:2014.21ms
+stopping_early: wallclock_cap train_time:10800178ms step:5362/20000
+peak memory allocated: 32795 MiB reserved: 33066 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:2.5506 val_bpb:1.1085 eval_time:37194ms
+Serialized model: 132872951 bytes
+Code size: 107945 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (64 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 64 sequences in 212.3s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 67 layers
+quant_config: bits_mlp=6 bits_attn=6 bits_embed=8
+budget: artifact_limit=16777216 code=107945 model_budget=16669271 (15.90MB)
+selective_prune: 7365413 +/-1 candidates, model_unpruned=16.92MB model_budget=15.90MB
+selective_prune: full +/-1 prune=14.73MB
+selective_prune: pruning 3534941/7365413 +/-1 values (48.0%)
+Serialized model brotli: 16668181 bytes
+Total submission size brotli: 16776126 bytes
+final_int6_roundtrip val_loss:2.6025 val_bpb:1.1310 eval_time:44276ms
+final_int6_roundtrip_exact val_loss:2.60250502 val_bpb:1.13101870
+Wed Apr  8 08:42:59 AM CDT 2026 Test E complete
+
+Wed Apr  8 08:42:59 AM CDT 2026 ── Test C: Skip Repeat Attention on GPU 1 ──
+Log: <project>/local_tests/v8.5_sweep/C_skip_repeat_attn_20260408_084259.log
+logs/f644fe19-aa27-4f63-bb3c-44f267737c0b.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:34524255
+arch_config: vocab_size=4096 num_layers=11 model_dim=512 mlp_mult=4.0 muon_wd=0.09 adam_wd=0.02 embed_wd=0.09 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True qk_gain_init=5.0 recur_layers=[3, 4, 5] recur_start_step=2000 ve_enabled=True ve_dim=128 ve_layers=[9, 10] parallel_start_layer=7
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:10800.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3151 val_bpb:3.6136 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3144 train_time:1528ms step_avg:1528.13ms
+step:2/20000 train_loss:12.3123 train_time:3043ms step_avg:1521.50ms
+step:3/20000 train_loss:10.1236 train_time:4699ms step_avg:1566.23ms
+step:4/20000 train_loss:8.1194 train_time:6360ms step_avg:1589.89ms
+step:5/20000 train_loss:7.0413 train_time:8024ms step_avg:1604.72ms
+step:6/20000 train_loss:6.6018 train_time:9689ms step_avg:1614.79ms
+step:7/20000 train_loss:6.4168 train_time:11352ms step_avg:1621.72ms
+step:8/20000 train_loss:6.3505 train_time:13016ms step_avg:1627.06ms
+step:9/20000 train_loss:6.2372 train_time:14683ms step_avg:1631.45ms
+step:10/20000 train_loss:6.1021 train_time:16351ms step_avg:1635.09ms
+step:100/20000 train_loss:4.1942 train_time:167334ms step_avg:1673.34ms
+step:200/20000 train_loss:3.3968 train_time:334406ms step_avg:1672.03ms
+step:300/20000 train_loss:3.1824 train_time:501528ms step_avg:1671.76ms
+W0408 08:52:34.901000 1699402 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0408 08:52:34.902000 1699402 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 1699476 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 1699402 got signal: 15

@@ -1,0 +1,31 @@
+Fri Apr  3 10:14:56 PM CDT 2026 ═══════════════════════════════════════
+  RUN 1: 14L standard (int6/int5) — does one more layer fit?
+═══════════════════════════════════════
+Fri Apr  3 10:14:56 PM CDT 2026 === v4R_14L_q65 ===
+  v4R_14L_q65: prequant=1.0958 quant=1.18089575 sliding= steps=5487 step_ms=2187.33 art=15.89MB params=42499696
+
+Sat Apr  4 02:25:50 AM CDT 2026 ═══════════════════════════════════════
+  RUN 2: 13L + WD 0.12 (int6/int5) — does higher WD improve compression?
+═══════════════════════════════════════
+Sat Apr  4 02:25:50 AM CDT 2026 === v4R_13L_wd012_q65 ===
+  v4R_13L_wd012_q65: prequant=1.1007 quant=1.13932749 sliding= steps=5910 step_ms=2030.54 art=14.50MB params=39613544
+
+Sat Apr  4 06:31:49 AM CDT 2026 ═══════════════════════════════════════
+  TTT on best model
+═══════════════════════════════════════
+14L: 1.18089575 BPB | 13L+wd012: 1.13932749 BPB
+Best: 13L_wd012 → <project>/local_tests/v4R_13L_wd012_q65.ptz
+Sat Apr  4 06:31:49 AM CDT 2026 === v4R_g1_ttt_adamw_con ===
+v4R_g1_ttt_adamw_con FAILED
+  v4R_g1_ttt_adamw_con: ttt= roundtrip=1.13247976 sliding=
+Sat Apr  4 08:07:36 AM CDT 2026 === v4R_g1_ttt_adamw_mod ===
+v4R_g1_ttt_adamw_mod FAILED
+  v4R_g1_ttt_adamw_mod: ttt= roundtrip= sliding=
+Sat Apr  4 08:07:52 AM CDT 2026 === v4R_g1_ttt_adamw_mid ===
+<project>/local_tests/vocab4096_14L_wd.sh: line 75: 487430 Killed                  nice -n 10 torchrun --standalone --nproc_per_node=1 --master_port=$PORT "$SCRIPT" > "$RESULTS/${LABEL}.log" 2>&1
+v4R_g1_ttt_adamw_mid FAILED
+  v4R_g1_ttt_adamw_mid: ttt= roundtrip= sliding=
+
+Sat Apr  4 08:08:19 AM CDT 2026 ═══════════════════════════════════════
+  ALL DONE
+═══════════════════════════════════════

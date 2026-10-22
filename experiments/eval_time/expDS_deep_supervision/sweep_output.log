@@ -1,0 +1,53 @@
+Sun Apr 19 09:14:29 PM CDT 2026 ── expDS sweep START ──
+  running control_N0  DS_N=0  DS_W=uniform
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8501 val_bpb:1.1033 eval_time:35625ms
+expDS:early_exit after post_ema eval
+  running singleN1  DS_N=1  DS_W=uniform
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8501 val_bpb:1.1033 eval_time:56608ms
+expDS:early_exit after post_ema eval
+  running uniformN2  DS_N=2  DS_W=uniform
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.9688 val_bpb:1.1493 eval_time:57945ms
+expDS:early_exit after post_ema eval
+  running uniformN3  DS_N=3  DS_W=uniform
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:3.1740 val_bpb:1.2288 eval_time:62477ms
+expDS:early_exit after post_ema eval
+  running uniformN4  DS_N=4  DS_W=uniform
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:3.4707 val_bpb:1.3436 eval_time:64358ms
+expDS:early_exit after post_ema eval
+  running weighted_N3a  DS_N=3  DS_W=0.2,0.3,0.5
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:3.0121 val_bpb:1.1661 eval_time:62539ms
+expDS:early_exit after post_ema eval
+  running weighted_N3b  DS_N=3  DS_W=0.1,0.2,0.7
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.9061 val_bpb:1.1251 eval_time:62777ms
+expDS:early_exit after post_ema eval
+  running weighted_N4a  DS_N=4  DS_W=0.1,0.15,0.25,0.5
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:3.0463 val_bpb:1.1793 eval_time:64289ms
+expDS:early_exit after post_ema eval
+
+Sun Apr 19 09:23:01 PM CDT 2026 ── expDS sweep DONE ──
+
+Results summary:
+  control_N0      DS_N=0  W=uniform              loss=2.8501  bpb=1.1033  delta=+0.0000
+  singleN1        DS_N=1  W=uniform              loss=2.8501  bpb=1.1033  delta=+0.0000
+  uniformN2       DS_N=2  W=uniform              loss=2.9688  bpb=1.1493  delta=+0.0460
+  uniformN3       DS_N=3  W=uniform              loss=3.1740  bpb=1.2288  delta=+0.1255
+  uniformN4       DS_N=4  W=uniform              loss=3.4707  bpb=1.3436  delta=+0.2403
+  weighted_N3a    DS_N=3  W=0.2,0.3,0.5          loss=3.0121  bpb=1.1661  delta=+0.0628
+  weighted_N3b    DS_N=3  W=0.1,0.2,0.7          loss=2.9061  bpb=1.1251  delta=+0.0218
+  weighted_N4a    DS_N=4  W=0.1,0.15,0.25,0.5    loss=3.0463  bpb=1.1793  delta=+0.0760

@@ -1,0 +1,36 @@
+logs/2c93d378-b3c1-4fd8-898b-97fba0af89a5.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+ttt_only:loading <project>/local_tests/v4R_13L_wd012_q65.ptz
+ttt_only:model loaded, params=39613544
+W0404 08:07:51.550000 486579 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0404 08:07:51.551000 486579 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 486739 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 486579 got signal: 15

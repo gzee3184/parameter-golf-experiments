@@ -1,0 +1,94 @@
+PREQUANT=1.1063 QUANT=1.13761091 SLIDING=1.14132150 TTT=1.11098876 ARTIFACT=16671205
+===
+total 166964
+drwxr-xr-x 2 root root      4096 Apr  5 17:32 .
+drwxr-xr-x 5 root root      4096 Apr  5 17:32 ..
+-rw-r--r-- 1 root root  16567816 Apr  5 18:20 final_model.int6.ptz
+-rw-r--r-- 1 root root 154287160 Apr  5 18:20 final_model.pt
+-rw-r--r-- 1 root root     35715 Apr  5 18:20 latest.log
+-rw-r--r-- 1 root root     11830 Apr  5 05:47 run_20260405_045554.log
+-rw-r--r-- 1 root root      1517 Apr  5 06:42 run_20260405_064203.log
+-rw-r--r-- 1 root root     11758 Apr  5 07:31 run_20260405_064407.log
+-rw-r--r-- 1 root root     35715 Apr  5 18:20 run_20260405_173239.log
+-rw-r--r-- 1 root root        85 Apr  5 07:32 summary.txt
+===
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank2]:     q_val_loss, q_val_bpb = eval_val(
+[rank2]:                             ^^^^^^^^^
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank2]:     batch_loss = model(x, y).detach()
+[rank2]:                  ^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank2]:     return super().__call__(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank2]:     result = self._torchdynamo_orig_backend(
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank2]:     result = _compile(
+[rank2]:              ^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank2]:     raise FailOnRecompileLimitHit(
+[rank2]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank0]:[W405 18:20:51.941708224 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0405 18:20:52.559000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1131 closing signal SIGTERM
+W0405 18:20:52.562000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1132 closing signal SIGTERM
+W0405 18:20:52.563000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1133 closing signal SIGTERM
+W0405 18:20:52.564000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1134 closing signal SIGTERM
+W0405 18:20:52.565000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1135 closing signal SIGTERM
+W0405 18:20:52.566000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1136 closing signal SIGTERM
+W0405 18:20:52.568000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1137 closing signal SIGTERM
+E0405 18:20:53.998000 1061 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 0 (pid: 1130) of binary: /usr/local/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-05_18:20:52
+  host      : 9d89e638c8a6
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1130)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

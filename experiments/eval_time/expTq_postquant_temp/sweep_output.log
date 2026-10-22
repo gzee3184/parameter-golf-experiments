@@ -1,0 +1,89 @@
+Sun Apr 19 09:33:25 PM CDT 2026 ── expTq sweep START ──
+  running T=0.90 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8762 val_bpb:1.1135 eval_time:34854ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.1073 val_bpb:1.2029 eval_time:30867ms
+final_int6_roundtrip_exact val_loss:3.10728292 val_bpb:1.20292605
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=0.95 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8570 val_bpb:1.1060 eval_time:35438ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.0902 val_bpb:1.1963 eval_time:30908ms
+final_int6_roundtrip_exact val_loss:3.09023777 val_bpb:1.19632734
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=0.975 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8521 val_bpb:1.1041 eval_time:56047ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.0869 val_bpb:1.1951 eval_time:30919ms
+final_int6_roundtrip_exact val_loss:3.08694560 val_bpb:1.19505284
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=1.00 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8501 val_bpb:1.1033 eval_time:35784ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.0868 val_bpb:1.1950 eval_time:30868ms
+final_int6_roundtrip_exact val_loss:3.08681658 val_bpb:1.19500289
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=1.025 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8507 val_bpb:1.1036 eval_time:56660ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.0896 val_bpb:1.1961 eval_time:31344ms
+final_int6_roundtrip_exact val_loss:3.08963124 val_bpb:1.19609254
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=1.05 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8539 val_bpb:1.1048 eval_time:36012ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.0952 val_bpb:1.1982 eval_time:31379ms
+final_int6_roundtrip_exact val_loss:3.09518635 val_bpb:1.19824309
+expTq:early_exit after roundtrip eval
+    -> 
+  running T=1.10 ...
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8671 val_bpb:1.1099 eval_time:36509ms
+prune: 10680483 cands unpruned=16.29MB budget=15.24MB
+prune: full=13.45MB
+prune: 4170312/10680483 (39.0%)
+final_int6_roundtrip val_loss:3.1138 val_bpb:1.2054 eval_time:31061ms
+final_int6_roundtrip_exact val_loss:3.11377587 val_bpb:1.20543967
+expTq:early_exit after roundtrip eval
+    -> 
+
+Sun Apr 19 10:17:16 PM CDT 2026 ── expTq sweep DONE ──
+
+Results (pre-quant baseline = 1.1033; post-quant BASELINE varies with local compression):
+  T=0.90    pre_quant=1.1135   post_quant_rt=1.2029   prune: 4170312/10680483 (39.0%
+  T=0.95    pre_quant=1.1060   post_quant_rt=1.1963   prune: 4170312/10680483 (39.0%
+  T=0.975   pre_quant=1.1041   post_quant_rt=1.1951   prune: 4170312/10680483 (39.0%
+  T=1.00    pre_quant=1.1033   post_quant_rt=1.1950   prune: 4170312/10680483 (39.0%
+  T=1.025   pre_quant=1.1036   post_quant_rt=1.1961   prune: 4170312/10680483 (39.0%
+  T=1.05    pre_quant=1.1048   post_quant_rt=1.1982   prune: 4170312/10680483 (39.0%
+  T=1.10    pre_quant=1.1099   post_quant_rt=1.2054   prune: 4170312/10680483 (39.0%

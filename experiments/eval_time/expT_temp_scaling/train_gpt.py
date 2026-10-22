@@ -1,0 +1,1265 @@
+from __future__ import annotations
+import copy,glob,io,lzma
+try:
+    import brotli;_HBR=True
+except ImportError:_HBR=False
+import datetime,math,os,random,sys,time,uuid
+from pathlib import Path
+import numpy as np;import sentencepiece as spm
+import torch;import torch.distributed as dist;import torch.nn.functional as F
+from torch import nn
+from flash_attn_interface import flash_attn_func as _fa3
+torch._dynamo.config.cache_size_limit=128
+if hasattr(torch._inductor.config,'mix_order_reduction'):torch._inductor.config.mix_order_reduction=False
+_autocast=lambda:torch.autocast(device_type="cuda",dtype=torch.bfloat16)
+_AVG=dist.ReduceOp.AVG;_SUM=dist.ReduceOp.SUM;_MAX=dist.ReduceOp.MAX
+_oi=nn.init.orthogonal_;_zi=nn.init.zeros_;_ni=nn.init.normal_;_ng=torch.no_grad;_im=torch.inference_mode
+_f32=torch.float32;_f16=torch.float16;_i8=torch.int8;_pc=time.perf_counter;_cs=torch.cuda.synchronize;_S=(None,None,slice(None))
+_ar=dist.all_reduce;_dia=lambda:dist.is_available() and dist.is_initialized();_P=nn.Parameter;_PL=nn.ParameterList;_eg=os.environ.get;_bf16=torch.bfloat16
+_tz=torch.zeros;_to=torch.ones;_te=torch.empty;_tt=torch.tensor;_tc=torch.clamp;_tr=torch.round;_ta=torch.arange
+class Hyperparameters:
+    dap=_eg("DATA_PATH","./data/datasets/fineweb10B_sp1024")
+    trf=os.path.join(dap,"fineweb_train_*.bin");vaf=os.path.join(dap,"fineweb_val_*.bin")
+    tkp=_eg("TOKENIZER_PATH","./data/tokenizers/fineweb_1024_bpe.model")
+    run_id=_eg("RUN_ID",str(uuid.uuid4()));seed=int(_eg("SEED",1337))
+    vbs=int(_eg("VAL_BATCH_SIZE",524_288));vle=int(_eg("VAL_LOSS_EVERY",4000))
+    tle=int(_eg("TRAIN_LOG_EVERY",500));itr=int(_eg("ITERATIONS",20000))
+    wdi=int(_eg("WARMDOWN_ITERS",3500));wdf=float(_eg("WARMDOWN_FRAC","0"));wus=int(_eg("WARMUP_STEPS",20))
+    tbt=int(_eg("TRAIN_BATCH_TOKENS",786_432));tsl=int(_eg("TRAIN_SEQ_LEN",2048))
+    esl=int(_eg("EVAL_SEQ_LEN",2048));mwc=float(_eg("MAX_WALLCLOCK_SECONDS",600.0))
+    qgi=float(_eg("QK_GAIN_INIT",1.5));vs=int(_eg("VOCAB_SIZE",1024))
+    nl=int(_eg("NUM_LAYERS",11));nkv=int(_eg("NUM_KV_HEADS",4))
+    md=int(_eg("MODEL_DIM",512));nh=int(_eg("NUM_HEADS",8))
+    mlm=float(_eg("MLP_MULT",3.0));te=bool(int(_eg("TIE_EMBEDDINGS","1")))
+    rb=float(_eg("ROPE_BASE",10000.0));lsc=float(_eg("LOGIT_SOFTCAP",30.0))
+    elr=float(_eg("EMBED_LR",0.6));hlr=float(_eg("HEAD_LR",0.008))
+    telr=float(_eg("TIED_EMBED_LR",0.035));teis=float(_eg("TIED_EMBED_INIT_STD",0.005))
+    mlr=float(_eg("MATRIX_LR",0.025));slr=float(_eg("SCALAR_LR",0.025))
+    mmo=float(_eg("MUON_MOMENTUM",0.99));mpl=bool(int(_eg("MUON_PLUS","0")))
+    mbs=int(_eg("MUON_BACKEND_STEPS",5));mmws=float(_eg("MUON_MOMENTUM_WARMUP_START",0.92));mmwu=int(_eg("MUON_MOMENTUM_WARMUP_STEPS",1500))
+    b1=float(_eg("BETA1",0.9));b2=float(_eg("BETA2",0.95))
+    aep=float(_eg("ADAM_EPS",1e-8));gcn=float(_eg("GRAD_CLIP_NORM",0.3))
+    mwd=float(_eg("MUON_WD",0.04));awd=float(_eg("ADAM_WD",0.04))
+    ewd=float(_eg("EMBED_WD",-1));xln=int(_eg("XSA_LAST_N",11))
+    rd=int(_eg("ROPE_DIMS",16));lns=bool(int(_eg("LN_SCALE","0")))
+    qbm=int(_eg("QUANT_BITS_MLP",6));qba=int(_eg("QUANT_BITS_ATTN",5))
+    qbe=int(_eg("QUANT_BITS_EMBED",6));cmp=_eg("COMPRESSOR","brotli")
+    bsh=bool(int(_eg("BYTE_SHUFFLE","0")));sgsk=bool(int(_eg("SIGMOID_SKIP","1")))
+    gpe=bool(int(_eg("GPTQ_ENABLED","1")));gcs=int(_eg("GPTQ_CALIB_SEQS",64))
+    gcl=int(_eg("GPTQ_CALIB_LEN",2048));gct=float(_eg("GPTQ_TEMPERATURE",0.8))
+    gcb=int(_eg("GPTQ_CALIB_BATCHES",64));gcrd=bool(int(_eg("GPTQ_REAL_DATA","0")))
+    rcl=_eg("RECUR_LAYERS","4,5");rss=int(_eg("RECUR_START_STEP",3000))
+    rnl=int(_eg("RECUR_NUM_LOOPS",2));ven=bool(int(_eg("VE_ENABLED","1")))
+    vd=int(_eg("VE_DIM",128));vel=_eg("VE_LAYERS","9,10")
+    psl=int(_eg("PARALLEL_START_LAYER",7));rum=_eg("REPEAT_UNTIE_MLP","lora")
+    rlr=int(_eg("REPEAT_LORA_RANK","16"));dl0a=bool(int(_eg("DISABLE_LAYER0_ATTN","1")))
+    rps=bool(int(_eg("REPEAT_PASS_SCALE","0")))
+    est=int(_eg("EVAL_STRIDE","64"));swe=bool(int(_eg("SLIDING_WINDOW_EVAL","1")))
+    sdc=bool(int(_eg("SDCLIP","0")));sdk=float(_eg("SDCLIP_K","12.85"));sdke=float(_eg("SDCLIP_K_EMBED","0"))
+    lqat=bool(int(_eg("LATE_QAT","0")));qsf=float(_eg("QAT_START_FRAC",0.90));qns=float(_eg("QAT_NOISE_SCALE",0.10))
+    tte=bool(int(_eg("TTT_ENABLED","0")));ttlr=float(_eg("TTT_LR",0.002));ttep=int(_eg("TTT_EPOCHS",3))
+    ttct=int(_eg("TTT_CHUNK_TOKENS",32768));ttfb=int(_eg("TTT_FREEZE_BLOCKS",0))
+    ttmo=float(_eg("TTT_MOMENTUM",0.9));ttbs=int(_eg("TTT_BATCH_SEQS",32));ttgc=float(_eg("TTT_GRAD_CLIP",1.0))
+    ttop=_eg("TTT_OPTIMIZER","sgd");ttwd=float(_eg("TTT_WD","0.01"))
+@torch.compile(fullgraph=True)
+def _zpns(G,steps=5,eps=1e-7):
+    a,b,c=3.4445,-4.7750,2.0315;w2d=G.ndim==2
+    if w2d:G=G.unsqueeze(0)
+    X=G.bfloat16();tr=X.size(-2)>X.size(-1)
+    if tr:X=X.mT
+    X=X/(X.norm(dim=(-2,-1),keepdim=True)+eps)
+    for _ in range(steps):A=X@X.mT;X=a*X+(b*A+c*(A@A))@X
+    if tr:X=X.mT
+    if w2d:X=X.squeeze(0)
+    return X
+class Muon(torch.optim.Optimizer):
+    def __init__(self,params,lr,momentum,bst,nes=True,wdy=0.0,pon=False):
+        super().__init__(params,dict(lr=lr,momentum=momentum,bst=bst,nesterov=nes,weight_decay=wdy))
+        self.pon=pon;self._built=False
+    def _build(self):
+        self._dst=_dia();self._wz=dist.get_world_size() if self._dst else 1;self._rank=dist.get_rank() if self._dst else 0
+        ws=self._wz;self._bm=[]
+        for group in self.param_groups:
+            for p in group["params"]:
+                B=p.shape[0];pB=((B+ws-1)//ws)*ws;sB=pB//ws;tail=p.shape[1:];dev=p.device
+                self._bm.append({'p':p,'B':B,'pg':_tz(pB,*tail,device=dev,dtype=_bf16),'shard':_tz(sB,*tail,device=dev,dtype=_bf16),'sm':_tz(sB,*tail,device=dev,dtype=_bf16),'fu':_tz(pB,*tail,device=dev,dtype=_bf16),'scale':max(1,p.shape[-2]/p.shape[-1])**0.5})
+        self._bm.sort(key=lambda m:-m['p'].numel());self._built=True
+    def lrs(self):
+        if not self._built:self._build()
+        if not self._dst:return
+        self._rsf=[]
+        for m in self._bm:
+            p=m['p']
+            if p.grad is None:self._rsf.append(None);continue
+            pg=m['pg'];pg[:m['B']].copy_(p.grad.bfloat16())
+            if pg.shape[0]>m['B']:pg[m['B']:].zero_()
+            self._rsf.append(dist.reduce_scatter_tensor(m['shard'],pg,op=_AVG,async_op=True))
+    @_ng()
+    def step(self,closure=None):
+        loss=None
+        if closure is not None:
+            with torch.enable_grad():loss=closure()
+        if not self._built:self._build()
+        for group in self.param_groups:
+            lr=group["lr"];momentum=group["momentum"];bst=group["bst"];nes=group["nesterov"];wd=group.get("weight_decay",0.0)
+            pah=None;prev_m=None;shr=self._dst and hasattr(self,'_rsf')
+            for i,m in enumerate(self._bm):
+                p=m['p']
+                if p.grad is None:continue
+                if pah is not None:
+                    pah.wait();pp=prev_m['p'];upd=prev_m['fu'][:prev_m['B']]
+                    if wd>0.0:pp.data.mul_(1.0-lr*wd)
+                    pp.add_(upd.to(dtype=pp.dtype),alpha=-lr*prev_m['scale'])
+                if shr and self._rsf[i] is not None:
+                    self._rsf[i].wait();g=m['shard'];buf=m['sm']
+                else:
+                    g=p.grad.bfloat16();state=self.state[p]
+                    if "mb" not in state:state["mb"]=torch.zeros_like(g)
+                    buf=state["mb"]
+                buf.mul_(momentum).add_(g)
+                update=g.add(buf,alpha=momentum) if nes else buf
+                update=update/update.float().norm(dim=-1,keepdim=True).clamp_min(1e-7).to(update.dtype)
+                update=_zpns(update,steps=bst)
+                if self.pon:
+                    tgt=(min(update.shape[-2],update.shape[-1]))**0.5
+                    update=update*(tgt/(update.norm(dim=(-2,-1),keepdim=True)+1e-7))
+                if shr:
+                    pah=dist.all_gather_into_tensor(m['fu'],update,async_op=True);prev_m=m
+                else:
+                    if wd>0.0:p.data.mul_(1.0-lr*wd)
+                    p.add_(update.to(dtype=p.dtype),alpha=-lr*m['scale'])
+            if pah is not None:
+                pah.wait();pp=prev_m['p'];upd=prev_m['fu'][:prev_m['B']]
+                if wd>0.0:pp.data.mul_(1.0-lr*wd)
+                pp.add_(upd.to(dtype=pp.dtype),alpha=-lr*prev_m['scale'])
+            if hasattr(self,'_rsf'):del self._rsf
+        return loss
+def _bsl(sp,vs,device):
+    sv=int(sp.vocab_size());ts=max(sv,vs)
+    bb=np.zeros((ts,),dtype=np.int16);ls=np.zeros((ts,),dtype=np.bool_);ib=np.ones((ts,),dtype=np.bool_)
+    for tid in range(sv):
+        if sp.is_control(tid) or sp.is_unknown(tid) or sp.is_unused(tid):continue
+        ib[tid]=False
+        if sp.is_byte(tid):bb[tid]=1;continue
+        pc=sp.id_to_piece(tid)
+        if pc.startswith("\u2581"):ls[tid]=True;pc=pc[1:]
+        bb[tid]=len(pc.encode("utf-8"))
+    return (_tt(bb,dtype=torch.int16,device=device),_tt(ls,dtype=torch.bool,device=device),_tt(ib,dtype=torch.bool,device=device))
+def _lvt(pattern,sln):
+    files=[Path(p) for p in sorted(glob.glob(pattern))]
+    if not files:raise FileNotFoundError(f"No files: {pattern}")
+    tokens=torch.cat([_lds(file) for file in files]).contiguous()
+    usable=((tokens.numel()-1)//sln)*sln
+    if usable<=0:raise ValueError(f"Val too short for sln={sln}")
+    return tokens[:usable+1]
+def ev(a,model,rank,wz,device,ga,vt,bbl,hll,ibl,esl=None):
+    sl=esl or a.tsl;lbt=a.vbs//(wz*ga)
+    if lbt<sl:raise ValueError(f"VAL_BATCH_SIZE too small: {a.vbs}")
+    lbs=lbt//sl;ts=(vt.numel()-1)//sl;ss=(ts*rank)//wz;se=(ts*(rank+1))//wz
+    z=lambda:_tz((),device=device,dtype=torch.float64)
+    vls=z();vtc=z();vbc=z();model.eval()
+    with _im():
+        for bss in range(ss,se,lbs):
+            bse=min(bss+lbs,se);rs=bss*sl;re=bse*sl+1
+            local=vt[rs:re].to(device=device,dtype=torch.int64,non_blocking=True)
+            x=local[:-1].reshape(-1,sl);y=local[1:].reshape(-1,sl)
+            with _autocast():
+                bl=model(x,y).detach()
+            btc=float(y.numel());vls+=bl.to(torch.float64)*btc;vtc+=btc
+            pi=x.reshape(-1);ti=y.reshape(-1)
+            tb=bbl[ti].to(dtype=torch.int16)
+            tb+=(hll[ti]&~ibl[pi]).to(dtype=torch.int16)
+            vbc+=tb.to(torch.float64).sum()
+    if _dia():
+        _ar(vls,op=_SUM);_ar(vtc,op=_SUM);_ar(vbc,op=_SUM)
+    vl=vls/vtc;bpt=vl.item()/math.log(2.0);tpb=vtc.item()/vbc.item()
+    model.train()
+    return float(vl.item()),float(bpt*tpb)
+def evs(a,model,rank,wz,device,vt,bbl,hll,ibl,bqs=32):
+    sl=a.esl if a.esl>0 else a.tsl;stride=a.est;ctx=sl-stride
+    tt=vt.numel()-1;ws_all=[w for w in range(0,tt,stride) if w+ctx<tt];tw=len(ws_all)
+    my_s=(tw*rank)//wz;my_e=(tw*(rank+1))//wz;mw=ws_all[my_s:my_e]
+    z=lambda:_tz((),device=device,dtype=torch.float64)
+    ls=z();tc=z();bc=z();model.eval();lfn=torch.compile(model.fwl,dynamic=True,fullgraph=True)
+    with _im():
+        for bi in range(0,len(mw),bqs):
+            bws=mw[bi:bi+bqs];bsz=len(bws)
+            xb=_tz(bsz,sl,dtype=torch.int64,device=device)
+            yb=_tz(bsz,sl,dtype=torch.int64,device=device)
+            wlens=[]
+            for i,w in enumerate(bws):
+                we=min(w+sl,tt);wl=we-w;wlens.append(wl)
+                ch=vt[w:we+1].to(dtype=torch.int64,device=device)
+                xb[i,:wl]=ch[:-1];yb[i,:wl]=ch[1:]
+            with _autocast():
+                logits=lfn(xb)
+            nll=F.cross_entropy(logits.reshape(-1,logits.size(-1)).float(),yb.reshape(-1),reduction="none").reshape(bsz,sl)
+            for i,w in enumerate(bws):
+                wl=wlens[i];s=0 if w==0 else ctx
+                sn=nll[i,s:wl].to(torch.float64);ls+=sn.sum();tc+=float(wl-s)
+                tgt=yb[i,s:wl];prev=xb[i,s:wl]
+                tb=bbl[tgt].to(torch.float64)
+                tb+=(hll[tgt]&~ibl[prev]).to(torch.float64)
+                bc+=tb.sum()
+    if _dia():
+        _ar(ls,op=_SUM);_ar(tc,op=_SUM);_ar(bc,op=_SUM)
+    vl=ls/tc;bpt=vl.item()/math.log(2.0);tpb=tc.item()/bc.item()
+    model.train()
+    return float(vl.item()),float(bpt*tpb)
+def evt(a,model,rank,wz,device,vt,bbl,hll,ibl,bqs=32):
+    """Legal score-first TTT: score chunk with sliding window, then train on scored tokens."""
+    sl=a.esl if a.esl>0 else a.tsl;stride=a.est;tt=vt.numel()-1
+    tck=a.ttct;nch=(tt+tck-1)//tck
+    ws_all=[w for w in range(0,tt,stride) if min(w+sl,tt)-w>=stride or w==0]
+    cw=[[] for _ in range(nch)]
+    for w in ws_all:
+        we=min(w+sl,tt);wl=we-w;s=0 if w==0 else max(wl-stride,0)
+        ci=min((w+s)//tck,nch-1);cw[ci].append(w)
+    log0=lambda m:print(m,flush=True) if rank==0 else None
+    log0(f"ttt:start chunks={nch} chunk_tokens={tck} windows={len(ws_all)} stride={stride} lr={a.ttlr} epochs={a.ttep} freeze={a.ttfb}")
+    z=lambda:torch.zeros((),device=device,dtype=torch.float64)
+    ls=z();tc=z();bc=z()
+    frozen=set(range(min(a.ttfb,a.nl)))
+    tparams=[]
+    for nm,p in model.named_parameters():
+        fr=any(f"blocks.{bi}." in nm for bi in frozen)
+        if fr:p.requires_grad_(False)
+        else:p.requires_grad_(True);tparams.append(p)
+    nuf=sum(p.numel() for p in tparams);nfr=sum(p.numel() for p in model.parameters() if not p.requires_grad)
+    log0(f"ttt:params unfrozen={nuf} frozen={nfr} optimizer={a.ttop}")
+    opt=torch.optim.AdamW(tparams,lr=a.ttlr,weight_decay=a.ttwd) if a.ttop=="adamw" else torch.optim.SGD(tparams,lr=a.ttlr,momentum=a.ttmo)
+    t0=time.perf_counter()
+    for ci in range(nch):
+        wins=cw[ci]
+        if not wins:continue
+        my_s=(len(wins)*rank)//wz;my_e=(len(wins)*(rank+1))//wz;mw=wins[my_s:my_e]
+        model.eval()
+        cfwl=torch.compile(model.fwl,dynamic=True,fullgraph=True)
+        with torch.no_grad():
+            for bi in range(0,len(mw),bqs):
+                bws=mw[bi:bi+bqs];bsz=len(bws)
+                xb=torch.zeros(bsz,sl,dtype=torch.int64,device=device)
+                yb=torch.zeros(bsz,sl,dtype=torch.int64,device=device)
+                wlens=[]
+                for i,w in enumerate(bws):
+                    we=min(w+sl,tt);wl=we-w;wlens.append(wl)
+                    ch=vt[w:we+1].to(dtype=torch.int64,device=device)
+                    xb[i,:wl]=ch[:-1];yb[i,:wl]=ch[1:]
+                with torch.autocast(device_type="cuda",dtype=torch.bfloat16):
+                    logits=cfwl(xb)
+                nll=F.cross_entropy(logits.reshape(-1,logits.size(-1)).float(),yb.reshape(-1),reduction="none").reshape(bsz,sl)
+                for i,w in enumerate(bws):
+                    wl=wlens[i];s=0 if w==0 else max(wl-stride,0)
+                    sn=nll[i,s:wl].to(torch.float64);ls+=sn.sum();tc+=float(wl-s)
+                    tgt=yb[i,s:wl];prev=xb[i,s:wl]
+                    tb=bbl[tgt].to(torch.float64);tb+=(hll[tgt]&~ibl[prev]).to(torch.float64)
+                    bc+=tb.sum()
+        is_last=ci==nch-1
+        if not is_last and a.ttep>0:
+            model.train()
+            cstart=ci*tck;cend=min((ci+1)*tck,tt)
+            cseqs=(cend-cstart)//sl
+            if cseqs>0:
+                cos_lr=a.ttlr*0.5*(1.0+math.cos(math.pi*ci/max(nch-1,1)))
+                for pg in opt.param_groups:pg['lr']=cos_lr
+                my_ss=(cseqs*rank)//wz;my_se=(cseqs*(rank+1))//wz
+                for _ep in range(a.ttep):
+                    for bs in range(0,my_se-my_ss,bqs):
+                        be=min(bs+bqs,my_se-my_ss);actual=my_ss+bs
+                        st=cstart+actual*sl;et=cstart+(my_ss+be)*sl+1
+                        if et>vt.numel():continue
+                        local=vt[st:et].to(device=device,dtype=torch.int64)
+                        x=local[:-1].reshape(-1,sl);y=local[1:].reshape(-1,sl)
+                        opt.zero_grad(set_to_none=True)
+                        with torch.autocast(device_type="cuda",dtype=torch.bfloat16):
+                            loss=model(x,y)
+                        loss.backward()
+                        if wz>1:
+                            for p in tparams:
+                                if p.grad is not None:dist.all_reduce(p.grad,op=dist.ReduceOp.AVG)
+                        torch.nn.utils.clip_grad_norm_(tparams,a.ttgc)
+                        opt.step()
+        if rank==0 and(ci%10==0 or ci==nch-1):
+            el=time.perf_counter()-t0;rl=ls.item()/max(tc.item(),1)
+            rbpb=rl/math.log(2.0)*(tc.item()/max(bc.item(),1)) if tc.item()>0 else 0.0
+            log0(f"  ttt_chunk [{ci+1}/{nch}] bpb={rbpb:.6f} time={el:.1f}s")
+    if _dia():
+        _ar(ls,op=_SUM);_ar(tc,op=_SUM);_ar(bc,op=_SUM)
+    vl=(ls/tc).item();vbpb=vl/math.log(2.0)*(tc.item()/bc.item())
+    for p in model.parameters():p.requires_grad_(True)
+    model.eval()
+    log0(f"ttt:done val_loss={vl:.6f} val_bpb={vbpb:.6f} elapsed={time.perf_counter()-t0:.1f}s")
+    return float(vl),float(vbpb)
+_CTNP=tuple(p for p in _eg("_CTNP","attn_scale,attn_scales,mlp_scale,mlp_scales,resid_mix,resid_mixes,q_gain,skip_weight,skip_weights,skip_gates,vels,ves.scale,lm,rps").split(",") if p)
+_ICQ=99.99984/100.0
+def _qft(t):
+    t32=t.float()
+    if t32.ndim==2:
+        ca=torch.quantile(t32.abs(),_ICQ,dim=1) if t32.numel() else _te((t32.shape[0],),dtype=_f32)
+        sc=(ca/127.0).clamp_min(1.0/127.0)
+        q=_tc(_tr(torch.maximum(torch.minimum(t32,ca[:,None]),-ca[:,None])/sc[:,None]),-127,127).to(_i8).contiguous()
+        return q,sc.to(dtype=_f16).contiguous()
+    ca=float(torch.quantile(t32.abs().flatten(),_ICQ).item()) if t32.numel() else 0.0
+    sc=_tt(ca/127.0 if ca>0 else 1.0,dtype=_f32)
+    return _tc(_tr(_tc(t32,-ca,ca)/sc),-127,127).to(_i8).contiguous(),sc
+def _lds(file):
+    hb=256*np.dtype("<i4").itemsize;h=np.fromfile(file,dtype="<i4",count=256)
+    if h.size!=256 or int(h[0])!=20240520 or int(h[1])!=1:raise ValueError(f"Bad shard header: {file}")
+    nt=int(h[2]);assert file.stat().st_size==hb+nt*np.dtype("<u2").itemsize,f"Shard size mismatch: {file}"
+    t=np.fromfile(file,dtype="<u2",count=nt,offset=hb);assert t.size==nt,f"Short read: {file}"
+    return torch.from_numpy(t.astype(np.uint16,copy=False))
+_SHB=256*np.dtype("<i4").itemsize
+_SNC={}
+_MC={}
+def _rnt(file):
+    k=str(file);c=_SNC.get(k)
+    if c is not None:return c
+    h=np.fromfile(file,dtype="<i4",count=256)
+    if h.size!=256 or int(h[0])!=20240520 or int(h[1])!=1:raise ValueError(f"Bad shard header: {file}")
+    n=int(h[2]);_SNC[k]=n;return n
+def _gsm(file):
+    k=str(file);mm=_MC.get(k)
+    if mm is not None:return mm
+    n=_rnt(file);mm=np.memmap(file,mode="r",dtype="<u2",offset=_SHB,shape=(n,))
+    _MC[k]=mm;return mm
+class DTL:
+    def __init__(self,pattern,rank,wz,device):
+        self.rank=rank;self.wz=wz;self.device=device
+        self.files=[Path(p) for p in sorted(glob.glob(pattern))]
+        if not self.files:raise FileNotFoundError(f"No files: {pattern}")
+        self._nt=np.array([_rnt(f) for f in self.files],dtype=np.int64)
+        seed=0
+        for f in self.files:
+            for b in str(f).encode():seed=((seed^b)*1099511628211)&0xFFFFFFFFFFFFFFFF
+        self._rng=np.random.Generator(np.random.PCG64(seed))
+        self._cfg=None;self._es=None;self._bbc=None
+        n=len(self.files);z64=lambda:np.zeros(n,dtype=np.int64)
+        self._cph=z64();self._cbc=z64()
+        self._cnx=z64();self._cst=z64()
+        self._csd=np.ones(n,dtype=np.int64);self._cin=np.zeros(n,dtype=np.bool_)
+        self._bbt=0;self._drs=float(_eg("DATA_RAMP_STEPS","1800"))
+        self._dwc=bool(int(_eg("DATA_WARMDOWN_COUPLING","0")));self._wdf=0.0
+    def set_wdf(self,frac):self._wdf=frac
+    def _pcs(self,n):
+        if n<=1:return 1
+        while True:
+            s=int(self._rng.integers(1,n))
+            if math.gcd(s,n)==1:return s
+    def _rc(self,si,sln):
+        nt=int(self._nt[si]);mp=min(sln-1,max(0,nt-sln-1))
+        phase=int(self._rng.integers(mp+1)) if mp>0 else 0;bc=(nt-1-phase)//sln
+        self._cph[si]=phase;self._cbc[si]=bc;self._cnx[si]=0
+        self._cst[si]=int(self._rng.integers(bc)) if bc>1 else 0
+        self._csd[si]=self._pcs(bc);self._cin[si]=True
+    def _ec(self,si,sln):
+        if not self._cin[si] or self._cnx[si] >= self._cbc[si]:self._rc(si,sln)
+    def _tfs(self,si,sln,count,out):
+        rem=count
+        while rem>0:
+            self._ec(si,sln)
+            bc=int(self._cbc[si]);ni=int(self._cnx[si])
+            take=min(rem,bc-ni);phase=int(self._cph[si])
+            start=int(self._cst[si]);stride=int(self._csd[si])
+            for j in range(take):bi=(start+(ni+j)*stride)%bc;out.append((si,phase+bi*sln))
+            self._cnx[si]=ni+take;rem-=take
+    def _ip(self,gt,sln,ga):
+        lt=gt//(self.wz*ga);ns=lt//sln;gns=ns*self.wz
+        self._cfg=(lt,sln,ns,gns);bbc=(self._nt-1)//sln;el2=bbc>0
+        self._es=np.nonzero(el2)[0].astype(np.int64)
+        self._bbc=bbc[self._es].astype(np.int64)
+    def _sgw(self):
+        _,sln,_,gns=self._cfg;ec=int(self._es.size)
+        rp=min(self._bbt/max(self._drs,1.0),1.0)
+        ba=0.90-0.40*rp
+        alpha=ba+self._wdf*0.30 if self._dwc else ba
+        rmg=np.empty(ec,dtype=np.float64)
+        for i,si in enumerate(self._es.tolist()):
+            rmg[i]=float(max(int(self._cbc[si])-int(self._cnx[si]),1)) if self._cin[si] else float(self._bbc[i])
+        wts=np.power(rmg,alpha);ws=float(wts.sum())
+        if not np.isfinite(ws) or ws<=0.0:wts=np.ones(ec,dtype=np.float64);ws=float(wts.sum())
+        probs=wts/ws
+        low=min(max(8,self.wz),ec,gns);high=min(max(32,self.wz*8),ec,gns)
+        rm=low+rp*(high-low)
+        mix=max(1,min(int(round(rm-self._wdf*(rm-low)*0.5)),ec,gns)) if self._dwc else max(1,min(int(round(rm)),ec,gns))
+        cp=self._rng.choice(ec,size=mix,replace=False,p=probs);cs=self._es[cp]
+        cpr=probs[cp].copy();cpr/=cpr.sum()
+        counts=np.ones(mix,dtype=np.int64);extra=gns-mix
+        if extra>0:counts+=self._rng.multinomial(extra,cpr).astype(np.int64)
+        perm=self._rng.permutation(mix);cs,counts=cs[perm],counts[perm]
+        bkts=[]
+        for si,cnt in zip(cs.tolist(),counts.tolist()):
+            b=[];self._tfs(int(si),sln,int(cnt),b)
+            if b:
+                if len(b)>1:bp=self._rng.permutation(len(b));b=[b[int(k)] for k in bp.tolist()]
+                bkts.append(b)
+        wnd=[];active=[i for i,bk in enumerate(bkts) if bk]
+        while active:
+            order=self._rng.permutation(len(active));na=[]
+            for oi in order.tolist():
+                bi=active[oi]
+                if bkts[bi]:wnd.append(bkts[bi].pop())
+                if bkts[bi]:na.append(bi)
+            active=na
+        return wnd
+    def nb(self,gt,sln,ga):
+        if self._cfg is None:self._ip(gt,sln,ga)
+        _,_,nseq,_=self._cfg
+        gw=self._sgw();lw=gw[self.rank::self.wz]
+        x=_te((nseq,sln),dtype=torch.int64);y=_te((nseq,sln),dtype=torch.int64)
+        for slot,(si,pos) in enumerate(lw):
+            mm=_gsm(self.files[si])
+            window=torch.as_tensor(np.array(mm[pos:pos+sln+1],dtype=np.int64))
+            x[slot]=window[:-1];y[slot]=window[1:]
+        self._bbt+=1
+        return x.to(self.device,non_blocking=True),y.to(self.device,non_blocking=True)
+class RN(nn.Module):
+    def __init__(self,eps=None):
+        super().__init__();self.eps=eps
+    def forward(self,x):
+        return F.rms_norm(x,(x.size(-1),),eps=self.eps)
+class CL(nn.Linear):
+    _qat_enabled:bool=False
+    def forward(self,x):
+        w=self.weight.to(x.dtype)
+        if CL._qat_enabled and self.training and w.ndim==2:
+            with _ng():
+                w32=self.weight.float();row_max=w32.abs().amax(dim=1)
+                scale=(row_max/31.0).clamp_min(1.0/31.0)
+                w_q=(_tc(_tr(w32/scale[:,None]),-32,31)*scale[:,None]).to(x.dtype)
+            w=w+(w_q-w).detach()
+        return F.linear(x,w,self.bias.to(x.dtype) if self.bias is not None else None)
+def _rlfp(module):
+    with _ng():
+        for nm,p in module.named_parameters():
+            if(p.ndim<2 or any(s in nm for s in _CTNP)) and p.dtype!=_f32:p.data=p.data.float()
+class Rotary(nn.Module):
+    def __init__(self,dim,base=10000.0,tsl=1024,rd=0):
+        super().__init__();self.dim=dim;self.base=base;self.tsl=tsl
+        self.rd=rd if rd>0 else dim
+        ief=1.0/(base**(_ta(0,self.rd,2,dtype=_f32)/self.rd))
+        self.register_buffer("ief",ief,persistent=False)
+        self._slc=0;self._cc=None;self._sc=None
+    def forward(self,sln,device,dtype):
+        if self._cc is None or self._sc is None or self._slc!=sln or self._cc.device!=device:
+            rd=self.rd
+            if sln>self.tsl:
+                scale=sln/self.tsl;new_base=self.base*(scale**(rd/(rd-2)))
+                ief=1.0/(new_base**(_ta(0,rd,2,dtype=_f32,device=device)/rd))
+            else:ief=self.ief.to(device)
+            t=_ta(sln,device=device,dtype=ief.dtype);freqs=torch.outer(t,ief)
+            self._cc=freqs.cos()[None,:,None,:];self._sc=freqs.sin()[None,:,None,:]
+            self._slc=sln
+        return self._cc.to(dtype=dtype),self._sc.to(dtype=dtype)
+def _are(x,cos,sin,rd=0):
+    if rd>0 and rd<x.size(-1):
+        xr,xp=x[...,:rd],x[...,rd:]
+        h=rd//2;x1,x2=xr[...,:h],xr[...,h:]
+        return torch.cat((torch.cat((x1*cos+x2*sin,x1*(-sin)+x2*cos),dim=-1),xp),dim=-1)
+    h=x.size(-1)//2;x1,x2=x[...,:h],x[...,h:]
+    return torch.cat((x1*cos+x2*sin,x1*(-sin)+x2*cos),dim=-1)
+class CSA(nn.Module):
+    def __init__(self,dim,nh,nkv,rb,qgi,tsl=2048):
+        super().__init__()
+        if dim%nh!=0:raise ValueError("dim%heads!=0")
+        if nh%nkv!=0:raise ValueError("heads%kv_heads!=0")
+        self.nh=nh;self.nkv=nkv;self.hdm=dim//nh
+        if self.hdm%2!=0:raise ValueError("hdm odd")
+        self.q_gain=_P(torch.full((nh,),qgi,dtype=_f32))
+        self.rd=0;self.rotary=Rotary(self.hdm,base=rb,tsl=tsl);self.uxs=False
+    def _xe(self,y,v):
+        B,T,H,D=y.shape;Hkv=v.size(-2);group=H//Hkv
+        y_g=y.reshape(B,T,Hkv,group,D);vn=F.normalize(v,dim=-1).unsqueeze(-2)
+        proj=(y_g*vn).sum(dim=-1,keepdim=True)*vn
+        return (y_g-proj).reshape(B,T,H,D)
+    def forward(self,x,q_w,k_w,v_w,out_w,ve=None):
+        bsz,sq,dim=x.shape
+        q=F.linear(x,q_w.to(x.dtype)).reshape(bsz,sq,self.nh,self.hdm)
+        k=F.linear(x,k_w.to(x.dtype)).reshape(bsz,sq,self.nkv,self.hdm)
+        v=F.linear(x,v_w.to(x.dtype))
+        if ve is not None:v=v+ve
+        v=v.reshape(bsz,sq,self.nkv,self.hdm)
+        q=F.rms_norm(q,(q.size(-1),));k=F.rms_norm(k,(k.size(-1),))
+        cos,sin=self.rotary(sq,x.device,q.dtype)
+        q=_are(q,cos,sin,self.rd);k=_are(k,cos,sin,self.rd)
+        q=q*self.q_gain.to(dtype=q.dtype)[None,None,:,None]
+        y=_fa3(q,k,v,causal=True)
+        if self.uxs:y=self._xe(y,v)
+        return F.linear(y.reshape(bsz,sq,dim),out_w.to(x.dtype))
+_AM={"leaky05":lambda x:F.leaky_relu(x,0.5).square(),"mish2":lambda x:F.mish(x).square()}
+_MA=_eg("MLP_ACTIVATION","leaky05")
+assert _MA in _AM,f"Unknown MLP_ACTIVATION={_MA!r}, valid: {list(_AM)}"
+_AF=_AM[_MA]
+class MLP(nn.Module):
+    def __init__(self,dim,mlm):
+        super().__init__();self.act_fn=_AF
+    def forward(self,x,up_w,down_w):
+        return F.linear(self.act_fn(F.linear(x,up_w.to(x.dtype))),down_w.to(x.dtype))
+class VE(nn.Module):
+    def __init__(self,vs,vd,tdim):
+        super().__init__();self.embed=nn.Embedding(vs,vd);_ni(self.embed.weight,std=0.01)
+        self.proj=CL(vd,tdim,bias=False) if vd!=tdim else None
+        if self.proj is not None:_zi(self.proj.weight)
+        self.scale=_P(_tt(0.1,dtype=_f32))
+    def forward(self,token_ids):
+        h=self.embed(token_ids)
+        if self.proj is not None:h=self.proj(h)
+        return h*self.scale.to(dtype=h.dtype)
+class Block(nn.Module):
+    def __init__(self,dim,nh,nkv,mlm,rb,qgi,lxi=0,lns=False,tsl=2048):
+        super().__init__();self.attn_norm=RN();self.mlp_norm=RN()
+        self.attn=CSA(dim,nh,nkv,rb,qgi,tsl=tsl);self.mlp=MLP(dim,mlm)
+        self.attn_scale=_P(_to(dim,dtype=_f32));self.mlp_scale=_P(_to(dim,dtype=_f32))
+        self.resid_mix=_P(torch.stack((_to(dim),_tz(dim))).float())
+        self.lsf=1.0/math.sqrt(lxi+1) if lns else 1.0
+    def forward(self,x,x0,q_w,k_w,v_w,out_w,up_w,down_w,ve=None,dwo=None):
+        mix=self.resid_mix.to(dtype=x.dtype)
+        xi=mix[0][_S]*x+mix[1][_S]*x0;xo=xi
+        if not getattr(self,'dsa',False):
+            aout=self.attn(self.attn_norm(xi)*self.lsf,q_w,k_w,v_w,out_w,ve=ve)
+            xo=xo+self.attn_scale.to(dtype=xi.dtype)[_S]*aout
+        dw=dwo if dwo is not None else down_w
+        xo=xo+self.mlp_scale.to(dtype=xo.dtype)[_S]*self.mlp(self.mlp_norm(xo)*self.lsf,up_w,dw)
+        return xo
+class GPT(nn.Module):
+    def __init__(self,vs,nl,md,nh,nkv,mlm,te,teis,lsc,rb,qgi,xln=0,rd=0,lns=False,sgsk=False,rcl=None,ven=False,vd=128,vel=None,psl=-1,rum='none',dl0a=False,rnl=2,lrk=0,rps=False,tsl=2048):
+        super().__init__()
+        self.te=te;self.teis=teis;self.lsc=lsc;self.sgsk=sgsk
+        self.tok_emb=nn.Embedding(vs,md)
+        self.nel=nl//2;self.ndl=nl-self.nel
+        self.nsw=min(self.nel,self.ndl)
+        self.skip_weights=_P(_to(self.nsw,md,dtype=_f32))
+        self.skip_gates=_P(_tz(self.nsw,md,dtype=_f32)) if sgsk else None
+        kvd=nkv*(md//nh);md2=int(mlm*md);self.nl=nl
+        self.qo_bank=_P(_te(2*nl,md,md));self.kv_bank=_P(_te(2*nl,kvd,md))
+        self.mlp_up_bank=_P(_te(nl,md2,md));self.mlp_down_bank=_P(_te(nl,md,md2))
+        self.blocks=nn.ModuleList([Block(md,nh,nkv,mlm,rb,qgi,lxi=i,lns=lns,tsl=tsl) for i in range(nl)])
+        if rd>0:
+            for block in self.blocks:block.attn.rd=rd;block.attn.rotary=Rotary(md//nh,base=rb,tsl=tsl,rd=rd)
+        self.final_norm=RN();self.lm_head=None if te else CL(md,vs,bias=False)
+        if self.lm_head is not None:self.lm_head._zero_init=True
+        if xln>0:
+            for i in range(max(0,nl-xln),nl):self.blocks[i].attn.uxs=True
+        self.rcl=sorted(rcl) if rcl else [];self.rnl=rnl;self._ra=False
+        self.veli=sorted(vel) if ven and vel else []
+        if self.veli:
+            self.ves=VE(vs,vd,kvd)
+            self.vels=_PL([_P(_to(1,dtype=_f32)) for _ in self.veli])
+        else:self.ves=None;self.vels=_PL()
+        self.psl=psl
+        if 0<psl<nl:self.lm=_P(_tt(0.5,dtype=_f32))
+        else:self.lm=None
+        self.rum=rum;self.lrk=lrk
+        nr=len(self.rcl) if self.rcl else 0
+        if rum=='lora' and nr>0 and lrk>0:
+            self.rla=_P(_te(nr,md,lrk));self.rlb=_P(_tz(nr,lrk,md2))
+            nn.init.kaiming_uniform_(self.rla,a=math.sqrt(5))
+        else:self.rla=None;self.rlb=None
+        self.rps=_P(_to(nr,dtype=_f32)) if rps and nr>0 else None
+        if dl0a and len(self.blocks)>0:self.blocks[0].dsa=True
+        self._iw()
+    def _iw(self):
+        if self.te:_ni(self.tok_emb.weight,mean=0.0,std=self.teis)
+        n=self.nl
+        for i in range(n):
+            _oi(self.qo_bank.data[i],gain=1.0);_zi(self.qo_bank.data[n+i])
+            _oi(self.kv_bank.data[i],gain=1.0);_oi(self.kv_bank.data[n+i],gain=1.0)
+            _oi(self.mlp_up_bank.data[i],gain=1.0);_zi(self.mlp_down_bank.data[i])
+        for _,module in self.named_modules():
+            if isinstance(module,nn.Linear):
+                if getattr(module,"_zero_init",False):_zi(module.weight)
+                elif module.weight.ndim==2 and module.weight.shape[0]>=64 and module.weight.shape[1]>=64:_oi(module.weight,gain=1.0)
+    def set_ra(self,active):self._ra=active
+    def _gvl(self):
+        n=len(self.blocks)
+        if not self._ra or not self.rcl:return [(i,False) for i in range(n)]
+        virt=[];ins=False;el=self.rnl-1
+        for i in range(n):
+            virt.append((i,False))
+            if not ins and i==self.rcl[-1]:
+                for _ in range(el):
+                    for rl in self.rcl:virt.append((rl,True))
+                ins=True
+        return virt
+    def _bw(self,pi):
+        n=self.nl
+        return (self.qo_bank[pi],self.kv_bank[pi],self.kv_bank[n+pi],self.qo_bank[n+pi],self.mlp_up_bank[pi],self.mlp_down_bank[pi])
+    def _grd(self,pi):
+        if self.rla is None or pi not in self.rcl:return None
+        ri=self.rcl.index(pi);return self.mlp_down_bank[pi]+self.rla[ri]@self.rlb[ri]
+    def _get_ve(self,pi,ids,vc):
+        if self.ves is None or pi not in self.veli:return None
+        if 've' not in vc:vc['ve']=self.ves(ids)
+        vb=vc['ve'];vi=self.veli.index(pi)
+        return vb*self.vels[vi].to(dtype=vb.dtype)
+    def _ars(self,xb,xa,pi):
+        if self.rps is None:return xa
+        ri=self.rcl.index(pi);s=self.rps[ri].to(dtype=xa.dtype)
+        return xb+s*(xa-xb)
+    def _fb(self,ii):
+        x=self.tok_emb(ii);x=F.rms_norm(x,(x.size(-1),));x0=x
+        vl=self._gvl();nv=len(vl);ne=nv//2;nd=nv-ne
+        skips=[];vc={}
+        pt=self.psl if self.lm is not None else nv+1
+        ip=False;l0=None;l1=None
+        for vi in range(ne):
+            pi,ir=vl[vi]
+            qw,kw,vw,ow,uw,dw=self._bw(pi)
+            ve=self._get_ve(pi,ii,vc)
+            dwo=self._grd(pi) if ir else None
+            xp=x if ir else None
+            x=self.blocks[pi](x,x0,qw,kw,vw,ow,uw,dw,ve=ve,dwo=dwo)
+            if ir and xp is not None:x=self._ars(xp,x,pi)
+            skips.append(x)
+        si=0
+        for vi in range(nd):
+            pi,ir=vl[ne+vi]
+            if skips and si<self.nsw:
+                tgt=l0 if ip else x;ss=self.skip_weights[si].to(dtype=tgt.dtype)[_S]*skips.pop()
+                if self.skip_gates is not None:
+                    g=torch.sigmoid(self.skip_gates[si].to(dtype=tgt.dtype))[_S];tgt=torch.lerp(ss,tgt,g)
+                else:tgt=tgt+ss
+                if ip:l0=tgt
+                else:x=tgt
+                si+=1
+            if pi>=pt and not ip:l0=x;l1=x;ip=True
+            if ip:
+                blk=self.blocks[pi];qw,kw,vw,ow,uw,dw=self._bw(pi)
+                ve=self._get_ve(pi,ii,vc);dwo=self._grd(pi) if ir else None
+                edw=dwo if dwo is not None else dw
+                mix=blk.resid_mix.to(dtype=l0.dtype);ai=mix[0][_S]*l0+mix[1][_S]*x0
+                ao=blk.attn(blk.attn_norm(ai)*blk.lsf,qw,kw,vw,ow,ve=ve)
+                l0=ai+blk.attn_scale.to(dtype=ai.dtype)[_S]*ao
+                l1=l1+blk.mlp_scale.to(dtype=l1.dtype)[_S]*blk.mlp(blk.mlp_norm(l1)*blk.lsf,uw,edw)
+            else:
+                qw,kw,vw,ow,uw,dw=self._bw(pi)
+                ve=self._get_ve(pi,ii,vc);dwo=self._grd(pi) if ir else None
+                xp=x if ir else None
+                x=self.blocks[pi](x,x0,qw,kw,vw,ow,uw,dw,ve=ve,dwo=dwo)
+                if ir and xp is not None:x=self._ars(xp,x,pi)
+        if ip:m=self.lm.to(dtype=l0.dtype);x=m*l0+(1-m)*l1
+        return self.final_norm(x)
+    def forward(self,ii,tgi):
+        x=self._fb(ii);xfl=x.reshape(-1,x.size(-1));tg=tgi.reshape(-1)
+        lp=F.linear(xfl,self.tok_emb.weight) if self.te else self.lm_head(xfl)
+        logits=self.lsc*torch.tanh(lp/self.lsc)
+        # expT: eval-time temperature scaling. Applied POST-softcap on eval only.
+        # ET=1.0 is baseline (no change). ET<1 sharpens, ET>1 smooths.
+        if not self.training:
+            et=float(os.environ.get("EVAL_TEMP","1.0"))
+            if et!=1.0:logits=logits/et
+        return F.cross_entropy(logits.float(),tg,reduction="mean")
+    def fwl(self,ii):
+        x=self._fb(ii)
+        lp=F.linear(x,self.tok_emb.weight) if self.te else self.lm_head(x)
+        out=self.lsc*torch.tanh(lp/self.lsc)
+        if not self.training:
+            et=float(os.environ.get("EVAL_TEMP","1.0"))
+            if et!=1.0:out=out/et
+        return out
+def _cp(name):
+    if "tok_emb" in name or "lm_head" in name:return "embed"
+    if ".mlp." in name:return "mlp"
+    if ".attn." in name or (".proj." in name and ".mlp." not in name):return "attn"
+    return "other"
+def _qpr(t,cr=31,sdk=0.0):
+    t32=t.float()
+    if t32.ndim==2:
+        if sdk>0:
+            rc=sdk*t32.std(dim=1).clamp_min(1e-12);rc=torch.minimum(rc,t32.abs().amax(dim=1))
+            s=(rc/cr).clamp_min(1.0/cr).to(_f16)
+            return _tc(_tr(t32/s.float()[:,None]),-cr,cr).to(_i8),s
+        bq,bs,be=None,None,float('inf')
+        for pct in [0.9990,0.9995,0.9999,0.99999,1.0]:
+            rc=torch.quantile(t32.abs(),pct,dim=1) if pct<1.0 else t32.abs().amax(dim=1)
+            s=(rc/cr).clamp_min(1.0/cr).to(_f16)
+            q=_tc(_tr(t32/s.float()[:,None]),-cr,cr).to(_i8)
+            err=(t32-q.float()*s.float()[:,None]).pow(2).mean().item()
+            if err<be:bq,bs,be=q,s,err
+        return bq,bs
+    amax=t32.abs().max().item();scale=_tt(amax/cr if amax>0 else 1.0,dtype=_f16)
+    return _tc(_tr(t32/scale.float()),-cr,cr).to(_i8),scale
+def _qgq(weight,hessian,cr=31,bsz=128,sdk=0.0):
+    t32=weight.float()
+    if t32.ndim!=2:return _qpr(t32,cr,sdk=sdk)
+    rows,cols=t32.shape;H=hessian.float().clone();dead=torch.diag(H)==0
+    H[dead,dead]=1;dm=torch.mean(torch.diag(H));Hinv=None;perm=None
+    for attempt,df in enumerate([0.01,0.05,0.1,0.5,1.0]):
+        try:
+            Htry=H.clone();damp=df*dm
+            Htry[_ta(cols),_ta(cols)]+=damp
+            perm=torch.argsort(torch.diag(Htry),descending=True)
+            L=torch.linalg.cholesky(Htry[perm][:,perm])
+            Hinv=torch.linalg.cholesky(torch.cholesky_inverse(L),upper=True);break
+        except torch._C._LinAlgError:
+            if attempt==4:return _qpr(t32,cr,sdk=sdk)
+    ip=torch.argsort(perm);W=t32[:,perm].clone();W[:,dead[perm]]=0
+    if sdk>0:
+        rc=sdk*t32.std(dim=1).clamp_min(1e-12);rc=torch.minimum(rc,t32.abs().amax(dim=1))
+        clips=[(rc,)]
+    else:
+        clips=[(torch.quantile(t32.abs(),p,dim=1) if p<1.0 else t32.abs().amax(dim=1),) for p in [0.9990,0.9995,0.9999,0.99999,1.0]]
+    bq,bsc,be=None,None,float('inf')
+    for (rc,) in clips:
+        s=(rc/cr).clamp_min(1.0/cr).to(_f16);sf=s.float()
+        Q=torch.zeros_like(W,dtype=_i8);W_work=W.clone()
+        for i1 in range(0,cols,bsz):
+            i2=min(i1+bsz,cols);count=i2-i1
+            W1=W_work[:,i1:i2].clone();Q1=_tz(rows,count,dtype=_i8)
+            Err1=_tz(rows,count);Hinv1=Hinv[i1:i2,i1:i2]
+            for i in range(count):
+                w=W1[:,i];d=Hinv1[i,i]
+                q=_tc(_tr(w/sf),-cr,cr).to(_i8)
+                Q1[:,i]=q;err=(w-q.float()*sf)/d
+                W1[:,i:]-=err.unsqueeze(1)*Hinv1[i,i:].unsqueeze(0);Err1[:,i]=err
+            Q[:,i1:i2]=Q1
+            if i2<cols:W_work[:,i2:]-=Err1@Hinv[i1:i2,i2:]
+        mse=(W-Q.float()*sf[:,None]).pow(2).mean().item()
+        if mse<be:bq,bsc,be=Q,s,mse
+    return bq[:,ip],bsc
+def _gac(model,device,nseq=64,sln=2048,vs=1024,tpr=0.8,bsn=8,seed=42):
+    model.eval();rng=torch.Generator(device=device);rng.manual_seed(seed);out=[]
+    with _im(),_autocast():
+        for bs0 in range(0,nseq,bsn):
+            bs=min(bsn,nseq-bs0);toks=torch.randint(0,vs,(bs,1),device=device,generator=rng)
+            for _ in range(sln-1):toks=torch.cat([toks,torch.multinomial(torch.softmax(model.fwl(toks)[:,-1,:]/tpr,dim=-1),1,generator=rng)],dim=1)
+            out.extend(toks[i:i+1] for i in range(bs))
+    return out
+def _cht(hm,seqs,device):
+    H={};hooks=[]
+    for nm,mod in hm.named_modules():
+        if isinstance(mod,CL):
+            pn=nm+".weight";c=mod.weight.shape[1];H[pn]=_tz(c,c,dtype=_f32,device='cpu')
+            def mk(p):
+                def fn(m,inp,out):
+                    x=inp[0].detach().float()
+                    if x.ndim==3:x=x.reshape(-1,x.shape[-1])
+                    H[p]+=(x.T@x).cpu()
+                return fn
+            hooks.append(mod.register_forward_hook(mk(pn)))
+    if getattr(hm,'te',False) and hasattr(hm,'final_norm'):
+        epn="tok_emb.weight";c=hm.tok_emb.weight.shape[1];H[epn]=_tz(c,c,dtype=_f32,device='cpu')
+        def mkeh(p):
+            def fn(m,inp,out):
+                x=out.detach().float()
+                if x.ndim==3:x=x.reshape(-1,x.shape[-1])
+                H[p]+=(x.T@x).cpu()
+            return fn
+        hooks.append(hm.final_norm.register_forward_hook(mkeh(epn)))
+    hm.eval()
+    with _im(),_autocast():
+        for s in seqs:hm(s[:,:-1].to(device),s[:,1:].to(device))
+    for h in hooks:h.remove()
+    for n in H:
+        H[n]/=len(seqs);d=0.01*torch.diag(H[n]).mean().clamp_min(1e-6);H[n]+=d*torch.eye(H[n].shape[0])
+    return H
+def _ubs(sd,n):
+    out={}
+    for nm,t in sd.items():
+        if nm=="qo_bank":
+            for i in range(n):out[f"blocks.{i}.attn.c_q.weight"]=t[i];out[f"blocks.{i}.attn.proj.weight"]=t[n+i]
+        elif nm=="kv_bank":
+            for i in range(n):out[f"blocks.{i}.attn.c_k.weight"]=t[i];out[f"blocks.{i}.attn.c_v.weight"]=t[n+i]
+        elif nm=="mlp_up_bank":
+            for i in range(n):out[f"blocks.{i}.mlp.fc.weight"]=t[i]
+        elif nm=="mlp_down_bank":
+            for i in range(n):out[f"blocks.{i}.mlp.proj.weight"]=t[i]
+        else:out[nm]=t
+    return out
+def _rbs(sd,n,tsd):
+    qo=[None]*(2*n);kv=[None]*(2*n);up=[None]*n;dn=[None]*n;c=set()
+    for i in range(n):
+        for k,l,ix in [(f"blocks.{i}.attn.c_q.weight",qo,i),(f"blocks.{i}.attn.proj.weight",qo,n+i),(f"blocks.{i}.attn.c_k.weight",kv,i),(f"blocks.{i}.attn.c_v.weight",kv,n+i),(f"blocks.{i}.mlp.fc.weight",up,i),(f"blocks.{i}.mlp.proj.weight",dn,i)]:
+            if k in sd:l[ix]=sd[k];c.add(k)
+    out={"qo_bank":torch.stack(qo).to(dtype=tsd["qo_bank"].dtype),"kv_bank":torch.stack(kv).to(dtype=tsd["kv_bank"].dtype),"mlp_up_bank":torch.stack(up).to(dtype=tsd["mlp_up_bank"].dtype),"mlp_down_bank":torch.stack(dn).to(dtype=tsd["mlp_down_bank"].dtype)}
+    for k,v in sd.items():
+        if k not in c:out[k]=v
+    return out
+class _HA(nn.Module):
+    def __init__(self,dim,nh,nkv,rb,qgi,rd=0,tsl=2048):
+        super().__init__();self.nh,self.nkv=nh,nkv
+        self.hdm=dim//nh;kvd=nkv*self.hdm
+        self.c_q=CL(dim,dim,bias=False);self.c_k=CL(dim,kvd,bias=False)
+        self.c_v=CL(dim,kvd,bias=False);self.proj=CL(dim,dim,bias=False)
+        self.q_gain=_P(torch.full((nh,),qgi,dtype=_f32))
+        self.rd=rd;self.rotary=Rotary(self.hdm,base=rb,tsl=tsl,rd=rd);self.uxs=False
+    def _xe(self,y,v):
+        B,T,H,D=y.shape;Hkv=v.size(-2);group=H//Hkv
+        y_g=y.reshape(B,T,Hkv,group,D);vn=F.normalize(v,dim=-1).unsqueeze(-2)
+        return (y_g-(y_g*vn).sum(dim=-1,keepdim=True)*vn).reshape(B,T,H,D)
+    def forward(self,x,ve=None):
+        bsz,sq,dim=x.shape
+        q=self.c_q(x).reshape(bsz,sq,self.nh,self.hdm)
+        k=self.c_k(x).reshape(bsz,sq,self.nkv,self.hdm)
+        v=self.c_v(x)
+        if ve is not None:v=v+ve
+        v=v.reshape(bsz,sq,self.nkv,self.hdm)
+        q=F.rms_norm(q,(q.size(-1),));k=F.rms_norm(k,(k.size(-1),))
+        cos,sin=self.rotary(sq,x.device,q.dtype)
+        q=_are(q,cos,sin,self.rd);k=_are(k,cos,sin,self.rd)
+        q=q*self.q_gain.to(dtype=q.dtype)[None,None,:,None]
+        y=_fa3(q,k,v,causal=True)
+        if self.uxs:y=self._xe(y,v)
+        return self.proj(y.reshape(bsz,sq,dim))
+class _HM(nn.Module):
+    def __init__(self,dim,mlm):
+        super().__init__();self.fc=CL(dim,int(mlm*dim),bias=False);self.proj=CL(int(mlm*dim),dim,bias=False);self.act_fn=_AF
+    def forward(self,x):return self.proj(self.act_fn(self.fc(x)))
+class _HB(nn.Module):
+    def __init__(self,dim,nh,nkv,mlm,rb,qgi,lxi=0,lns=False,rd=0,tsl=2048):
+        super().__init__();self.attn_norm=RN();self.mlp_norm=RN()
+        self.attn=_HA(dim,nh,nkv,rb,qgi,rd=rd,tsl=tsl);self.mlp=_HM(dim,mlm)
+        self.attn_scale=_P(_to(dim,dtype=_f32));self.mlp_scale=_P(_to(dim,dtype=_f32))
+        self.resid_mix=_P(torch.stack((_to(dim),_tz(dim))).float())
+        self.lsf=1.0/math.sqrt(lxi+1) if lns else 1.0
+    def forward(self,x,x0,ve=None):
+        mix=self.resid_mix.to(dtype=x.dtype)
+        xi=mix[0][_S]*x+mix[1][_S]*x0;xo=xi
+        if not getattr(self,'dsa',False):
+            aout=self.attn(self.attn_norm(xi)*self.lsf,ve=ve)
+            xo=xo+self.attn_scale.to(dtype=xi.dtype)[_S]*aout
+        return xo+self.mlp_scale.to(dtype=xo.dtype)[_S]*self.mlp(self.mlp_norm(xo)*self.lsf)
+class _HG(nn.Module):
+    def __init__(self,vs,nl,md,nh,nkv,mlm,te,lsc,rb,qgi,xln=0,rd=0,lns=False,sgsk=False,ven=False,vd=128,vel=None,psl=-1,dl0a=False,tsl=2048,rcl=None,rnl=2):
+        super().__init__();self.te=te;self.lsc=lsc;self.sgsk=sgsk
+        self.nl=nl;self.tok_emb=nn.Embedding(vs,md)
+        self.rcl=sorted(rcl) if rcl else [];self.rnl=rnl
+        vl=[(i,False) for i in range(nl)]
+        if self.rcl:
+            ins=False;vl_r=[]
+            for i in range(nl):
+                vl_r.append((i,False))
+                if not ins and i==self.rcl[-1]:
+                    for _ in range(rnl-1):
+                        for rl in self.rcl:vl_r.append((rl,True))
+                    ins=True
+            vl=vl_r
+        self._vl=vl;nv=len(vl)
+        self.nel=nv//2;self.ndl=nv-self.nel
+        pnel=nl//2;pndl=nl-pnel;self.nsw=min(pnel,pndl)
+        self.skip_weights=_P(_to(self.nsw,md,dtype=_f32))
+        self.skip_gates=_P(_tz(self.nsw,md,dtype=_f32)) if sgsk else None
+        self.blocks=nn.ModuleList([_HB(md,nh,nkv,mlm,rb,qgi,lxi=i,lns=lns,rd=rd,tsl=tsl) for i in range(nl)])
+        if xln>0:
+            for i in range(max(0,nl-xln),nl):self.blocks[i].attn.uxs=True
+        self.final_norm=RN();self.lm_head=None if te else CL(md,vs,bias=False)
+        kvd=nkv*(md//nh)
+        self.veli=sorted(vel) if ven and vel else []
+        if self.veli:
+            self.ves=VE(vs,vd,kvd)
+            self.vels=_PL([_P(_to(1,dtype=_f32)) for _ in self.veli])
+        else:self.ves=None;self.vels=_PL()
+        self.psl=psl
+        if 0<psl<nl:self.lm=_P(_tt(0.5,dtype=_f32))
+        else:self.lm=None
+        if dl0a and len(self.blocks)>0:self.blocks[0].dsa=True
+    def _get_ve(self,pi,ids,vc):
+        if self.ves is None or pi not in self.veli:return None
+        if 've' not in vc:vc['ve']=self.ves(ids)
+        vb=vc['ve'];vi=self.veli.index(pi)
+        return vb*self.vels[vi].to(dtype=vb.dtype)
+    def forward(self,ii,tgi):
+        x=self.tok_emb(ii);x=F.rms_norm(x,(x.size(-1),));x0=x
+        skips=[];vc={};pt=self.psl if self.lm is not None else self.nl+1
+        ip=False;l0=None;l1=None;si=0
+        for vi in range(self.nel):
+            pi,ir=self._vl[vi]
+            x=self.blocks[pi](x,x0,ve=self._get_ve(pi,ii,vc))
+            skips.append(x)
+        for vi in range(self.ndl):
+            pi,ir=self._vl[self.nel+vi]
+            if skips and si<self.nsw:
+                t=l0 if ip else x;ss=self.skip_weights[si].to(dtype=t.dtype)[_S]*skips.pop()
+                if self.skip_gates is not None:
+                    g=torch.sigmoid(self.skip_gates[si].to(dtype=t.dtype))[_S];t=torch.lerp(ss,t,g)
+                else:t=t+ss
+                if ip:l0=t
+                else:x=t
+                si+=1
+            if pi>=pt and not ip:l0=x;l1=x;ip=True
+            if ip:
+                blk=self.blocks[pi];ve=self._get_ve(pi,ii,vc)
+                mix=blk.resid_mix.to(dtype=l0.dtype);ai=mix[0][_S]*l0+mix[1][_S]*x0
+                ao=blk.attn(blk.attn_norm(ai)*blk.lsf,ve=ve)
+                l0=ai+blk.attn_scale.to(dtype=ai.dtype)[_S]*ao
+                l1=l1+blk.mlp_scale.to(dtype=l1.dtype)[_S]*blk.mlp(blk.mlp_norm(l1)*blk.lsf)
+            else:
+                x=self.blocks[pi](x,x0,ve=self._get_ve(pi,ii,vc))
+        if ip:m=self.lm.to(dtype=l0.dtype);x=m*l0+(1-m)*l1
+        x=self.final_norm(x);xf=x.reshape(-1,x.size(-1));tgt=tgi.reshape(-1)
+        lp=F.linear(xf,self.tok_emb.weight) if self.te else self.lm_head(xf)
+        return F.cross_entropy((self.lsc*torch.tanh(lp/self.lsc)).float(),tgt,reduction="mean")
+    def fwl(self,ii):
+        x=self.tok_emb(ii);x=F.rms_norm(x,(x.size(-1),));x0=x
+        skips=[];vc={};pt=self.psl if self.lm is not None else self.nl+1
+        ip=False;l0=None;l1=None;si=0
+        for vi in range(self.nel):
+            pi,ir=self._vl[vi]
+            x=self.blocks[pi](x,x0,ve=self._get_ve(pi,ii,vc))
+            skips.append(x)
+        for vi in range(self.ndl):
+            pi,ir=self._vl[self.nel+vi]
+            if skips and si<self.nsw:
+                t=l0 if ip else x;ss=self.skip_weights[si].to(dtype=t.dtype)[_S]*skips.pop()
+                if self.skip_gates is not None:
+                    g=torch.sigmoid(self.skip_gates[si].to(dtype=t.dtype))[_S];t=torch.lerp(ss,t,g)
+                else:t=t+ss
+                if ip:l0=t
+                else:x=t
+                si+=1
+            if pi>=pt and not ip:l0=x;l1=x;ip=True
+            if ip:
+                blk=self.blocks[pi];ve=self._get_ve(pi,ii,vc)
+                mix=blk.resid_mix.to(dtype=l0.dtype);ai=mix[0][_S]*l0+mix[1][_S]*x0
+                ao=blk.attn(blk.attn_norm(ai)*blk.lsf,ve=ve)
+                l0=ai+blk.attn_scale.to(dtype=ai.dtype)[_S]*ao
+                l1=l1+blk.mlp_scale.to(dtype=l1.dtype)[_S]*blk.mlp(blk.mlp_norm(l1)*blk.lsf)
+            else:
+                x=self.blocks[pi](x,x0,ve=self._get_ve(pi,ii,vc))
+        if ip:m=self.lm.to(dtype=l0.dtype);x=m*l0+(1-m)*l1
+        x=self.final_norm(x)
+        lp=F.linear(x,self.tok_emb.weight) if self.te else self.lm_head(x)
+        return self.lsc*torch.tanh(lp/self.lsc)
+def _bits_to_cr(bits):return{5:15,6:31,8:127}[bits]
+def _mqi(sdi,i6c,hs=None,bm=6,ba=6,be=6,sdk=0.0,sdke=0.0):
+    result={};meta={}
+    for name,tensor in sdi.items():
+        t=tensor.detach().cpu().contiguous();cat=_cp(name)
+        if not t.is_floating_point() or t.numel()<=65536:
+            result[name]=t.to(_f16) if t.is_floating_point() else t
+            meta[name]="pt";continue
+        if any(p in name for p in _CTNP):
+            result[name]=t.float();meta[name]="ptc";continue
+        if cat in i6c and t.ndim>=1:
+            bits=bm if cat=="mlp" else(be if cat=="embed" else ba)
+            clip=_bits_to_cr(bits);H=hs.get(name) if hs else None
+            sk=sdke if cat=="embed" and sdke>0 else sdk
+            if H is not None and t.ndim==2:q,s=_qgq(t,hessian=H,cr=clip,sdk=sk)
+            else:q,s=_qpr(t,cr=clip,sdk=sk)
+            result[name+".q"]=q;result[name+".scale"]=s;meta[name]={"type":f"int{bits}"}
+        else:
+            q,s=_qft(t)
+            result[name+".q"]=q;result[name+".scale"]=s;meta[name]={"type":"int8"}
+    return result,meta
+def _dmi(res,meta,tsd):
+    out={}
+    for nm,orig in tsd.items():
+        info=meta.get(nm)
+        if info is None:continue
+        od=orig.dtype
+        if info in("pt","ptc","ptf"):
+            t=res[nm];out[nm]=t.to(od) if t.dtype==_f16 and od in(_f32,_bf16) else t;continue
+        q,s=res[nm+".q"],res[nm+".scale"]
+        out[nm]=(q.float()*s.float().view(q.shape[0],*([1]*(q.ndim-1))) if s.ndim>0 else q.float()*float(s.item())).to(od)
+    return out
+def _sgd(m):
+    for _b in [m.qo_bank,m.kv_bank,m.mlp_up_bank,m.mlp_down_bank]:_b.data=_b.data.float()
+    if m.rla is not None:m.rla.data=m.rla.data.float();m.rlb.data=m.rlb.data.float()
+    for mod in m.modules():
+        if isinstance(mod,CL):mod.float()
+    _rlfp(m)
+def _mk_gpt(a,rll,vll):
+    return GPT(vs=a.vs,nl=a.nl,md=a.md,nh=a.nh,nkv=a.nkv,mlm=a.mlm,te=a.te,teis=a.teis,lsc=a.lsc,rb=a.rb,qgi=a.qgi,xln=a.xln,rd=a.rd,lns=a.lns,sgsk=a.sgsk,rcl=rll,ven=a.ven,vd=a.vd,vel=vll,psl=a.psl,rum=a.rum,dl0a=a.dl0a,rnl=a.rnl,lrk=a.rlr,rps=a.rps,tsl=a.tsl)
+def main():
+    code=Path(__file__).read_text(encoding="utf-8")
+    a=Hyperparameters()
+    dst="RANK" in os.environ and "WORLD_SIZE" in os.environ
+    rank=int(_eg("RANK","0"));wz=int(_eg("WORLD_SIZE","1"));lrn=int(_eg("LOCAL_RANK","0"))
+    if wz<=0:raise ValueError(f"WORLD_SIZE<=0: {wz}")
+    if 8%wz!=0:raise ValueError(f"WORLD_SIZE={wz} must divide 8")
+    ga=8//wz;gsc=1.0/ga
+    if not torch.cuda.is_available():raise RuntimeError("CUDA required")
+    device=torch.device("cuda",lrn);torch.cuda.set_device(device)
+    if dst:dist.init_process_group(backend="nccl",device_id=device,timeout=datetime.timedelta(seconds=1800));dist.barrier()
+    ms=rank==0
+    torch.backends.cuda.matmul.allow_tf32=True;torch.backends.cudnn.allow_tf32=True
+    from torch.backends.cuda import enable_cudnn_sdp,enable_flash_sdp,enable_math_sdp,enable_mem_efficient_sdp
+    enable_cudnn_sdp(False);enable_flash_sdp(True);enable_mem_efficient_sdp(False);enable_math_sdp(False)
+    lgf=None
+    if ms:os.makedirs("logs",exist_ok=True);lgf=f"logs/{a.run_id}.txt";print(lgf)
+    def log0(msg,console=True):
+        if not ms:return
+        if console:print(msg)
+        if lgf is not None:
+            with open(lgf,"a",encoding="utf-8") as f:print(msg,file=f)
+    log0(code,console=False);log0("="*100,console=False);log0(f"Running Python {sys.version}",console=False);log0(f"Running PyTorch {torch.__version__}",console=False);log0("="*100,console=False)
+    random.seed(a.seed);np.random.seed(a.seed);torch.manual_seed(a.seed);torch.cuda.manual_seed_all(a.seed)
+    if not a.tkp.endswith(".model"):raise ValueError(f"Need .model file: {a.tkp}")
+    sp=spm.SentencePieceProcessor(model_file=a.tkp)
+    if int(sp.vocab_size())!=a.vs:raise ValueError(f"VOCAB_SIZE mismatch: {a.vs}!={int(sp.vocab_size())}")
+    dsd=Path(a.dap).resolve()
+    atf=len(list(dsd.glob("fineweb_train_*.bin")));esl=a.esl if a.esl>0 else a.tsl
+    vt=_lvt(a.vaf,max(a.tsl,esl));bbl,hll,ibl=_bsl(sp,a.vs,device)
+    log0(f"tokenizer:{a.tkp}");log0(f"dataset:{dsd.name} train_shards:{atf} val_tokens:{vt.numel()-1}")
+    rll=[int(x) for x in a.rcl.split(",") if x.strip()] if a.rcl.strip() else [];vll=[int(x) for x in a.vel.split(",") if x.strip()] if a.ven else []
+    bm=_mk_gpt(a,rll,vll).to(device).bfloat16();_sgd(bm)
+    cm=torch.compile(bm,dynamic=False,fullgraph=True);model=cm
+    mp=[bm.qo_bank,bm.kv_bank,bm.mlp_up_bank,bm.mlp_down_bank]
+    sp=[p for name,p in bm.blocks.named_parameters() if p.ndim<2 or any(pattern in name for pattern in _CTNP)]
+    if bm.skip_weights.numel()>0:sp.append(bm.skip_weights)
+    if bm.skip_gates is not None:sp.append(bm.skip_gates)
+    if bm.ves is not None:
+        sp.extend(bm.vels.parameters());sp.append(bm.ves.scale)
+    if bm.lm is not None:sp.append(bm.lm)
+    if bm.rla is not None:sp.extend([bm.rla,bm.rlb])
+    if bm.rps is not None:sp.append(bm.rps)
+    tlr=a.telr if a.te else a.elr
+    tp=[{"params":[bm.tok_emb.weight],"lr":tlr,"blr":tlr}]
+    ewv=a.ewd if a.ewd>=0 else a.awd
+    if bm.ves is not None:
+        ve_mp=[bm.ves.embed.weight]
+        if bm.ves.proj is not None:ve_mp.append(bm.ves.proj.weight)
+        tp.append({"params":ve_mp,"lr":tlr,"blr":tlr})
+    otk=torch.optim.AdamW(tp,betas=(a.b1,a.b2),eps=a.aep,weight_decay=ewv,fused=True)
+    omu=Muon(mp,lr=a.mlr,momentum=a.mmo,bst=a.mbs,wdy=a.mwd,pon=a.mpl)
+    for g in omu.param_groups:g["blr"]=a.mlr
+    osc=torch.optim.AdamW([{"params":sp,"lr":a.slr,"blr":a.slr}],betas=(a.b1,a.b2),eps=a.aep,weight_decay=a.awd,fused=True)
+    rp=list(otk.param_groups[0]["params"])
+    for pg in otk.param_groups[1:]:rp.extend(pg["params"])
+    rp.extend(sp);ohd=None
+    if bm.lm_head is not None:
+        ohd=torch.optim.Adam([{"params":[bm.lm_head.weight],"lr":a.hlr,"blr":a.hlr}],betas=(a.b1,a.b2),eps=a.aep,fused=True)
+        rp.append(bm.lm_head.weight)
+    opts=[otk,omu,osc]
+    if ohd is not None:opts.append(ohd)
+    log0(f"model_params:{sum(p.numel() for p in bm.parameters())}")
+    xsl=[i for i,b in enumerate(bm.blocks) if b.attn.uxs]
+    log0(f"arch: vs={a.vs} nl={a.nl} dim={a.md} mlp={a.mlm} mwd={a.mwd} awd={a.awd} ewd={ewv} mlr={a.mlr} ss={a.sgsk} bs={a.bsh} qk={a.qgi} rl={rll} rs={a.rss} ve={a.ven} vd={a.vd} vl={vll} ps={a.psl}")
+    log0(f"XSA:last_{a.xln} layers:{xsl} ws:{wz} ga:{ga} heads:{a.nh}/{a.nkv}");log0(f"tie:{a.te} elr:{tlr} hlr:{a.hlr if bm.lm_head is not None else 0.0} mlr:{a.mlr} slr:{a.slr}")
+    log0(f"tbt:{a.tbt} tsl:{a.tsl} iters:{a.itr} wu:{a.wus} wc:{a.mwc:.3f} seed:{a.seed}")
+    _rq=bool(int(_eg("RESUME_QUANT","0")))
+    if _rq:
+        log0("resume:loading final_model.pt");_rsd=torch.load("final_model.pt",map_location='cpu',weights_only=True)
+        cs=bm.state_dict();bm.load_state_dict({k:v.to(dtype=cs[k].dtype) for k,v in _rsd.items()},strict=True)
+        if rll:bm.set_ra(True);log0(f"resume:recurrence activated, virtual_layers={bm._gvl()}")
+        _cs();t_diag=_pc()
+        dvl,dvb=ev(a,cm,rank,wz,device,ga,vt,bbl,hll,ibl)
+        _cs();log0(f"resume:post_ema val_loss:{dvl:.4f} val_bpb:{dvb:.4f} eval_time:{1000.0*(_pc()-t_diag):.0f}ms")
+        # expT: stop after post-EMA eval; skip quant/prune/compress/TTT (we only want pre-quant BPB sweeps)
+        if bool(int(_eg("EXPT_EARLY_EXIT","0"))):
+            log0("expT:early_exit after post_ema eval")
+            if dst:dist.destroy_process_group()
+            return
+    if not _rq:
+        tl=DTL(a.trf,rank,wz,device)
+    def zga():
+        for opt in opts:opt.zero_grad(set_to_none=True)
+    mwm=1000.0*a.mwc if a.mwc>0 else None
+    def lr_mul(step,ems):
+        if a.wdi<=0 and a.wdf<=0:return 1.0
+        if mwm is None:
+            wdst=max(a.itr-a.wdi,0)
+            return max((a.itr-step)/max(a.wdi,1),0.0) if wdst<=step<a.itr else 1.0
+        stms=ems/max(step,1)
+        wdm=a.wdf*mwm if a.wdf>0 else a.wdi*stms
+        rms=max(mwm-ems,0.0)
+        return rms/max(wdm,1e-9) if rms<=wdm else 1.0
+    if _rq:esd=dict(bm.state_dict())
+    if not _rq and a.wus>0:
+        im={n:t.detach().cpu().clone() for n,t in bm.state_dict().items()}
+        ios=[copy.deepcopy(opt.state_dict()) for opt in opts];model.train()
+        for wust in range(a.wus):
+            zga()
+            for mst in range(ga):
+                x,y=tl.nb(a.tbt,a.tsl,ga)
+                with _autocast():wul=model(x,y)
+                (wul*gsc).backward()
+            if dst:
+                for p in bm.parameters():
+                    if p.grad is not None:_ar(p.grad,op=_AVG)
+            for opt in opts:opt.step()
+            zga()
+            if a.wus<=20 or (wust+1)%10==0 or wust+1==a.wus:log0(f"wust:{wust+1}/{a.wus}")
+        bm.load_state_dict(im,strict=True)
+        for opt,state in zip(opts,ios,strict=True):opt.load_state_dict(state)
+        zga();tl=DTL(a.trf,rank,wz,device)
+    if not _rq:
+        es={n:t.detach().float().clone() for n,t in bm.state_dict().items()}
+        ema=float(_eg("EMA_DECAY",0.997));ttm=0.0;sas=None
+        _cs();t0=_pc();step=0
+        while True:
+            lst=step==a.itr or(sas is not None and step>=sas)
+            if rll and step==a.rss and not bm._ra:
+                bm.set_ra(True);log0(f"recurrence:activated at step {step}, virtual_layers={bm._gvl()}")
+            shv=lst or(a.vle>0 and step%a.vle==0)
+            if shv:
+                _cs();ttm+=1000.0*(_pc()-t0)
+                vlo,vbp=ev(a,model,rank,wz,device,ga,vt,bbl,hll,ibl)
+                log0(f"step:{step}/{a.itr} val_loss:{vlo:.4f} val_bpb:{vbp:.4f} train_time:{ttm:.0f}ms step_avg:{ttm/max(step,1):.2f}ms")
+                _cs();t0=_pc()
+            if lst:
+                if sas is not None and step<a.itr:
+                    log0(f"stopping_early: wallclock_cap train_time:{ttm:.0f}ms step:{step}/{a.itr}")
+                break
+            ems=ttm+1000.0*(_pc()-t0)
+            scale=lr_mul(step,ems);tl.set_wdf(max(1.0-scale,0.0))
+            zga();tnl=_tz((),device=device)
+            for mst in range(ga):
+                x,y=tl.nb(a.tbt,a.tsl,ga)
+                with _autocast():loss=model(x,y)
+                tnl+=loss.detach();(loss*gsc).backward()
+            tnl/=ga
+            frac=min(step/a.mmwu,1.0) if a.mmwu>0 else 1.0
+            mm=(1-frac)*a.mmws+frac*a.mmo
+            for g in omu.param_groups:g["momentum"]=mm
+            for opt in opts:
+                for g in opt.param_groups:g["lr"]=g["blr"]*scale
+            omu.lrs()
+            if dst:
+                for p in rp:
+                    if p.grad is not None:_ar(p.grad,op=_AVG)
+            if a.gcn>0:torch.nn.utils.clip_grad_norm_(bm.parameters(),a.gcn)
+            otk.step();osc.step()
+            if ohd is not None:ohd.step()
+            omu.step();zga()
+            if a.lqat and scale<(1.0-a.qsf):
+                with _ng():
+                    for n,p in bm.named_parameters():
+                        if p.numel()<256:continue
+                        if "qo_bank" in n or "kv_bank" in n:bits=a.qba
+                        elif "mlp_up_bank" in n or "mlp_down_bank" in n:bits=a.qbm
+                        elif "rdb" in n or "rla" in n or "rlb" in n:bits=8
+                        elif "tok_emb" in n or "lm_head" in n:bits=a.qbe
+                        elif "ves.embed" in n or "ves.proj" in n:bits=a.qbm
+                        else:continue
+                        cr=(1<<(bits-1))-1;pf=p.float()
+                        rm=pf.reshape(-1,pf.shape[-1]) if pf.ndim>=2 else pf.unsqueeze(0)
+                        gs=rm.abs().amax(dim=-1,keepdim=True).clamp_min(1e-12)/cr
+                        ns=(torch.rand_like(rm,dtype=_f32)-0.5)*gs*a.qns
+                        p.add_(ns.reshape(pf.shape).to(p.dtype))
+            with _ng():
+                for n,t in bm.state_dict().items():es[n].mul_(ema).add_(t.detach().float(),alpha=1.0-ema)
+            step+=1
+            attm=ttm+1000.0*(_pc()-t0)
+            shlt=a.tle>0 and(step<=10 or step%a.tle==0 or sas is not None)
+            if shlt:
+                log0(f"step:{step}/{a.itr} tnl:{tnl.item():.4f} train_time:{attm:.0f}ms step_avg:{attm/step:.2f}ms")
+            rcap=mwm is not None and attm>=mwm
+            if dst and mwm is not None:
+                rct=_tt(int(rcap),device=device)
+                _ar(rct,op=_MAX);rcap=bool(rct.item())
+            if sas is None and rcap:sas=step
+        log0(f"peak_mem:{torch.cuda.max_memory_allocated()//1024//1024}MiB res:{torch.cuda.max_memory_reserved()//1024//1024}MiB");log0("ema:apply")
+        cs=bm.state_dict();bm.load_state_dict({n:t.to(dtype=cs[n].dtype) for n,t in es.items()},strict=True)
+        _cs();t_diag=_pc()
+        dvl,dvb=ev(a,cm,rank,wz,device,ga,vt,bbl,hll,ibl)
+        _cs();log0(f"post_ema val_loss:{dvl:.4f} val_bpb:{dvb:.4f} eval_time:{1000.0*(_pc()-t_diag):.0f}ms")
+        esd=dict(bm.state_dict())
+        if ms:
+            torch.save(esd,"final_model.pt")
+            _csz=int(_eg("CODE_SIZE_OVERRIDE",0)) or len(code.encode('utf-8'));log0(f"model: {os.path.getsize('final_model.pt')} bytes  code: {_csz} bytes")
+    sdc={k:v.detach().cpu() for k,v in esd.items()}
+    us=_ubs(sdc,a.nl);hs=None
+    def _bus(data):
+        pad=data[-1];arr=np.frombuffer(data[:-1],dtype=np.uint8)
+        result=arr.reshape(4,len(arr)//4).T.tobytes()
+        return result[:-pad] if pad else result
+    def _decompress(data):
+        raw=brotli.decompress(data) if a.cmp=="brotli" and _HBR else lzma.decompress(data)
+        return _bus(raw) if a.bsh else raw
+    if ms:
+        if a.gpe:
+            log0("gptq:building hessian model...")
+            hgm=_HG(vs=a.vs,nl=a.nl,md=a.md,nh=a.nh,nkv=a.nkv,mlm=a.mlm,te=a.te,lsc=a.lsc,rb=a.rb,qgi=a.qgi,xln=a.xln,rd=a.rd,lns=a.lns,sgsk=a.sgsk,ven=a.ven,vd=a.vd,vel=vll,psl=a.psl,dl0a=a.dl0a,tsl=a.tsl,rcl=rll,rnl=a.rnl).to(device).bfloat16()
+            for m in hgm.modules():
+                if isinstance(m,CL):m.float()
+            _rlfp(hgm)
+            hgm.load_state_dict({k:v.to(device) for k,v in us.items() if k in hgm.state_dict()},strict=False)
+            t_gen=_pc()
+            if a.gcrd:
+                cfiles=sorted(glob.glob(a.trf));cmm=_gsm(cfiles[0]);cn=len(cmm)
+                rng_c=torch.Generator();rng_c.manual_seed(a.seed)
+                spb=a.tbt//(a.gcl+1);ncs=min(a.gcb*spb,256);at=[]
+                log0(f"gptq:calib {ncs} seqs ({ncs*(a.gcl+1)//1000}K tokens) from real data")
+                for _ in range(ncs):
+                    ci=torch.randint(0,cn-a.gcl-1,(1,),generator=rng_c).item()
+                    at.append(torch.as_tensor(np.array(cmm[ci:ci+a.gcl+1],dtype=np.int64)).unsqueeze(0).to(device))
+            else:
+                log0(f"gptq:calib {a.gcs}x{a.gcl} gen seqs")
+                at=_gac(hgm,device,nseq=a.gcs,sln=a.gcl,vs=a.vs,tpr=a.gct,bsn=8,seed=a.seed)
+            log0(f"gptq:{len(at)} seqs in {_pc()-t_gen:.1f}s");log0("gptq:hs...")
+            hs=_cht(hgm,at,device)
+            log0(f"gptq:collected hs for {len(hs)} layers");del at,hgm;torch.cuda.empty_cache()
+        i6c={"mlp","attn"}
+        if a.qbe<=8:i6c.add("embed")
+        log0(f"quant_config: bits_mlp={a.qbm} bits_attn={a.qba} bits_embed={a.qbe}")
+        sdk=a.sdk if a.sdc else 0.0
+        sdke=a.sdke if a.sdc and a.sdke>0 else sdk
+        qr,qm=_mqi(us,i6c,hs=hs,bm=a.qbm,ba=a.qba,be=a.qbe,sdk=sdk,sdke=sdke)
+        cbe=int(_eg("CODE_SIZE_OVERRIDE",0)) or len(code.encode("utf-8"));AL=16_000_000;tbyt=AL-cbe
+        log0(f"budget: limit={AL} code={cbe} model={tbyt} ({tbyt/1048576:.2f}MB)")
+        oi=[]
+        for name,info in qm.items():
+            if not(isinstance(info,dict) and info.get("type","").startswith("int")):continue
+            qk,sk=name+".q",name+".scale"
+            if qk not in qr or sk not in qr:continue
+            q,s=qr[qk],qr[sk]
+            if s.ndim>0 and (q.abs()==1).any():
+                om=(q.abs()==1);ri=_ta(q.shape[0]).unsqueeze(1).expand_as(q)[om];fi=_ta(q.numel()).reshape(q.shape)[om]
+                for f,e in zip(fi.tolist(),(s.float()[ri].pow(2)).tolist()):oi.append((qk,f,e))
+        def _bsh(data):
+            arr=np.frombuffer(data,dtype=np.uint8);pad=(4-len(arr)%4)%4
+            if pad:arr=np.concatenate([arr,np.zeros(pad,dtype=np.uint8)])
+            return arr.reshape(-1,4).T.tobytes()+pad.to_bytes(1,'little')
+        def _compress(data,q=11):
+            if a.bsh:data=_bsh(data)
+            return brotli.compress(data,quality=q) if a.cmp=="brotli" and _HBR else lzma.compress(data,preset=9)
+        if oi:
+            oi.sort(key=lambda x:x[2])
+            def _tp(n,q=11):
+                tmp={k:v.clone() for k,v in qr.items()}
+                for i in range(min(n,len(oi))):tmp[oi[i][0]].view(-1)[oi[i][1]]=0
+                buf=io.BytesIO();torch.save({"w":tmp,"m":qm},buf)
+                return len(_compress(buf.getvalue(),q=q)),tmp
+            no_sz,_=_tp(0,q=6)
+            log0(f"prune: {len(oi)} cands unpruned={no_sz/1048576:.2f}MB budget={tbyt/1048576:.2f}MB")
+            if no_sz<=tbyt:
+                log0("prune: fits")
+            else:
+                full_sz,_=_tp(len(oi),q=6)
+                log0(f"prune: full={full_sz/1048576:.2f}MB")
+                if full_sz>tbyt:
+                    log0("prune: full not enough, applying all");_,qr=_tp(len(oi))
+                else:
+                    lo,hi=0,len(oi)
+                    while lo<hi:
+                        mid=(lo+hi)//2;sz,_=_tp(mid,q=6)
+                        if sz<=tbyt:hi=mid
+                        else:lo=mid+1
+                    log0(f"prune: {lo}/{len(oi)} ({100*lo/len(oi):.1f}%)");_,qr=_tp(lo)
+        qbu=io.BytesIO();torch.save({"w":qr,"m":qm},qbu);qb=_compress(qbu.getvalue())
+        with open("final_model.int6.ptz","wb") as f:f.write(qb)
+        cb=int(_eg("CODE_SIZE_OVERRIDE",0)) or len(code.encode("utf-8"))
+        log0(f"Serialized model {a.cmp}: {len(qb)} bytes")
+        log0(f"Total submission size {a.cmp}: {len(qb)+cb} bytes")
+    if dst:dist.barrier()
+    with open("final_model.int6.ptz","rb") as f:qb_disk=f.read()
+    qs=torch.load(io.BytesIO(_decompress(qb_disk)),map_location="cpu")
+    deu=_dmi(qs["w"],qs["m"],us)
+    des=_rbs(deu,a.nl,sdc)
+    em=_mk_gpt(a,rll,vll).to(device).bfloat16()
+    _sgd(em);em.load_state_dict(des,strict=True);em.set_ra(bm._ra)
+    if a.tte:
+        ttt_sd={k:v.detach().clone() for k,v in em.state_dict().items()}
+    ce=torch.compile(em,dynamic=False,fullgraph=True)
+    _cs();t_qeval=_pc()
+    qvl,qvb=ev(a,ce,rank,wz,device,ga,vt,bbl,hll,ibl,esl=esl)
+    _cs();log0(f"final_int6_roundtrip val_loss:{qvl:.4f} val_bpb:{qvb:.4f} eval_time:{1000.0*(_pc()-t_qeval):.0f}ms")
+    log0(f"final_int6_roundtrip_exact val_loss:{qvl:.8f} val_bpb:{qvb:.8f}")
+    if a.swe:
+        em.set_ra(bm._ra);_cs();t_sw=_pc()
+        swl,swb=evs(a,em,rank,wz,device,vt,bbl,hll,ibl)
+        _cs();log0(f"final_int6_sliding_window val_loss:{swl:.4f} val_bpb:{swb:.4f} stride:{a.est} eval_time:{1000.0*(_pc()-t_sw):.0f}ms")
+        log0(f"final_int6_sliding_window_exact val_loss:{swl:.8f} val_bpb:{swb:.8f}")
+    if a.tte:
+        tm=_mk_gpt(a,rll,vll).to(device).bfloat16()
+        _sgd(tm);tm.load_state_dict(ttt_sd,strict=True);tm.set_ra(bm._ra);del ttt_sd
+        for m in tm.modules():
+            if isinstance(m,Rotary):m._cc=None;m._sc=None
+        _cs();t_ttt=_pc()
+        tl,tb=evt(a,tm,rank,wz,device,vt,bbl,hll,ibl)
+        _cs();log0(f"final_int6_ttt val_loss:{tl:.4f} val_bpb:{tb:.4f} eval_time:{1000.0*(_pc()-t_ttt):.0f}ms")
+        log0(f"final_int6_ttt_exact val_loss:{tl:.8f} val_bpb:{tb:.8f}")
+        del tm
+    if dst:dist.destroy_process_group()
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,9 @@
+=============================================
+  Pairwise Ablation: mish2 + one change
+  Mon Mar 30 06:10:40 AM CDT 2026
+=============================================
+  GPU0: mish2 + XSA=6  (MTP off, XSA_LAST_N=6)
+  GPU1: mish2 + MTP    (XSA=4, MTP 1h w=0.05)
+
+[06:10:40] START mish2_xsa6 on GPU0 → <project>/parameter-golf/records/track_10min_16mb/pairwise_ablation_results/mish2_xsa6.log
+[06:10:40] START mish2_mtp on GPU1 → <project>/parameter-golf/records/track_10min_16mb/pairwise_ablation_results/mish2_mtp.log

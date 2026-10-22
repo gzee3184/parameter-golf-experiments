@@ -1,0 +1,144 @@
+logs/6b81d6cc-dccc-4cc7-b77c-e154e25adf8e.txt
+tokenizer:./data/tokenizers/fineweb_4096_bpe.model
+dataset:fineweb10B_sp4096 train_shards:143 val_tokens:45508608
+model_params:34524255
+arch: vs=4096 nl=11 dim=512 mlp=4.0 mwd=0.09 awd=0.02 ewd=0.09 mlr=0.02 ss=True bs=True qk=5.0 rl=[3, 4, 5] rs=2000 ve=True vd=128 vl=[9, 10] ps=7
+XSA:last_11 layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ws:1 ga:8 heads:8/4
+tie:True elr:0.035 hlr:0.0 mlr:0.02 slr:0.02
+tbt:786432 tsl:2048 iters:20000 wu:20 wc:10800.000 seed:1337
+wust:1/20
+wust:2/20
+wust:3/20
+wust:4/20
+wust:5/20
+wust:6/20
+wust:7/20
+wust:8/20
+wust:9/20
+wust:10/20
+wust:11/20
+wust:12/20
+wust:13/20
+wust:14/20
+wust:15/20
+wust:16/20
+wust:17/20
+wust:18/20
+wust:19/20
+wust:20/20
+step:0/20000 val_loss:8.3151 val_bpb:3.6136 train_time:0ms step_avg:0.01ms
+step:1/20000 tnl:8.3144 train_time:1540ms step_avg:1539.86ms
+step:2/20000 tnl:12.1917 train_time:3066ms step_avg:1533.02ms
+step:3/20000 tnl:10.2111 train_time:4735ms step_avg:1578.49ms
+step:4/20000 tnl:8.1625 train_time:6408ms step_avg:1602.02ms
+step:5/20000 tnl:7.0445 train_time:8081ms step_avg:1616.29ms
+step:6/20000 tnl:6.6254 train_time:9753ms step_avg:1625.58ms
+step:7/20000 tnl:6.4648 train_time:11426ms step_avg:1632.31ms
+step:8/20000 tnl:6.3795 train_time:13105ms step_avg:1638.07ms
+step:9/20000 tnl:6.2375 train_time:14778ms step_avg:1641.99ms
+step:10/20000 tnl:6.0908 train_time:16450ms step_avg:1645.01ms
+step:100/20000 tnl:4.1470 train_time:166916ms step_avg:1669.16ms
+step:200/20000 tnl:3.3528 train_time:333314ms step_avg:1666.57ms
+step:300/20000 tnl:3.1641 train_time:499752ms step_avg:1665.84ms
+step:400/20000 tnl:3.0843 train_time:667393ms step_avg:1668.48ms
+step:500/20000 tnl:3.0433 train_time:834579ms step_avg:1669.16ms
+step:600/20000 tnl:2.9805 train_time:1001871ms step_avg:1669.79ms
+step:700/20000 tnl:2.9769 train_time:1169247ms step_avg:1670.35ms
+step:800/20000 tnl:2.9469 train_time:1336685ms step_avg:1670.86ms
+step:900/20000 tnl:2.9264 train_time:1504260ms step_avg:1671.40ms
+step:1000/20000 tnl:2.9192 train_time:1672045ms step_avg:1672.05ms
+step:1100/20000 tnl:2.9047 train_time:1839722ms step_avg:1672.47ms
+step:1200/20000 tnl:2.8766 train_time:2007375ms step_avg:1672.81ms
+step:1300/20000 tnl:2.8853 train_time:2175122ms step_avg:1673.17ms
+step:1400/20000 tnl:2.8569 train_time:2343053ms step_avg:1673.61ms
+step:1500/20000 tnl:2.8352 train_time:2511137ms step_avg:1674.09ms
+step:1600/20000 tnl:2.8438 train_time:2679304ms step_avg:1674.57ms
+step:1700/20000 tnl:2.8315 train_time:2847828ms step_avg:1675.19ms
+step:1800/20000 tnl:2.7822 train_time:3016494ms step_avg:1675.83ms
+step:1900/20000 tnl:2.7937 train_time:3185226ms step_avg:1676.43ms
+step:2000/20000 tnl:2.8143 train_time:3353811ms step_avg:1676.91ms
+recurrence:activated at step 2000, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+step:2100/20000 tnl:2.8447 train_time:3576678ms step_avg:1703.18ms
+step:2200/20000 tnl:2.8366 train_time:3798462ms step_avg:1726.57ms
+step:2300/20000 tnl:2.7872 train_time:4020330ms step_avg:1747.97ms
+step:2400/20000 tnl:2.8102 train_time:4242305ms step_avg:1767.63ms
+step:2500/20000 tnl:2.7938 train_time:4464179ms step_avg:1785.67ms
+step:2600/20000 tnl:2.7624 train_time:4686117ms step_avg:1802.35ms
+step:2700/20000 tnl:2.7635 train_time:4908120ms step_avg:1817.82ms
+step:2800/20000 tnl:2.7396 train_time:5130137ms step_avg:1832.19ms
+step:2900/20000 tnl:2.7402 train_time:5352273ms step_avg:1845.61ms
+step:3000/20000 tnl:2.7115 train_time:5574301ms step_avg:1858.10ms
+step:3100/20000 tnl:2.7037 train_time:5796403ms step_avg:1869.81ms
+step:3200/20000 tnl:2.7273 train_time:6018756ms step_avg:1880.86ms
+step:3300/20000 tnl:2.7072 train_time:6240978ms step_avg:1891.21ms
+step:3400/20000 tnl:2.7126 train_time:6463193ms step_avg:1900.94ms
+step:3500/20000 tnl:2.6896 train_time:6685239ms step_avg:1910.07ms
+step:3600/20000 tnl:2.6887 train_time:6907268ms step_avg:1918.69ms
+step:3700/20000 tnl:2.6809 train_time:7129248ms step_avg:1926.82ms
+step:3800/20000 tnl:2.6731 train_time:7351272ms step_avg:1934.55ms
+step:3900/20000 tnl:2.6662 train_time:7573262ms step_avg:1941.86ms
+step:4000/20000 tnl:2.6498 train_time:7794990ms step_avg:1948.75ms
+step:4000/20000 val_loss:2.6484 val_bpb:1.1509 train_time:7795132ms step_avg:1948.78ms
+step:4100/20000 tnl:2.6478 train_time:8016712ms step_avg:1955.30ms
+step:4200/20000 tnl:2.6430 train_time:8238525ms step_avg:1961.55ms
+step:4300/20000 tnl:2.6325 train_time:8460177ms step_avg:1967.48ms
+step:4400/20000 tnl:2.6126 train_time:8681605ms step_avg:1973.09ms
+step:4500/20000 tnl:2.6172 train_time:8903170ms step_avg:1978.48ms
+step:4600/20000 tnl:2.6295 train_time:9124926ms step_avg:1983.68ms
+step:4700/20000 tnl:2.6071 train_time:9346667ms step_avg:1988.65ms
+step:4800/20000 tnl:2.6268 train_time:9568428ms step_avg:1993.42ms
+step:4900/20000 tnl:2.6167 train_time:9790077ms step_avg:1997.97ms
+step:5000/20000 tnl:2.5532 train_time:10011627ms step_avg:2002.33ms
+step:5100/20000 tnl:2.5779 train_time:10233029ms step_avg:2006.48ms
+step:5200/20000 tnl:2.5703 train_time:10454414ms step_avg:2010.46ms
+step:5300/20000 tnl:2.5421 train_time:10675908ms step_avg:2014.32ms
+step:5357/20000 val_loss:2.5345 val_bpb:1.1015 train_time:10802145ms step_avg:2016.45ms
+stopping_early: wallclock_cap train_time:10802145ms step:5357/20000
+peak_mem:32795MiB res:33066MiB
+ema:apply
+post_ema val_loss:2.5318 val_bpb:1.1003 eval_time:37474ms
+model: 132872823 bytes  code: 65655 bytes
+gptq:collecting hessians from real data...
+gptq:calib 64x2048 real data
+gptq:64 seqs in 0.0s
+gptq:hs...
+gptq:collected hs for 67 layers
+quant_config: bits_mlp=6 bits_attn=5 bits_embed=8
+budget: limit=16000000 code=65655 model=15934345 (15.20MB)
+prune: 9849039 cands unpruned=16.26MB budget=15.20MB
+prune: full=13.64MB
+prune: 4306363/9849039 (43.7%)
+Serialized model brotli: 14083644 bytes
+Total submission size brotli: 14149299 bytes
+final_int6_roundtrip val_loss:2.7199 val_bpb:1.1821 eval_time:37462ms
+final_int6_roundtrip_exact val_loss:2.71994054 val_bpb:1.18205482
+W0410 13:34:52.913000 2236231 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0410 13:34:52.914000 2236231 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 2236327 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 2236231 got signal: 15

@@ -1,0 +1,469 @@
+cp: '/workspace/parameter-golf/train_gpt.py' and '/workspace/parameter-golf/train_gpt.py' are the same file
+Installed custom train_gpt.py
+Sun Apr  5 17:32:39 UTC 2026 Using 8 GPUs
+Sun Apr  5 17:32:39 UTC 2026 MODE: full (train + quant + sliding + TTT)
+
+Sun Apr  5 17:32:39 UTC 2026 ══════════════════════════════════════════
+  CONFIG: 13L vocab4096 leaky05 Muon+ int6/int5 GPTQ+TTT
+  GPUs: 8  Wallclock: 600s  TTT: 1
+  Log: /workspace/results/run_20260405_173239.log
+══════════════════════════════════════════
+
+W0405 17:32:41.134000 1061 torch/distributed/run.py:803] 
+W0405 17:32:41.134000 1061 torch/distributed/run.py:803] *****************************************
+W0405 17:32:41.134000 1061 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0405 17:32:41.134000 1061 torch/distributed/run.py:803] *****************************************
+logs/b629549a-19c3-4cbf-a0fe-c660db3fddb2.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:39615593
+arch_config: vocab_size=4096 num_layers=13 model_dim=512 mlp_mult=4.0 muon_wd=0.12 adam_wd=0.02 embed_wd=0.12 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True coprime_stride=True qk_gain_init=4.0
+XSA:last_13 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+depth_recurrence: layers=4,5 start_step=200
+parallel_residuals: start_layer=7
+world_size:8 grad_accum_steps:1
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:600.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3154 val_bpb:3.6138 train_time:0ms step_avg:0.02ms
+step:1/20000 train_loss:8.3186 train_time:157ms step_avg:156.80ms
+step:2/20000 train_loss:13.5698 train_time:211ms step_avg:105.51ms
+step:3/20000 train_loss:11.6164 train_time:321ms step_avg:106.95ms
+step:4/20000 train_loss:9.2192 train_time:431ms step_avg:107.65ms
+step:5/20000 train_loss:7.6285 train_time:542ms step_avg:108.42ms
+step:6/20000 train_loss:7.0221 train_time:652ms step_avg:108.68ms
+step:7/20000 train_loss:6.8918 train_time:763ms step_avg:108.96ms
+step:8/20000 train_loss:6.7531 train_time:873ms step_avg:109.17ms
+step:9/20000 train_loss:6.6122 train_time:984ms step_avg:109.31ms
+step:10/20000 train_loss:6.3620 train_time:1100ms step_avg:109.98ms
+recurrence:activated at step 200, virtual_layers=[0, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+step:500/20000 train_loss:3.0693 train_time:98229ms step_avg:196.46ms
+step:1000/20000 train_loss:2.9661 train_time:163045ms step_avg:163.05ms
+step:1500/20000 train_loss:2.8088 train_time:229572ms step_avg:153.05ms
+step:2000/20000 train_loss:2.7838 train_time:295949ms step_avg:147.97ms
+step:2500/20000 train_loss:2.7432 train_time:359849ms step_avg:143.94ms
+step:3000/20000 train_loss:2.7676 train_time:423724ms step_avg:141.24ms
+step:3500/20000 train_loss:2.6616 train_time:487547ms step_avg:139.30ms
+swa:start step:3850
+step:4000/20000 train_loss:2.6028 train_time:551624ms step_avg:137.91ms
+step:4000/20000 val_loss:2.5902 val_bpb:1.1257 train_time:551789ms step_avg:137.95ms
+step:4374/20000 val_loss:2.5479 val_bpb:1.1073 train_time:600093ms step_avg:137.20ms
+stopping_early: wallclock_cap train_time:600093ms step:4374/20000
+peak memory allocated: 34262 MiB reserved: 34276 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:2.5464 val_bpb:1.1066 eval_time:2277ms
+Serialized model: 154287160 bytes
+Code size: 104103 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (64 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 64 sequences in 260.3s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 78 layers
+quant_config: mode=int6 bits_mlp=6 bits_attn=6 bits_embed=6 cats={'attn', 'embed', 'mlp'}
+selective_prune: 11190664 +/-1 candidates, unpruned=16.97MB target=15.9MB
+selective_prune: full +/-1 prune=13.50MB
+selective_prune: pruning 3211440/11190664 +/-1 values (28.7%) to fit 15.9MB
+Serialized model brotli: 16567816 bytes
+Total submission size brotli: 16671919 bytes
+[rank4]:W0405 18:20:45.004000 1134 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank4]:W0405 18:20:45.004000 1134 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank4]:W0405 18:20:45.004000 1134 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank4]:W0405 18:20:45.004000 1134 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank4]:W0405 18:20:45.004000 1134 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank4]:     main()
+[rank4]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank4]:     q_val_loss, q_val_bpb = eval_val(
+[rank4]:                             ^^^^^^^^^
+[rank4]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank4]:     batch_loss = model(x, y).detach()
+[rank4]:                  ^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank4]:     return super().__call__(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank4]:     return self._call_impl(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank4]:     return forward_call(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank4]:     return fn(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank4]:     return self._call_impl(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank4]:     return forward_call(*args, **kwargs)
+[rank4]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank4]:     result = self._torchdynamo_orig_backend(
+[rank4]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank4]:     result = _compile(
+[rank4]:              ^^^^^^^^^
+[rank4]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank4]:     raise FailOnRecompileLimitHit(
+[rank4]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank0]:W0405 18:20:45.077000 1130 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank0]:W0405 18:20:45.077000 1130 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank0]:W0405 18:20:45.077000 1130 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank0]:W0405 18:20:45.077000 1130 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank0]:W0405 18:20:45.077000 1130 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank0]:     main()
+[rank0]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank0]:     q_val_loss, q_val_bpb = eval_val(
+[rank0]:                             ^^^^^^^^^
+[rank0]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank0]:     batch_loss = model(x, y).detach()
+[rank0]:                  ^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank0]:     result = self._torchdynamo_orig_backend(
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank0]:     result = _compile(
+[rank0]:              ^^^^^^^^^
+[rank0]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank0]:     raise FailOnRecompileLimitHit(
+[rank0]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank5]:W0405 18:20:45.107000 1135 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank5]:W0405 18:20:45.107000 1135 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank5]:W0405 18:20:45.107000 1135 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank5]:W0405 18:20:45.107000 1135 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank5]:W0405 18:20:45.107000 1135 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank5]:     main()
+[rank5]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank5]:     q_val_loss, q_val_bpb = eval_val(
+[rank5]:                             ^^^^^^^^^
+[rank5]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank5]:     batch_loss = model(x, y).detach()
+[rank5]:                  ^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank5]:     return super().__call__(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank5]:     return self._call_impl(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank5]:     return forward_call(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank5]:     return fn(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank5]:     return self._call_impl(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank5]:     return forward_call(*args, **kwargs)
+[rank5]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank5]:     result = self._torchdynamo_orig_backend(
+[rank5]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank5]:     result = _compile(
+[rank5]:              ^^^^^^^^^
+[rank5]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank5]:     raise FailOnRecompileLimitHit(
+[rank5]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank7]:W0405 18:20:45.502000 1137 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank7]:W0405 18:20:45.502000 1137 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank7]:W0405 18:20:45.502000 1137 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank7]:W0405 18:20:45.502000 1137 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank7]:W0405 18:20:45.502000 1137 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank7]:     main()
+[rank7]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank7]:     q_val_loss, q_val_bpb = eval_val(
+[rank7]:                             ^^^^^^^^^
+[rank7]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank7]:     batch_loss = model(x, y).detach()
+[rank7]:                  ^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank7]:     return super().__call__(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank7]:     return self._call_impl(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank7]:     return forward_call(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank7]:     return fn(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank7]:     return self._call_impl(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank7]:     return forward_call(*args, **kwargs)
+[rank7]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank7]:     result = self._torchdynamo_orig_backend(
+[rank7]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank7]:     result = _compile(
+[rank7]:              ^^^^^^^^^
+[rank7]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank7]:     raise FailOnRecompileLimitHit(
+[rank7]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank3]:W0405 18:20:45.515000 1133 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank3]:W0405 18:20:45.515000 1133 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank3]:W0405 18:20:45.515000 1133 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank3]:W0405 18:20:45.515000 1133 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank3]:W0405 18:20:45.515000 1133 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank3]:     main()
+[rank3]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank3]:     q_val_loss, q_val_bpb = eval_val(
+[rank3]:                             ^^^^^^^^^
+[rank3]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank3]:     batch_loss = model(x, y).detach()
+[rank3]:                  ^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank3]:     return super().__call__(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank3]:     return fn(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank3]:     return self._call_impl(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank3]:     return forward_call(*args, **kwargs)
+[rank3]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank3]:     result = self._torchdynamo_orig_backend(
+[rank3]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank3]:     result = _compile(
+[rank3]:              ^^^^^^^^^
+[rank3]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank3]:     raise FailOnRecompileLimitHit(
+[rank3]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank1]:W0405 18:20:45.665000 1131 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank1]:W0405 18:20:45.665000 1131 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank1]:W0405 18:20:45.665000 1131 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank1]:W0405 18:20:45.665000 1131 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank1]:W0405 18:20:45.665000 1131 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank1]:     main()
+[rank1]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank1]:     q_val_loss, q_val_bpb = eval_val(
+[rank1]:                             ^^^^^^^^^
+[rank1]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank1]:     batch_loss = model(x, y).detach()
+[rank1]:                  ^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank1]:     return super().__call__(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank1]:     return fn(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank1]:     result = self._torchdynamo_orig_backend(
+[rank1]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank1]:     result = _compile(
+[rank1]:              ^^^^^^^^^
+[rank1]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank1]:     raise FailOnRecompileLimitHit(
+[rank1]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank6]:W0405 18:20:45.737000 1136 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank6]:W0405 18:20:45.737000 1136 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank6]:W0405 18:20:45.737000 1136 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank6]:W0405 18:20:45.737000 1136 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank6]:W0405 18:20:45.737000 1136 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank6]:     main()
+[rank6]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank6]:     q_val_loss, q_val_bpb = eval_val(
+[rank6]:                             ^^^^^^^^^
+[rank6]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank6]:     batch_loss = model(x, y).detach()
+[rank6]:                  ^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank6]:     return super().__call__(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank6]:     return self._call_impl(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank6]:     return forward_call(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank6]:     return fn(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank6]:     return self._call_impl(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank6]:     return forward_call(*args, **kwargs)
+[rank6]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank6]:     result = self._torchdynamo_orig_backend(
+[rank6]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank6]:     result = _compile(
+[rank6]:              ^^^^^^^^^
+[rank6]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank6]:     raise FailOnRecompileLimitHit(
+[rank6]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8] torch._dynamo hit config.recompile_limit (8)
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8]    function: 'forward' (/workspace/parameter-golf/train_gpt.py:718)
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # orkspace/parameter-golf/train_gpt.py:509 in forward
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+[rank2]:W0405 18:20:45.756000 1132 torch/_dynamo/convert_frame.py:1358] [0/8] To diagnose recompilation issues, see https://pytorch.org/docs/main/torch.compiler_troubleshooting.html
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 2126, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 2065, in main
+[rank2]:     q_val_loss, q_val_bpb = eval_val(
+[rank2]:                             ^^^^^^^^^
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 335, in eval_val
+[rank2]:     batch_loss = model(x, y).detach()
+[rank2]:                  ^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 414, in __call__
+[rank2]:     return super().__call__(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 832, in compile_wrapper
+[rank2]:     return fn(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1875, in __call__
+[rank2]:     result = self._torchdynamo_orig_backend(
+[rank2]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 688, in __call__
+[rank2]:     result = _compile(
+[rank2]:              ^^^^^^^^^
+[rank2]:   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/convert_frame.py", line 1375, in _compile
+[rank2]:     raise FailOnRecompileLimitHit(
+[rank2]: torch._dynamo.exc.FailOnRecompileLimitHit: recompile_limit reached with fullgraph=True. Excessive recompilations can degrade performance due to the compilation overhead of each recompilation. To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.cache_size_limit to an appropriate value.
+[rank0]:[W405 18:20:51.941708224 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0405 18:20:52.559000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1131 closing signal SIGTERM
+W0405 18:20:52.562000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1132 closing signal SIGTERM
+W0405 18:20:52.563000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1133 closing signal SIGTERM
+W0405 18:20:52.564000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1134 closing signal SIGTERM
+W0405 18:20:52.565000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1135 closing signal SIGTERM
+W0405 18:20:52.566000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1136 closing signal SIGTERM
+W0405 18:20:52.568000 1061 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1137 closing signal SIGTERM
+E0405 18:20:53.998000 1061 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 0 (pid: 1130) of binary: /usr/local/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-05_18:20:52
+  host      : 9d89e638c8a6
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1130)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+
+Sun Apr  5 18:20:54 UTC 2026 ══════════════════════════════════════════
+  TRAINING FAILED (exit code 1)
+  Check log: /workspace/results/run_20260405_173239.log
+══════════════════════════════════════════
+Saved: /workspace/results/final_model.int6.ptz
+Saved: /workspace/results/final_model.pt
+
+Sun Apr  5 18:20:54 UTC 2026 === DONE ===
+Results in: /workspace/results/

@@ -1,0 +1,20 @@
+=============================================
+  Artifact Size Tests
+  Mon Mar 30 06:12:33 PM CDT 2026
+=============================================
+[18:12:33] START mish2_int5mlp on GPU0
+[18:12:33] START mish2_int5mlp_had on GPU1
+[19:34:24] DONE mish2_int5mlp_had — artifact=7246467 roundtrip=2.22865412 sliding=2.21736892
+[19:42:32] DONE mish2_int5mlp — artifact=7502971 roundtrip=2.06758685 sliding=2.04564993
+
+=============================================
+  ARTIFACT RESULTS SUMMARY
+=============================================
+  Reference: mish2 Int6 (A100 full): artifact=16,648,933 sliding=1.1445
+  Reference: mish2 Int6 (local): artifact=~9,300,000 sliding=1.3652
+  Reference: mish2 Int6+Had (local): artifact=9,671,645 sliding=1.3643
+
+  mish2_int5mlp              artifact=7502971  roundtrip=2.06758685  sliding=2.04564993
+  mish2_int5mlp_had          artifact=7246467  roundtrip=2.22865412  sliding=2.21736892
+
+Done at Mon Mar 30 07:42:32 PM CDT 2026

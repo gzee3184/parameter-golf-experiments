@@ -1,0 +1,16 @@
+Wed Apr  1 08:18:53 PM CDT 2026 ====== SPECTRAL + TTT GPU1 START ======
+
+Wed Apr  1 08:18:53 PM CDT 2026 === RUN 1/3: Spectral k=32, AdamW, all params ===
+Wed Apr  1 09:41:46 PM CDT 2026 === RUN 1 DONE ===
+
+Wed Apr  1 09:41:46 PM CDT 2026 === RUN 2/3: Spectral k=64, qTTT, AdamW ===
+Wed Apr  1 11:01:05 PM CDT 2026 === RUN 2 DONE ===
+
+Wed Apr  1 11:01:05 PM CDT 2026 === RUN 3/3: Full TTT, AdamW (no spectral) ===
+Thu Apr  2 12:22:34 AM CDT 2026 === RUN 3 DONE ===
+
+Thu Apr  2 12:22:34 AM CDT 2026 ====== GPU1 RESULTS ======
+  ttt_spectral_k32_adamw: steps=194 sliding=3.38715084 ttt=1.79009523
+  ttt_spectral_k64_qttt: steps=194 sliding=3.38507832 ttt=3.34817381
+  ttt_full_adamw: steps=194 sliding=3.38538184 ttt=1.65656685
+Thu Apr  2 12:22:34 AM CDT 2026 ====== DONE ======

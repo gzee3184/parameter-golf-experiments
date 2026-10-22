@@ -1,0 +1,44 @@
+Fri Apr  3 12:09:16 AM CDT 2026 sweep2 GPU0 done, starting reliable sweep
+Fri Apr  3 12:09:16 AM CDT 2026 === RELIABLE MLP/QUANT SWEEP (GPU 0, sequential) ===
+Fri Apr  3 12:09:16 AM CDT 2026 === rel_mlp3.0_q86 ===
+  rel_mlp3.0_q86: prequant=3.7255 quant=3.74338690 steps=41 step_ms=1485.72 art=6.54MB params=27067484
+Fri Apr  3 12:14:03 AM CDT 2026 === rel_mlp3.5_q86 ===
+  rel_mlp3.5_q86: prequant=3.7405 quant=3.75772556 steps=39 step_ms=1559.79 art=7.09MB params=29951068
+Fri Apr  3 12:19:05 AM CDT 2026 === rel_mlp3.5_q85 ===
+  rel_mlp3.5_q85: prequant=3.7405 quant=3.75775934 steps=39 step_ms=1561.76 art=6.42MB params=29951068
+Fri Apr  3 12:24:06 AM CDT 2026 === rel_mlp3.5_q66 ===
+  rel_mlp3.5_q66: prequant=3.7405 quant=3.75781938 steps=39 step_ms=1561.78 art=4.78MB params=29951068
+Fri Apr  3 12:29:08 AM CDT 2026 === rel_mlp3.5_q65 ===
+  rel_mlp3.5_q65: prequant=3.7405 quant=3.75781407 steps=39 step_ms=1561.95 art=4.09MB params=29951068
+Fri Apr  3 12:34:14 AM CDT 2026 === rel_mlp3.5_q88 ===
+  rel_mlp3.5_q88: prequant=3.7404 quant=3.75773390 steps=39 step_ms=1560.78 art=8.31MB params=29951068
+Fri Apr  3 12:39:12 AM CDT 2026 === rel_mlp4.0_q86 ===
+  rel_mlp4.0_q86: prequant=3.7563 quant=3.77380532 steps=37 step_ms=1641.95 art=7.64MB params=32834652
+Fri Apr  3 12:44:27 AM CDT 2026 === rel_mlp4.0_q85 ===
+  rel_mlp4.0_q85: prequant=3.7563 quant=3.77384522 steps=37 step_ms=1638.68 art=6.99MB params=32834652
+Fri Apr  3 12:49:42 AM CDT 2026 === rel_mlp4.0_q65 ===
+  rel_mlp4.0_q65: prequant=3.7564 quant=3.77381763 steps=37 step_ms=1644.02 art=4.30MB params=32834652
+Fri Apr  3 12:55:04 AM CDT 2026 === rel_mlp4.0_q88 ===
+  rel_mlp4.0_q88: prequant=3.7563 quant=3.77375259 steps=37 step_ms=1644.36 art=8.83MB params=32834652
+Fri Apr  3 01:00:19 AM CDT 2026 === rel_mlp4.5_q86 ===
+  rel_mlp4.5_q86: prequant=3.7642 quant=3.78350490 steps=36 step_ms=1714.14 art=8.12MB params=35718236
+Fri Apr  3 01:05:52 AM CDT 2026 === rel_mlp4.5_q85 ===
+  rel_mlp4.5_q85: prequant=3.7642 quant=3.78349401 steps=36 step_ms=1717.30 art=7.46MB params=35718236
+Fri Apr  3 01:11:23 AM CDT 2026 === rel_mlp4.5_q65 ===
+  rel_mlp4.5_q65: prequant=3.7642 quant=3.78361474 steps=36 step_ms=1713.97 art=4.44MB params=35718236
+
+Fri Apr  3 01:17:03 AM CDT 2026 === RELIABLE SWEEP COMPLETE ===
+All results (sorted by prequant BPB):
+  rel_mlp3.0_q86: prequant=3.7255 quant=3.74338690 steps=41 step_ms=1485.72ms art=6.54MB params=27067484
+  rel_mlp3.5_q65: prequant=3.7405 quant=3.75781407 steps=39 step_ms=1561.95ms art=4.09MB params=29951068
+  rel_mlp3.5_q66: prequant=3.7405 quant=3.75781938 steps=39 step_ms=1561.78ms art=4.78MB params=29951068
+  rel_mlp3.5_q85: prequant=3.7405 quant=3.75775934 steps=39 step_ms=1561.76ms art=6.42MB params=29951068
+  rel_mlp3.5_q86: prequant=3.7405 quant=3.75772556 steps=39 step_ms=1559.79ms art=7.09MB params=29951068
+  rel_mlp3.5_q88: prequant=3.7404 quant=3.75773390 steps=39 step_ms=1560.78ms art=8.31MB params=29951068
+  rel_mlp4.0_q65: prequant=3.7564 quant=3.77381763 steps=37 step_ms=1644.02ms art=4.30MB params=32834652
+  rel_mlp4.0_q85: prequant=3.7563 quant=3.77384522 steps=37 step_ms=1638.68ms art=6.99MB params=32834652
+  rel_mlp4.0_q86: prequant=3.7563 quant=3.77380532 steps=37 step_ms=1641.95ms art=7.64MB params=32834652
+  rel_mlp4.0_q88: prequant=3.7563 quant=3.77375259 steps=37 step_ms=1644.36ms art=8.83MB params=32834652
+  rel_mlp4.5_q65: prequant=3.7642 quant=3.78361474 steps=36 step_ms=1713.97ms art=4.44MB params=35718236
+  rel_mlp4.5_q85: prequant=3.7642 quant=3.78349401 steps=36 step_ms=1717.30ms art=7.46MB params=35718236
+  rel_mlp4.5_q86: prequant=3.7642 quant=3.78350490 steps=36 step_ms=1714.14ms art=8.12MB params=35718236

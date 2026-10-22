@@ -1,0 +1,18 @@
+Thu Apr  2 12:28:35 AM CDT 2026 ====== BUDGET SWEEP GPU0 START ======
+
+Thu Apr  2 12:28:35 AM CDT 2026 === RUN 1/3: MLP 3.5x, int6 MLP / int6 attn ===
+Thu Apr  2 01:54:04 AM CDT 2026 === RUN 1 DONE ===
+
+Thu Apr  2 01:54:04 AM CDT 2026 === RUN 2/3: MLP 3.5x, int6 MLP / int5 attn ===
+Thu Apr  2 03:18:34 AM CDT 2026 === RUN 2 DONE ===
+
+Thu Apr  2 03:18:34 AM CDT 2026 === RUN 3/3: MLP 4x, int6 MLP / int5 attn ===
+Thu Apr  2 04:48:20 AM CDT 2026 === RUN 3 DONE ===
+
+Thu Apr  2 04:48:20 AM CDT 2026 ====== GPU0 RESULTS ======
+  budget_mlp35_int6_int6: params=29951068 steps=193 artifact=6
+5.24MB sliding=3.37800059 ttt=1.65480071
+  budget_mlp35_int6_int5: params=29951068 steps=193 artifact=6
+4.54MB sliding=3.38401036 ttt=1.67144764
+  budget_mlp4_int6_int5: params=32834652 steps=183 artifact=4.72MB sliding=3.37149036 ttt=1.65816020
+Thu Apr  2 04:48:20 AM CDT 2026 ====== DONE ======

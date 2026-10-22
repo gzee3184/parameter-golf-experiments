@@ -1,0 +1,45 @@
+Fri Apr  3 01:59:09 AM CDT 2026 === VOCAB4096 SWEEP GPU1 ===
+Fri Apr  3 01:59:09 AM CDT 2026 === v4_batch393216 ===
+  v4_batch393216: prequant=3.2958 quant=3.31024992 steps=70 step_ms=862.85 art=7.38MB params=33841752
+Fri Apr  3 02:04:34 AM CDT 2026 === v4_batch524288 ===
+  v4_batch524288: prequant=3.3575 quant=3.37099951 steps=53 step_ms=1151.86 art=7.34MB params=33841752
+Fri Apr  3 02:10:05 AM CDT 2026 === v4_batch786432 ===
+  v4_batch786432: prequant=3.4277 quant=3.44073155 steps=35 step_ms=1754.64 art=7.28MB params=33841752
+Fri Apr  3 02:15:19 AM CDT 2026 === v4_batch1048576 ===
+  v4_batch1048576: prequant=3.4692 quant=3.48086670 steps=26 step_ms=2321.57 art=7.26MB params=33841752
+Fri Apr  3 02:21:11 AM CDT 2026 === v4_leaky05 ===
+  v4_leaky05: prequant=3.4228 quant=3.43552339 steps=36 step_ms=1717.53 art=7.28MB params=33841752
+Fri Apr  3 02:27:03 AM CDT 2026 === v4_mish2_control ===
+  v4_mish2_control: prequant=3.4277 quant=3.44070971 steps=35 step_ms=1750.68 art=7.28MB params=33841752
+Fri Apr  3 02:32:17 AM CDT 2026 === v4_q86 ===
+  v4_q86: prequant=3.4277 quant=3.44070515 steps=35 step_ms=1752.32 art=7.28MB params=33841752
+Fri Apr  3 02:37:30 AM CDT 2026 === v4_q85 ===
+  v4_q85: prequant=3.4277 quant=3.44070760 steps=35 step_ms=1749.53 art=6.70MB params=33841752
+Fri Apr  3 02:42:45 AM CDT 2026 === v4_q66 ===
+  v4_q66: prequant=3.4277 quant=3.44072407 steps=35 step_ms=1758.25 art=4.81MB params=33841752
+Fri Apr  3 02:48:09 AM CDT 2026 === v4_q65 ===
+  v4_q65: prequant=3.4277 quant=3.44072342 steps=35 step_ms=1757.00 art=4.23MB params=33841752
+Fri Apr  3 02:53:35 AM CDT 2026 === v4_q88 ===
+  v4_q88: prequant=3.4277 quant=3.44073613 steps=35 step_ms=1759.04 art=8.65MB params=33841752
+Fri Apr  3 02:58:43 AM CDT 2026 === v4_12L_wd0.085 ===
+  v4_12L_wd0.085: prequant=3.4416 quant=3.45454795 steps=32 step_ms=1903.69 art=7.88MB params=36727904
+Fri Apr  3 03:04:18 AM CDT 2026 === v4_12L_wd0.12 ===
+  v4_12L_wd0.12: prequant=3.4416 quant=3.45455637 steps=32 step_ms=1906.00 art=7.88MB params=36727904
+Fri Apr  3 03:09:52 AM CDT 2026 === v4_12L_wd0.15 ===
+  v4_12L_wd0.15: prequant=3.4416 quant=3.45456787 steps=32 step_ms=1905.08 art=7.88MB params=36727904
+Fri Apr  3 03:15:28 AM CDT 2026 === v4_13L_wd0.12 ===
+  v4_13L_wd0.12: prequant=3.4513 quant=3.46362174 steps=30 step_ms=2052.78 art=8.48MB params=39613544
+Fri Apr  3 03:21:21 AM CDT 2026 === v4_13L_wd0.15 ===
+  v4_13L_wd0.15: prequant=3.4513 quant=3.46362104 steps=30 step_ms=2048.59 art=8.48MB params=39613544
+Fri Apr  3 03:27:12 AM CDT 2026 === v4_13L_wd0.20 ===
+  v4_13L_wd0.20: prequant=3.4513 quant=3.46368864 steps=30 step_ms=2052.16 art=8.48MB params=39613544
+Fri Apr  3 03:33:03 AM CDT 2026 === v4_qk2.0 ===
+  v4_qk2.0: prequant=3.4276 quant=3.44059562 steps=35 step_ms=1747.63 art=7.28MB params=33841752
+Fri Apr  3 03:38:18 AM CDT 2026 === v4_qk4.0 ===
+  v4_qk4.0: prequant=3.4277 quant=3.44071001 steps=35 step_ms=1749.28 art=7.28MB params=33841752
+Fri Apr  3 03:43:29 AM CDT 2026 === v4_qk6.0 ===
+  v4_qk6.0: prequant=3.4277 quant=3.44078802 steps=35 step_ms=1747.23 art=7.28MB params=33841752
+Fri Apr  3 03:48:43 AM CDT 2026 === v4_qk8.0 ===
+  v4_qk8.0: prequant=3.4278 quant=3.44080367 steps=35 step_ms=1748.99 art=7.28MB params=33841752
+
+Fri Apr  3 03:53:58 AM CDT 2026 === VOCAB4096 SWEEP GPU1 COMPLETE ===

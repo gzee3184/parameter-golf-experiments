@@ -1,0 +1,6 @@
+logs/15290ca5-0dc2-4f56-b05a-6c5c82566272.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+ttt_only:loading <project>/local_tests/v4R_13L_wd012_q65.ptz
+ttt_only:model loaded, params=39613544

@@ -1,0 +1,79 @@
+logs/e751f10a-7dac-475b-a958-e55ebe11fdbb.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:43812472
+arch_config: vocab_size=4096 num_layers=15 model_dim=512 mlp_mult=4.0 muon_wd=0.085 adam_wd=0.02 embed_wd=0.085 matrix_lr=0.02 sigmoid_skip=True smear_enabled=False byte_shuffle=True coprime_stride=True qk_gain_init=4.0
+slm_config: attn_pattern='' attn_layers=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] num_attn=15/15 unique_attn_banks=13
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_15 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:12000.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3154 val_bpb:3.6138 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3157 train_time:2114ms step_avg:2113.52ms
+step:2/20000 train_loss:13.3973 train_time:4260ms step_avg:2130.15ms
+step:3/20000 train_loss:11.4858 train_time:6544ms step_avg:2181.33ms
+step:4/20000 train_loss:9.2530 train_time:8836ms step_avg:2208.89ms
+step:5/20000 train_loss:7.6624 train_time:11130ms step_avg:2225.98ms
+step:6/20000 train_loss:7.0526 train_time:13430ms step_avg:2238.41ms
+step:7/20000 train_loss:6.8861 train_time:15736ms step_avg:2247.93ms
+step:8/20000 train_loss:6.7875 train_time:18045ms step_avg:2255.59ms
+step:9/20000 train_loss:6.6498 train_time:20361ms step_avg:2262.35ms
+step:10/20000 train_loss:6.4538 train_time:22681ms step_avg:2268.13ms
+step:500/20000 train_loss:3.0752 train_time:1166874ms step_avg:2333.75ms
+step:1000/20000 train_loss:2.9291 train_time:2333970ms step_avg:2333.97ms
+step:1500/20000 train_loss:2.8350 train_time:3501035ms step_avg:2334.02ms
+step:2000/20000 train_loss:2.7294 train_time:4670752ms step_avg:2335.38ms
+step:2500/20000 train_loss:2.7493 train_time:5841585ms step_avg:2336.63ms
+step:3000/20000 train_loss:2.7074 train_time:7011775ms step_avg:2337.26ms
+step:3500/20000 train_loss:2.6458 train_time:8181530ms step_avg:2337.58ms
+step:4000/20000 train_loss:2.6357 train_time:9349774ms step_avg:2337.44ms
+step:4000/20000 val_loss:2.6150 val_bpb:1.1364 train_time:9349903ms step_avg:2337.48ms
+swa:start step:4350
+step:4500/20000 train_loss:2.5750 train_time:10517448ms step_avg:2337.21ms
+step:5000/20000 train_loss:2.5518 train_time:11684563ms step_avg:2336.91ms
+step:5136/20000 val_loss:2.5274 val_bpb:1.0984 train_time:12001867ms step_avg:2336.81ms
+stopping_early: wallclock_cap train_time:12001867ms step:5136/20000
+peak memory allocated: 34964 MiB reserved: 35158 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:2.5252 val_bpb:1.0974 eval_time:40376ms
+Serialized model: 171076157 bytes
+Code size: 151589 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (8 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 8 sequences in 29.3s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 90 layers
+quant_config: mode=int6 bits_mlp=6 bits_attn=5 cats={'mlp', 'attn'}
+selective_prune: 13049221 +/-1 candidates, unpruned=18.19MB target=15.9MB
+selective_prune: full +/-1 prune=14.24MB
+selective_prune: pruning 7373576/13049221 +/-1 values (56.5%) to fit 15.9MB
+Serialized model brotli: 16520668 bytes
+Total submission size brotli: 16672257 bytes
+final_int6_roundtrip val_loss:2.7802 val_bpb:1.2082 eval_time:47700ms
+final_int6_roundtrip_exact val_loss:2.78016421 val_bpb:1.20822734
+skip_sliding:1 — skipping sliding window and TTT evals (screening mode)

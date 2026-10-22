@@ -1,0 +1,190 @@
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8] torch._dynamo hit config.recompile_limit (8)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]    function: 'forward' (<project>/kevclark_base/train_gpt_modified.py:773)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]    last reason: 0/7: self._modules['blocks']._modules['0']._modules['attn']._modules['rotary']._cos_cached is None  # self._cos_cached is None  # kevclark_base/train_gpt_modified.py:448 in forward
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8] User stack trace:
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]   File "<project>/kevclark_base/train_gpt_modified.py", line 774, in forward
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]     logits = self.forward_logits(input_ids)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]   File "<project>/kevclark_base/train_gpt_modified.py", line 725, in forward_logits
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]     x = self.blocks[phys_idx](x, x0, v_embed=ve)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]   File "<project>/kevclark_base/train_gpt_modified.py", line 580, in forward
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]     attn_out = self.attn(self.attn_norm(x_in) * self.ln_scale_factor, v_embed=v_embed)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]   File "<project>/kevclark_base/train_gpt_modified.py", line 523, in forward
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]     cos, sin = self.rotary(seqlen, x.device, q.dtype)
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]   File "<project>/kevclark_base/train_gpt_modified.py", line 448, in forward
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8]     self._cos_cached is None
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8] To log all recompilation reasons, use TORCH_LOGS="recompiles".
+W0405 05:16:23.360000 685259 torch/_dynamo/convert_frame.py:1743] [0/8] To diagnose recompilation issues, see https://docs.pytorch.org/docs/main/user_guide/torch_compiler/compile/programming_model.recompilation.html
+Hyperparameters:
+  adam_eps: 1e-08
+  adam_wd: 0.02
+  beta1: 0.9
+  beta2: 0.95
+  compressor: brotli
+  data_dir: ./data/
+  datasets_dir: ./data/datasets/fineweb10B_sp4096
+  distributed: False
+  ema_decay: 0.997
+  embed_lr: 0.6
+  embed_wd: 0.09
+  embedding_dim: 512
+  eval_seq_len: 2048
+  eval_stride: 64
+  gptq_calibration_batches: 64
+  gptq_enabled: False
+  gptq_reserve_seconds: 10.0
+  grad_accum_steps: 8
+  grad_clip_norm: 0.3
+  head_lr: 0.008
+  is_main_process: True
+  iterations: 20000
+  ln_scale: True
+  local_rank: 0
+  logfile: logs/modified_v1_600s.txt
+  logit_softcap: 30.0
+  matrix_lr: 0.02
+  max_wallclock_seconds: 600.0
+  min_lr: 0.0
+  mlp_mult: 4.0
+  model_dim: 512
+  model_path: final_model.pt
+  muon_backend_steps: 5
+  muon_beta2: 0.95
+  muon_eq_r: True
+  muon_momentum: 0.99
+  muon_momentum_warmup_start: 0.92
+  muon_momentum_warmup_steps: 1500
+  muon_wd: 0.09
+  num_heads: 8
+  num_kv_heads: 4
+  num_layers: 11
+  parallel_start_layer: 7
+  qk_gain_init: 5.0
+  quantized_model_path: final_model.int6.ptz
+  rank: 0
+  recur_layers: 4,5
+  recur_start_step: 200
+  rope_base: 10000.0
+  rope_dims: 16
+  rope_train_seq_len: 2048
+  run_id: modified_v1_600s
+  scalar_lr: 0.02
+  seed: 1337
+  shared_attn_layers: 8,9,10
+  skip_gates_enabled: True
+  sliding_window_enabled: True
+  tie_embeddings: True
+  tied_embed_init_std: 0.005
+  tied_embed_lr: 0.03
+  tokenizer_path: ./data/tokenizers/fineweb_4096_bpe.model
+  train_batch_tokens: 786432
+  train_files: ./data/datasets/fineweb10B_sp4096/fineweb_train_*.bin
+  train_log_every: 50
+  train_seq_len: 2048
+  val_batch_tokens: 524288
+  val_files: ./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin
+  val_loss_every: 500
+  ve_dim: 128
+  ve_enabled: True
+  ve_layers: 9,10
+  vocab_size: 4096
+  warmdown_frac: 0.667
+  warmup_steps: 20
+  world_size: 1
+  xsa_last_n: 11
+train_shards: 143
+val_tokens: 45508608
+depth_recurrence: layers=4,5 start_step=200
+muon_eq_r: enabled
+parallel_residuals: start_layer=7
+shared_attn: layers=8,9,10
+model_params:32828492
+warmup_step: 1/20
+warmup_step: 2/20
+warmup_step: 3/20
+warmup_step: 4/20
+warmup_step: 5/20
+warmup_step: 6/20
+warmup_step: 10/20
+warmup_step: 20/20
+0/20000 val_loss: 8.3169 val_bpb: 3.6144
+1/20000 train_loss: 8.3159 train_time: 0.0m tok/s: 497458
+2/20000 train_loss: 12.1355 train_time: 0.1m tok/s: 479554
+3/20000 train_loss: 10.5892 train_time: 0.1m tok/s: 473265
+4/20000 train_loss: 8.8984 train_time: 0.1m tok/s: 469858
+5/20000 train_loss: 7.7416 train_time: 0.1m tok/s: 467707
+50/20000 train_loss: 4.8532 train_time: 1.5m tok/s: 451335
+100/20000 train_loss: 4.0362 train_time: 2.9m tok/s: 450215
+150/20000 train_loss: 3.5528 train_time: 4.4m tok/s: 450302
+200/20000 train_loss: 3.3117 train_time: 5.8m tok/s: 450435
+recurrence:activated at step 200, virtual_layers=[0, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 10]
+250/20000 train_loss: 3.1789 train_time: 7.9m tok/s: 417128
+300/20000 train_loss: 3.1042 train_time: 9.6m tok/s: 408553
+311/20000 val_loss: 3.1004 val_bpb: 1.3474
+stopping_early: wallclock_cap train_time: 600708ms step: 311/20000
+peak memory allocated: 31108 MiB reserved: 31456 MiB
+ema:applying EMA weights
+pre-quantization post-ema val_loss:4.89067034 val_bpb:2.12542899 eval_time:34613ms
+Serialized model: 126112625 bytes
+Code size: 73787 bytes
+Serialized model int6+brotli: 8075944 bytes
+Total submission size int6+brotli: 8149731 bytes
+Traceback (most recent call last):
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1773, in _compile
+    raise_unimplemented_cache_limit_exceeded()
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1757, in raise_unimplemented_cache_limit_exceeded
+    unimplemented(
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/exc.py", line 634, in unimplemented
+    raise Unsupported(msg, gb_type, skip_frame)
+torch._dynamo.exc.Unsupported: Dynamo recompile limit exceeded
+  Explanation: Dynamo attempted to recompile the code object too many times, exceeding the recompile_limit cache size limit (currently set to 8). Excessive recompilations can degrade performance due to the compilation overhead of each recompilation.
+  Hint: To monitor recompilations, enable TORCH_LOGS=recompiles. If recompilations are expected, consider increasing torch._dynamo.config.recompile_limit to an appropriate value.
+  Hint: See https://docs.pytorch.org/docs/main/user_guide/torch_compiler/compile/programming_model.recompilation.html for tips on dealing with recompilations.
+
+  Developer debug context: Limit type: recompile_limit
+
+ For more details about this graph break, please visit: https://meta-pytorch.github.io/compile-graph-break-site/gb/gb0039.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1748, in <module>
+    main()
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1741, in main
+    train_and_eval(h, device)
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1690, in train_and_eval
+    run_evals(h, device, val_data, deserialized_model)
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1494, in run_evals
+    timed_eval("final_int6_roundtrip", eval_val, h, device, val_data, compiled_model)
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1480, in timed_eval
+    val_loss, val_bpb = fn(*args, **kwargs)
+                        ^^^^^^^^^^^^^^^^^^^
+  File "<project>/kevclark_base/train_gpt_modified.py", line 1384, in eval_val
+    batch_loss = model(x, y).detach()
+                 ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 472, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1024, in compile_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 2316, in __call__
+    result = self._torchdynamo_orig_backend(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 729, in __call__
+    result = _compile(
+             ^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1780, in _compile
+    raise FailOnRecompileLimitHit(
+torch._dynamo.exc.FailOnRecompileLimitHit: Hard failure due to fullgraph=True

@@ -1,0 +1,32 @@
+Sat Apr 11 17:36:07 UTC 2026 ── H100 8×GPU Run #10 (SP8192, seed=1337) ──
+Config: SP8192 RPS=1 ROPE=10K SDClip(12.85/20.0) WARMDOWN=72% TTT_LR=0.005 GPTQ_REAL VE=OFF
+W0411 17:36:08.401000 1014 torch/distributed/run.py:803] 
+W0411 17:36:08.401000 1014 torch/distributed/run.py:803] *****************************************
+W0411 17:36:08.401000 1014 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0411 17:36:08.401000 1014 torch/distributed/run.py:803] *****************************************
+logs/f18686d5-46ea-44e5-87c5-a329aac06ac9.txt
+tokenizer:./data/tokenizers/fineweb_8192_bpe.model
+dataset:fineweb10B_sp8192 train_shards:128 val_tokens:40540160
+model_params:36064348
+arch: vs=8192 nl=11 dim=512 mlp=4.0 mwd=0.09 awd=0.02 ewd=0.09 mlr=0.02 ss=True bs=True qk=5.0 rl=[3, 4, 5] rs=2000 ve=False vd=128 vl=[] ps=7
+XSA:last_11 layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ws:8 ga:1 heads:8/4
+tie:True elr:0.035 hlr:0.0 mlr:0.02 slr:0.02
+tbt:786432 tsl:2048 iters:20000 wu:20 wc:600.000 seed:1337
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:2.8501 val_bpb:1.1033 eval_time:54395ms
+gptq:building hessian model...
+gptq:calib 256 seqs (524K tokens) from real data
+gptq:256 seqs in 0.0s
+gptq:hs...
+gptq:collected hs for 67 layers
+quant_config: bits_mlp=6 bits_attn=5 bits_embed=8
+budget: limit=16000000 code=23524 model=15976476 (15.24MB)
+prune: 10300951 cands unpruned=16.35MB budget=15.24MB
+prune: full=13.21MB
+prune: 4231423/10300951 (41.1%)
+Serialized model brotli: 15943232 bytes
+Total submission size brotli: 15966756 bytes
+run_h100.sh: line 95:  1014 Killed                  torchrun --standalone --nproc_per_node=8 train_gpt.py 2>&1
+      1015 Done                    | tee run10_seed${SEED}.log
+Sat Apr 11 17:56:25 UTC 2026 ── Run #10 seed=1337 COMPLETE ──

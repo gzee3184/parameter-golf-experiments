@@ -1,0 +1,10 @@
+=============================================
+  Combined Config vs Baseline — Pipeline Test
+  Mon Mar 30 05:25:57 AM CDT 2026
+=============================================
+Combined: MLP_ACTIVATION=mish2 XSA_LAST_N=6 MTP_NUM_HEADS=1 MTP_LOSS_WEIGHT=0.05
+Baseline: MLP_ACTIVATION=leaky05 XSA_LAST_N=4 MTP_NUM_HEADS=0
+Wallclock: 2400s | Seed: 1337 | TTT: off
+
+[05:25:57] START combined on GPU0 → <project>/parameter-golf/records/track_10min_16mb/combined_test_results/combined.log
+[05:25:57] START baseline on GPU1 → <project>/parameter-golf/records/track_10min_16mb/combined_test_results/baseline.log

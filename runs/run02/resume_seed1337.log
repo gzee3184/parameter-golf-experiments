@@ -1,0 +1,27 @@
+-rw-r--r-- 1 root root  15936976 Apr  9 06:54 /workspace/parameter-golf/final_model.int6.ptz
+-rw-r--r-- 1 root root 132872823 Apr  9 06:14 /workspace/parameter-golf/final_model.pt
+W0409 06:30:58.838000 989 torch/distributed/run.py:803] 
+W0409 06:30:58.838000 989 torch/distributed/run.py:803] *****************************************
+W0409 06:30:58.838000 989 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0409 06:30:58.838000 989 torch/distributed/run.py:803] *****************************************
+logs/d623070f-34e0-483f-aea4-7acbb35c2b58.txt
+tokenizer:./data/tokenizers/fineweb_4096_bpe.model
+dataset:fineweb10B_sp4096 train_shards:143 val_tokens:45508608
+RESUME:loading final_model.pt
+RESUME post_ema val_loss:2.5570 val_bpb:1.1113 eval_time:56905ms
+gptq:building hessian model...
+gptq:calib 64x2048 t=0.8
+gptq:64 seqs in 234.0s
+gptq:hs...
+gptq:collected hs for 67 layers
+quant_config: bits_mlp=6 bits_attn=6 bits_embed=8
+budget: limit=16000000 code=60686 model=15939314 (15.20MB)
+prune: 8801729 cands unpruned=16.21MB budget=15.20MB
+prune: full=13.65MB
+prune: 3574354/8801729 (40.6%)
+Serialized model brotli: 15936976 bytes
+Total submission size brotli: 15997662 bytes
+final_int6_roundtrip val_loss:2.6770 val_bpb:1.1634 eval_time:2148ms
+final_int6_roundtrip_exact val_loss:2.67696765 val_bpb:1.16337930
+final_int6_sliding_window val_loss:2.6332 val_bpb:1.1443 stride:64 eval_time:109733ms
+final_int6_sliding_window_exact val_loss:2.63315221 val_bpb:1.14433762

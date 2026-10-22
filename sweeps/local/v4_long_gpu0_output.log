@@ -1,0 +1,94 @@
+Fri Apr  3 03:55:05 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 1: 600s comparison runs (GPU 0)
+═══════════════════════════════════════
+Fri Apr  3 03:55:05 AM CDT 2026 === v4L_wd085 ===
+  v4L_wd085: prequant=3.4508 quant=3.73757146 steps=361 step_ms=1662.49 art=8.67MB params=33841752
+Fri Apr  3 04:09:45 AM CDT 2026 === v4L_wd012 ===
+  v4L_wd012: prequant=3.4539 quant=3.73644064 steps=361 step_ms=1664.55 art=8.63MB params=33841752
+Fri Apr  3 04:24:27 AM CDT 2026 === v4L_mish2 ===
+  v4L_mish2: prequant=3.3695 quant=3.68993848 steps=357 step_ms=1684.75 art=8.61MB params=33841752
+Fri Apr  3 04:39:12 AM CDT 2026 === v4L_13L ===
+  v4L_13L: prequant=3.2149 quant=3.46731346 steps=307 step_ms=1955.41 art=9.68MB params=39613544
+Fri Apr  3 04:55:27 AM CDT 2026 === v4L_ema995 ===
+  v4L_ema995: prequant=2.8651 quant=3.36696939 steps=361 step_ms=1665.14 art=9.16MB params=33841752
+Fri Apr  3 05:10:07 AM CDT 2026 === v4L_13L_wd012 ===
+  v4L_13L_wd012: prequant=3.2117 quant=3.47131263 steps=307 step_ms=1957.62 art=9.65MB params=39613544
+
+Fri Apr  3 05:25:33 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 1 COMPLETE — selecting top 2 configs
+═══════════════════════════════════════
+
+All Phase 1 results (sorted by post-quant BPB):
+  v4L_ema995: prequant=2.8651 quant=3.36696939 steps=361 step_ms=1665.14ms art=9.16MB
+  v4L_13L: prequant=3.2149 quant=3.46731346 steps=307 step_ms=1955.41ms art=9.68MB
+  v4L_13L_wd012: prequant=3.2117 quant=3.47131263 steps=307 step_ms=1957.62ms art=9.65MB
+  v4L_12L: prequant=3.2681 quant=3.55146231 steps=319 step_ms=1883.27ms art=9.06MB
+  v4L_12L_wd012: prequant=3.2677 quant=3.58290310 steps=319 step_ms=1883.69ms art=9.04MB
+  v4L_mlp45_wd012: prequant=3.3263 quant=3.60563374 steps=331 step_ms=1814.27ms art=8.98MB
+  v4L_mlp45: prequant=3.3255 quant=3.60914563 steps=331 step_ms=1815.29ms art=9.00MB
+  v4L_mish2: prequant=3.3695 quant=3.68993848 steps=357 step_ms=1684.75ms art=8.61MB
+  v4L_wd015: prequant=3.3982 quant=3.71331326 steps=347 step_ms=1731.69ms art=8.52MB
+  v4L_wd012: prequant=3.4539 quant=3.73644064 steps=361 step_ms=1664.55ms art=8.63MB
+  v4L_wd085: prequant=3.4508 quant=3.73757146 steps=361 step_ms=1662.49ms art=8.67MB
+
+TOP 1: v4L_ema995 (3.36696939 BPB)
+TOP 2: v4L_13L (3.46731346 BPB)
+
+Fri Apr  3 05:25:33 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 2: ~7000-step runs on top 2 configs
+═══════════════════════════════════════
+Fri Apr  3 05:25:33 AM CDT 2026 === v4F_ema995 ===
+  v4F_ema995: prequant=1.1056 quant=1.14224279 steps=7199 step_ms=1667.09 art=19.41MB params=33841752
+Fri Apr  3 09:08:30 AM CDT 2026 === v4F_13L ===
+  v4F_13L: prequant=1.0971 quant=1.12568148 steps=6128 step_ms=1958.35 art=22.53MB params=39613544
+
+Fri Apr  3 12:55:03 PM CDT 2026 ═══════════════════════════════════════
+  PHASE 2 COMPLETE — picking best for TTT
+═══════════════════════════════════════
+Full run 1 (ema995): 1.14224279 BPB
+Full run 2 (13L): 1.12568148 BPB
+Best: 13L → <project>/local_tests/v4F_13L.ptz
+
+Fri Apr  3 12:55:03 PM CDT 2026 ═══════════════════════════════════════
+  PHASE 3: TTT evaluation on best model
+═══════════════════════════════════════
+Fri Apr  3 12:55:03 PM CDT 2026 === v4T_sgd ===
+v4T_sgd FAILED
+  v4T_sgd: prequant= quant= steps= step_ms= art=—MB params=
+Fri Apr  3 12:55:07 PM CDT 2026 === v4T_adamw_conservative ===
+v4T_adamw_conservative FAILED
+  v4T_adamw_conservative: prequant= quant= steps= step_ms= art=—MB params=
+Fri Apr  3 12:55:11 PM CDT 2026 === v4T_adamw_aggressive ===
+v4T_adamw_aggressive FAILED
+  v4T_adamw_aggressive: prequant= quant= steps= step_ms= art=—MB params=
+
+Fri Apr  3 12:55:14 PM CDT 2026 ═══════════════════════════════════════
+  ALL PHASES COMPLETE
+═══════════════════════════════════════
+
+=== FINAL SUMMARY ===
+
+Phase 1 (600s screening):
+  v4L_ema993: 2.78293250 BPB
+  v4L_ema995: 3.36696939 BPB
+  v4L_13L: 3.46731346 BPB
+  v4L_13L_wd012: 3.47131263 BPB
+  v4L_12L: 3.55146231 BPB
+  v4L_12L_wd012: 3.58290310 BPB
+  v4L_mlp45_wd012: 3.60563374 BPB
+  v4L_mlp45: 3.60914563 BPB
+  v4L_mish2: 3.68993848 BPB
+  v4L_wd015: 3.71331326 BPB
+  v4L_wd012: 3.73644064 BPB
+  v4L_wd085: 3.73757146 BPB
+
+Phase 2 (~7000 steps):
+  v4F_12L: sliding= roundtrip=1.12692017
+  v4F_13L: sliding=1.12568148 roundtrip=1.12568148
+  v4F_ema993: sliding=1.14496097 roundtrip=1.14496097
+  v4F_ema995: sliding=1.14224279 roundtrip=1.14224279
+
+Phase 3 (TTT on best model):
+  v4T_adamw_aggressive: ttt= sliding=
+  v4T_adamw_conservative: ttt= sliding=
+  v4T_sgd: ttt= sliding=

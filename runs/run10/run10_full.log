@@ -1,0 +1,175 @@
+Sat Apr 11 16:34:04 UTC 2026 ── H100 8×GPU Run #10 (SP8192, seed=1337) ──
+Config: SP8192 RPS=1 ROPE=10K SDClip(12.85/20.0) WARMDOWN=72% TTT_LR=0.005 GPTQ_REAL VE=OFF
+W0411 16:34:05.907000 1171 torch/distributed/run.py:803] 
+W0411 16:34:05.907000 1171 torch/distributed/run.py:803] *****************************************
+W0411 16:34:05.907000 1171 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0411 16:34:05.907000 1171 torch/distributed/run.py:803] *****************************************
+logs/3a10ecc8-eced-47b5-9861-e294accc67d5.txt
+tokenizer:./data/tokenizers/fineweb_8192_bpe.model
+dataset:fineweb10B_sp8192 train_shards:128 val_tokens:40540160
+model_params:36064348
+arch: vs=8192 nl=11 dim=512 mlp=4.0 mwd=0.09 awd=0.02 ewd=0.09 mlr=0.02 ss=True bs=True qk=5.0 rl=[3, 4, 5] rs=2000 ve=False vd=128 vl=[] ps=7
+XSA:last_11 layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ws:8 ga:1 heads:8/4
+tie:True elr:0.035 hlr:0.0 mlr:0.02 slr:0.02
+tbt:786432 tsl:2048 iters:20000 wu:20 wc:600.000 seed:1337
+wust:1/20
+wust:2/20
+wust:3/20
+wust:4/20
+wust:5/20
+wust:6/20
+wust:7/20
+wust:8/20
+wust:9/20
+wust:10/20
+wust:11/20
+wust:12/20
+wust:13/20
+wust:14/20
+wust:15/20
+wust:16/20
+wust:17/20
+wust:18/20
+wust:19/20
+wust:20/20
+step:0/20000 val_loss:9.0078 val_bpb:3.4872 train_time:0ms step_avg:0.02ms
+step:1/20000 tnl:9.0091 train_time:4071ms step_avg:4071.32ms
+step:2/20000 tnl:12.3080 train_time:4097ms step_avg:2048.41ms
+step:3/20000 tnl:10.6511 train_time:4190ms step_avg:1396.80ms
+step:4/20000 tnl:8.7518 train_time:4286ms step_avg:1071.45ms
+step:5/20000 tnl:7.5427 train_time:4383ms step_avg:876.62ms
+step:6/20000 tnl:6.9715 train_time:4480ms step_avg:746.63ms
+step:7/20000 tnl:6.8615 train_time:4576ms step_avg:653.74ms
+step:8/20000 tnl:6.7518 train_time:4673ms step_avg:584.09ms
+step:9/20000 tnl:6.7054 train_time:4770ms step_avg:529.96ms
+step:10/20000 tnl:6.5365 train_time:4867ms step_avg:486.72ms
+step:100/20000 tnl:5.0446 train_time:13504ms step_avg:135.04ms
+step:200/20000 tnl:4.0221 train_time:23084ms step_avg:115.42ms
+step:300/20000 tnl:3.6547 train_time:32648ms step_avg:108.83ms
+step:400/20000 tnl:3.5889 train_time:42224ms step_avg:105.56ms
+step:500/20000 tnl:3.5734 train_time:51832ms step_avg:103.66ms
+step:600/20000 tnl:3.5207 train_time:61453ms step_avg:102.42ms
+step:700/20000 tnl:3.4430 train_time:71108ms step_avg:101.58ms
+step:800/20000 tnl:3.4295 train_time:80748ms step_avg:100.94ms
+step:900/20000 tnl:3.4281 train_time:90402ms step_avg:100.45ms
+step:1000/20000 tnl:3.3927 train_time:100058ms step_avg:100.06ms
+step:1100/20000 tnl:3.3375 train_time:109719ms step_avg:99.74ms
+step:1200/20000 tnl:3.2387 train_time:119370ms step_avg:99.47ms
+step:1300/20000 tnl:3.3263 train_time:129023ms step_avg:99.25ms
+step:1400/20000 tnl:3.3584 train_time:138680ms step_avg:99.06ms
+step:1500/20000 tnl:3.2377 train_time:148323ms step_avg:98.88ms
+step:1600/20000 tnl:3.2936 train_time:157969ms step_avg:98.73ms
+step:1700/20000 tnl:3.1752 train_time:167613ms step_avg:98.60ms
+step:1800/20000 tnl:3.1823 train_time:177254ms step_avg:98.47ms
+step:1900/20000 tnl:3.1937 train_time:186882ms step_avg:98.36ms
+step:2000/20000 tnl:3.2034 train_time:196514ms step_avg:98.26ms
+recurrence:activated at step 2000, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+step:2100/20000 tnl:3.1775 train_time:245205ms step_avg:116.76ms
+step:2200/20000 tnl:3.1519 train_time:257258ms step_avg:116.94ms
+step:2300/20000 tnl:3.1054 train_time:269262ms step_avg:117.07ms
+step:2400/20000 tnl:3.0863 train_time:281264ms step_avg:117.19ms
+step:2500/20000 tnl:3.0856 train_time:293265ms step_avg:117.31ms
+step:2600/20000 tnl:3.0982 train_time:305264ms step_avg:117.41ms
+step:2700/20000 tnl:3.0816 train_time:317264ms step_avg:117.51ms
+step:2800/20000 tnl:3.0448 train_time:329264ms step_avg:117.59ms
+step:2900/20000 tnl:3.0024 train_time:341264ms step_avg:117.68ms
+step:3000/20000 tnl:3.0208 train_time:353263ms step_avg:117.75ms
+step:3100/20000 tnl:3.0269 train_time:365264ms step_avg:117.83ms
+step:3200/20000 tnl:3.0627 train_time:377264ms step_avg:117.89ms
+step:3300/20000 tnl:3.0787 train_time:389263ms step_avg:117.96ms
+step:3400/20000 tnl:3.0318 train_time:401263ms step_avg:118.02ms
+step:3500/20000 tnl:3.0839 train_time:413263ms step_avg:118.08ms
+step:3600/20000 tnl:2.9776 train_time:425262ms step_avg:118.13ms
+step:3700/20000 tnl:2.9939 train_time:437264ms step_avg:118.18ms
+step:3800/20000 tnl:3.0063 train_time:449261ms step_avg:118.23ms
+step:3900/20000 tnl:3.0199 train_time:461262ms step_avg:118.27ms
+step:4000/20000 tnl:2.9328 train_time:473263ms step_avg:118.32ms
+step:4000/20000 val_loss:2.9516 val_bpb:1.1427 train_time:473332ms step_avg:118.33ms
+step:4100/20000 tnl:2.8862 train_time:485937ms step_avg:118.52ms
+step:4200/20000 tnl:2.9583 train_time:497915ms step_avg:118.55ms
+step:4300/20000 tnl:2.9365 train_time:509914ms step_avg:118.58ms
+step:4400/20000 tnl:2.9580 train_time:521915ms step_avg:118.62ms
+step:4500/20000 tnl:2.9797 train_time:533915ms step_avg:118.65ms
+step:4600/20000 tnl:2.8539 train_time:545915ms step_avg:118.68ms
+step:4700/20000 tnl:2.8999 train_time:557918ms step_avg:118.71ms
+step:4800/20000 tnl:2.9267 train_time:569918ms step_avg:118.73ms
+step:4900/20000 tnl:2.8471 train_time:581918ms step_avg:118.76ms
+step:5000/20000 tnl:2.8357 train_time:593918ms step_avg:118.78ms
+step:5051/20000 val_loss:2.8558 val_bpb:1.1056 train_time:600108ms step_avg:118.81ms
+stopping_early: wallclock_cap train_time:600108ms step:5051/20000
+peak_mem:32461MiB res:32476MiB
+ema:apply
+post_ema val_loss:2.8530 val_bpb:1.1045 eval_time:1934ms
+model: 135886002 bytes  code: 23464 bytes
+gptq:building hessian model...
+gptq:calib 64 batches x 383 seqs = 24512 seqs (50225K tokens) from real data
+gptq:24512 seqs in 0.7s
+gptq:hs...
+[rank3]:[E411 17:16:19.033367427 ProcessGroupNCCL.cpp:683] [Rank 3] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=287972, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=600000) ran for 600008 milliseconds before timing out.
+[rank3]:[E411 17:16:19.033624689 ProcessGroupNCCL.cpp:2241] [PG ID 0 PG GUID 0(default_pg) Rank 3]  failure detected by watchdog at work sequence id: 287972 PG status: last enqueued work: 287972, last completed work: 287971
+[rank3]:[E411 17:16:19.033647353 ProcessGroupNCCL.cpp:730] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+[rank3]:[E411 17:16:19.033764799 ProcessGroupNCCL.cpp:2573] [PG ID 0 PG GUID 0(default_pg) Rank 3] First PG on this rank to signal dumping.
+[rank4]:[E411 17:16:19.077902306 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 4] Observed flight recorder dump signal from another rank via TCPStore.
+[rank5]:[E411 17:16:19.078098333 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 5] Observed flight recorder dump signal from another rank via TCPStore.
+[rank4]:[E411 17:16:19.078166400 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 4] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank5]:[E411 17:16:19.078338983 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 5] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank4]:[E411 17:16:19.078604743 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 4] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank5]:[E411 17:16:19.078963975 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 5] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank2]:[E411 17:16:19.135581558 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 2] Observed flight recorder dump signal from another rank via TCPStore.
+[rank0]:[E411 17:16:19.135587598 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 0] Observed flight recorder dump signal from another rank via TCPStore.
+[rank2]:[E411 17:16:19.135794545 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 2] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank0]:[E411 17:16:19.135883963 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 0] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287971, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank2]:[E411 17:16:19.136235386 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 2] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank7]:[E411 17:16:19.136580914 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 7] Observed flight recorder dump signal from another rank via TCPStore.
+[rank7]:[E411 17:16:19.136779130 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 7] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank7]:[E411 17:16:19.137132574 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 7] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank0]:[E411 17:16:19.137145438 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 0] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank1]:[E411 17:16:19.194585345 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 1] Observed flight recorder dump signal from another rank via TCPStore.
+[rank6]:[E411 17:16:19.194558685 ProcessGroupNCCL.cpp:1794] [PG ID 0 PG GUID 0(default_pg) Rank 6] Observed flight recorder dump signal from another rank via TCPStore.
+[rank1]:[E411 17:16:19.194741578 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 1] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank6]:[E411 17:16:19.194778982 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 6] Received a dump signal due to a collective timeout from  rank 3 and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank1]:[E411 17:16:19.195214453 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 1] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank6]:[E411 17:16:19.195219664 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 6] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank3]:[E411 17:16:20.888445284 ProcessGroupNCCL.cpp:1858] [PG ID 0 PG GUID 0(default_pg) Rank 3] Received a dump signal due to a collective timeout from this local rank and we will try our best to dump the debug info. Last enqueued NCCL work: 287972, last completed NCCL work: 287971.This is most likely caused by incorrect usages of collectives, e.g., wrong sizes used across ranks, the order of collectives is not same for all ranks or the scheduled collective, for some reason, didn't run. Additionally, this can be caused by GIL deadlock or other reasons such as network errors or bugs in the communications library (e.g. NCCL), etc. 
+[rank3]:[E411 17:16:20.888922260 ProcessGroupNCCL.cpp:1575] [PG ID 0 PG GUID 0(default_pg) Rank 3] ProcessGroupNCCL preparing to dump debug info. Include stack trace: 1
+[rank2]:[E411 17:16:23.041909484 ProcessGroupNCCL.cpp:683] [Rank 2] Watchdog caught collective operation timeout: WorkNCCL(SeqNum=287972, OpType=ALLREDUCE, NumelIn=1, NumelOut=1, Timeout(ms)=600000) ran for 600019 milliseconds before timing out.
+[rank2]:[E411 17:16:23.042103225 ProcessGroupNCCL.cpp:2241] [PG ID 0 PG GUID 0(default_pg) Rank 2]  failure detected by watchdog at work sequence id: 287972 PG status: last enqueued work: 287972, last completed work: 287971
+[rank2]:[E411 17:16:23.042131155 ProcessGroupNCCL.cpp:730] Stack trace of the failed collective not found, potentially because FlightRecorder is disabled. You can enable it by setting TORCH_NCCL_TRACE_BUFFER_SIZE to a non-zero value.
+W0411 17:17:13.206000 1171 torch/distributed/elastic/agent/server/api.py:725] Received 15 death signal, shutting down workers
+W0411 17:17:13.208000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1240 closing signal SIGTERM
+W0411 17:17:13.209000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1241 closing signal SIGTERM
+W0411 17:17:13.209000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1242 closing signal SIGTERM
+W0411 17:17:13.210000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1243 closing signal SIGTERM
+W0411 17:17:13.210000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1244 closing signal SIGTERM
+W0411 17:17:13.211000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1245 closing signal SIGTERM
+W0411 17:17:13.214000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1246 closing signal SIGTERM
+W0411 17:17:13.216000 1171 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 1247 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 284, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/metrics/api.py", line 138, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/agent/server/api.py", line 717, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/agent/server/api.py", line 881, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/api.py", line 85, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 1171 got signal: 15
+Sat Apr 11 17:17:15 UTC 2026 ── Run #10 seed=1337 COMPLETE ──

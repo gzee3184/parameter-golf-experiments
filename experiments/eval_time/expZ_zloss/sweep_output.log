@@ -1,0 +1,14 @@
+
+Sun Apr 19 10:31:19 PM CDT 2026 ── Running control (Z_LOSS_WEIGHT=0) ──
+step:500/500 val_loss:3.2167 val_bpb:1.2453 train_time:829109ms step_avg:1658.22ms
+post_ema val_loss:3.6870 val_bpb:1.4274 eval_time:25580ms
+
+Sun Apr 19 10:48:43 PM CDT 2026 ── Running zloss_1em4 (Z_LOSS_WEIGHT=0.0001) ──
+step:500/500 val_loss:3.2343 val_bpb:1.2521 train_time:833959ms step_avg:1667.92ms
+post_ema val_loss:3.8179 val_bpb:1.4780 eval_time:25868ms
+
+Sun Apr 19 11:05:55 PM CDT 2026 ── expZ scratch A/B DONE ──
+
+Results:
+  control         final_train_loss=MISS     post_ema_val_bpb=1.4274
+  zloss_1em4      final_train_loss=MISS     post_ema_val_bpb=1.4780

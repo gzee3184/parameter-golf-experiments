@@ -1,0 +1,39 @@
+[2026-03-29 19:10:19] ==============================================
+[2026-03-29 19:10:19]   OVERNIGHT LOCAL RUN — Phase 1 Screening
+[2026-03-29 19:10:19]   GPUs: 0, 1 (1 process each, nice=10)
+[2026-03-29 19:10:19]   Wallclock: 2400s per run
+[2026-03-29 19:10:19]   Jobs: GPU0=9, GPU1=8
+[2026-03-29 19:10:19]   Estimated total: ~360 min
+[2026-03-29 19:10:19] ==============================================
+[2026-03-29 19:10:19] [GPU0] START leaky05 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_a/leaky05.log
+[2026-03-29 19:10:19] GPU0 queue PID: 12858
+[2026-03-29 19:10:19] [GPU1] START silu2 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_a/silu2.log
+[2026-03-29 19:10:19] GPU1 queue PID: 12859
+[2026-03-29 20:15:13] [GPU0] DONE  leaky05 — val_bpb=1.37573042 step_avg=1414.91ms elapsed=3894s exit=0
+[2026-03-29 20:15:13] [GPU0] START gelu2 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_a/gelu2.log
+[2026-03-29 20:16:07] [GPU1] DONE  silu2 — val_bpb=1.39050311 step_avg=1492.88ms elapsed=3948s exit=0
+[2026-03-29 20:16:07] [GPU1] START leaky03 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_a/leaky03.log
+[2026-03-29 21:20:01] [GPU0] DONE  gelu2 — val_bpb=1.36577345 step_avg=1426.74ms elapsed=3888s exit=0
+[2026-03-29 21:20:01] [GPU0] START leaky07 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_a/leaky07.log
+[2026-03-29 21:21:34] [GPU1] DONE  leaky03 — val_bpb=1.40304298 step_avg=1488.08ms elapsed=3927s exit=0
+[2026-03-29 21:21:34] [GPU1] START xsa_4 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_c/xsa4.log
+[2026-03-29 22:24:41] [GPU0] DONE  leaky07 — val_bpb=1.37877874 step_avg=1417.60ms elapsed=3880s exit=0
+[2026-03-29 22:24:41] [GPU0] START xsa_6 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_c/xsa6.log
+[2026-03-29 22:26:28] [GPU1] DONE  xsa_4 — val_bpb=1.40939494 step_avg=1488.12ms elapsed=3894s exit=0
+[2026-03-29 22:26:28] [GPU1] START xsa_8 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_c/xsa8.log
+[2026-03-29 23:29:38] [GPU0] DONE  xsa_6 — val_bpb=1.37566744 step_avg=1431.70ms elapsed=3897s exit=0
+[2026-03-29 23:29:38] [GPU0] START xsa_11 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_c/xsa11.log
+[2026-03-29 23:31:53] [GPU1] DONE  xsa_8 — val_bpb=1.41488418 step_avg=1519.80ms elapsed=3925s exit=0
+[2026-03-29 23:31:53] [GPU1] START mtp_off → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_d/mtp_off.log
+[2026-03-30 00:35:00] [GPU0] DONE  xsa_11 — val_bpb=1.39265032 step_avg=1467.32ms elapsed=3922s exit=0
+[2026-03-30 00:35:00] [GPU0] START mtp_1h_w05 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_d/mtp_1h_w05.log
+[2026-03-30 00:36:37] [GPU1] DONE  mtp_off — val_bpb=1.42829835 step_avg=1489.79ms elapsed=3884s exit=0
+[2026-03-30 00:36:37] [GPU1] START mtp_1h_w10 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_d/mtp_1h_w10.log
+[2026-03-30 01:39:22] [GPU0] DONE  mtp_1h_w05 — val_bpb=1.38792606 step_avg=1436.79ms elapsed=3862s exit=0
+[2026-03-30 01:39:22] [GPU0] START mtp_2h_w05 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_d/mtp_2h_w05.log
+[2026-03-30 01:41:10] [GPU1] DONE  mtp_1h_w10 — val_bpb=1.42438757 step_avg=1507.70ms elapsed=3873s exit=0
+[2026-03-30 01:41:10] [GPU1] START rope_16 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_e/rope16.log
+[2026-03-30 02:43:44] [GPU0] DONE  mtp_2h_w05 — val_bpb=1.40427562 step_avg=1452.72ms elapsed=3862s exit=0
+[2026-03-30 02:43:44] [GPU0] START rope_8 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_e/rope8.log
+[2026-03-30 02:45:53] [GPU1] DONE  rope_16 — val_bpb=1.40835665 step_avg=1490.87ms elapsed=3883s exit=0
+[2026-03-30 02:45:53] [GPU1] START rope_24 → <project>/parameter-golf/records/track_10min_16mb/overnight_results/exp_e/rope24.log

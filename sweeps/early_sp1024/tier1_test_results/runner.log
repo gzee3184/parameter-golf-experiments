@@ -1,0 +1,39 @@
+=============================================
+  Tier 1 Tests: Stacking with mish2
+  Mon Mar 30 07:16:21 AM CDT 2026
+=============================================
+
+Checking for existing training processes...
+[07:16:21] GPUs free. Starting Tier 1 tests.
+
+=============================================
+  ROUND 1: XSA=11 vs MTP w=0.01
+  Mon Mar 30 07:16:21 AM CDT 2026
+=============================================
+[07:16:21] START mish2_mtp_w001 on GPU1 → <project>/parameter-golf/records/track_10min_16mb/tier1_test_results/mish2_mtp_w001.log
+[07:16:21] START mish2_xsa11 on GPU0 → <project>/parameter-golf/records/track_10min_16mb/tier1_test_results/mish2_xsa11.log
+[08:38:15] DONE  mish2_mtp_w001 — val_bpb=1.42729952 sliding=1.42729952 step_avg=1527.74ms steps=1572 elapsed=4914s exit=0
+[08:38:32] DONE  mish2_xsa11 — val_bpb=1.38330124 sliding=1.38330124 step_avg=1484.93ms steps=1617 elapsed=4931s exit=0
+
+=============================================
+  ROUND 2: Hadamard quant vs XSA=2
+  Mon Mar 30 08:38:32 AM CDT 2026
+=============================================
+[08:38:32] START mish2_hadamard on GPU0 → <project>/parameter-golf/records/track_10min_16mb/tier1_test_results/mish2_hadamard.log
+[08:38:32] START mish2_xsa2 on GPU1 → <project>/parameter-golf/records/track_10min_16mb/tier1_test_results/mish2_xsa2.log
+[09:59:31] DONE  mish2_hadamard — val_bpb=1.36426309 sliding=1.36426309 step_avg=1433.76ms steps=1675 elapsed=4859s exit=0
+[10:00:56] DONE  mish2_xsa2 — val_bpb=1.39533494 sliding=1.39533494 step_avg=1494.56ms steps=1606 elapsed=4944s exit=0
+
+=============================================
+  TIER 1 RESULTS SUMMARY
+  Mon Mar 30 10:00:56 AM CDT 2026
+=============================================
+  Reference: mish2-only (prior): sliding_bpb=1.3652, steps=1673, avg=1435ms
+  Reference: baseline (leaky05,XSA4,noMTP): sliding_bpb=1.3757
+
+  mish2_xsa11         train_bpb=1.2560      sliding=1.38330124  roundtrip=1.40527408  steps=1617   avg=1484.93ms  artifact=9432045
+  mish2_mtp_w001      train_bpb=1.2609      sliding=1.42729952  roundtrip=1.44993501  steps=1572   avg=1527.74ms  artifact=9308089
+  mish2_hadamard      train_bpb=1.2522      sliding=1.36426309  roundtrip=1.38927206  steps=1675   avg=1433.76ms  artifact=9671645
+  mish2_xsa2          train_bpb=1.2582      sliding=1.39533494  roundtrip=1.42106987  steps=1606   avg=1494.56ms  artifact=9427389
+
+Done at Mon Mar 30 10:00:56 AM CDT 2026

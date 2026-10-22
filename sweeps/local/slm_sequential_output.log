@@ -1,0 +1,16 @@
+
+Sat Apr  4 08:08:54 AM CDT 2026 ═══════════════════════════════════════
+  RUN: 15L_uniform2_8attn
+═══════════════════════════════════════
+  15L_uniform2_8attn: prequant=1.0981 quant=1.13518567 steps=7047 ms/step=1702.93 art=15.89MB params=39876672
+  selective_prune: pruning 2823896/10952474 +/-1 values (25.8%) to fit 15.9MB
+
+Sat Apr  4 11:54:23 AM CDT 2026 ═══════════════════════════════════════
+  RUN: 19L_uniform2_10attn
+═══════════════════════════════════════
+  19L_uniform2_10attn: prequant=1.0895 quant=1.52087549 steps=5633 ms/step=2130.44 art=16.13MB params=49846352
+  
+
+Sat Apr  4 03:23:46 PM CDT 2026 ═══════════════════════════════════════
+  ALL DONE
+═══════════════════════════════════════

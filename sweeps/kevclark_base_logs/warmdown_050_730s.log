@@ -1,0 +1,120 @@
+Hyperparameters:
+  adam_eps: 1e-08
+  adam_wd: 0.02
+  beta1: 0.9
+  beta2: 0.95
+  compressor: brotli
+  data_dir: ./data/
+  datasets_dir: ./data/datasets/fineweb10B_sp4096
+  distributed: False
+  ema_decay: 0.997
+  embed_lr: 0.6
+  embed_wd: 0.09
+  embedding_dim: 512
+  eval_seq_len: 2048
+  eval_stride: 64
+  gptq_calibration_batches: 64
+  gptq_enabled: True
+  gptq_reserve_seconds: 10.0
+  grad_accum_steps: 8
+  grad_clip_norm: 0.3
+  head_lr: 0.008
+  is_main_process: True
+  iterations: 20000
+  ln_scale: True
+  local_rank: 0
+  logfile: logs/warmdown_050_730s.txt
+  logit_softcap: 30.0
+  matrix_lr: 0.02
+  max_wallclock_seconds: 730.0
+  min_lr: 0.0
+  mlp_mult: 4.0
+  model_dim: 512
+  model_path: final_model.pt
+  muon_backend_steps: 5
+  muon_beta2: 0.95
+  muon_eq_r: True
+  muon_momentum: 0.99
+  muon_momentum_warmup_start: 0.92
+  muon_momentum_warmup_steps: 1500
+  muon_wd: 0.09
+  num_heads: 8
+  num_kv_heads: 4
+  num_layers: 11
+  parallel_start_layer: 7
+  qk_gain_init: 5.0
+  quantized_model_path: final_model.int6.ptz
+  rank: 0
+  recur_layers: 4,5
+  recur_start_step: 200
+  rope_base: 10000.0
+  rope_dims: 16
+  rope_train_seq_len: 2048
+  run_id: warmdown_050_730s
+  scalar_lr: 0.02
+  seed: 1337
+  shared_attn_layers: 
+  skip_gates_enabled: True
+  sliding_window_enabled: True
+  tie_embeddings: True
+  tied_embed_init_std: 0.005
+  tied_embed_lr: 0.03
+  tokenizer_path: ./data/tokenizers/fineweb_4096_bpe.model
+  train_batch_tokens: 786432
+  train_files: ./data/datasets/fineweb10B_sp4096/fineweb_train_*.bin
+  train_log_every: 50
+  train_seq_len: 2048
+  val_batch_tokens: 524288
+  val_files: ./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin
+  val_loss_every: 4000
+  ve_dim: 128
+  ve_enabled: True
+  ve_layers: 9,10
+  vocab_size: 4096
+  warmdown_frac: 0.5
+  warmup_steps: 20
+  world_size: 1
+  xsa_last_n: 11
+train_shards: 143
+val_tokens: 45508608
+depth_recurrence: layers=4,5 start_step=200
+muon_eq_r: enabled
+parallel_residuals: start_layer=7
+model_params:34403420
+gptq:reserving 10s, effective=720000ms
+warmup_step: 1/20
+warmup_step: 2/20
+warmup_step: 3/20
+warmup_step: 4/20
+warmup_step: 5/20
+warmup_step: 6/20
+warmup_step: 10/20
+warmup_step: 20/20
+0/20000 val_loss: 8.3169 val_bpb: 3.6144
+1/20000 train_loss: 8.3159 train_time: 0.0m tok/s: 510424
+2/20000 train_loss: 12.3394 train_time: 0.1m tok/s: 493777
+3/20000 train_loss: 10.7870 train_time: 0.1m tok/s: 487804
+4/20000 train_loss: 9.0636 train_time: 0.1m tok/s: 484686
+5/20000 train_loss: 7.8805 train_time: 0.1m tok/s: 482722
+50/20000 train_loss: 4.8724 train_time: 1.4m tok/s: 468217
+100/20000 train_loss: 4.0805 train_time: 2.8m tok/s: 465551
+150/20000 train_loss: 3.5688 train_time: 4.2m tok/s: 465163
+200/20000 train_loss: 3.3425 train_time: 5.6m tok/s: 465091
+recurrence:activated at step 200, virtual_layers=[0, 1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 10]
+250/20000 train_loss: 3.1972 train_time: 7.6m tok/s: 433319
+300/20000 train_loss: 3.0861 train_time: 9.2m tok/s: 426640
+350/20000 train_loss: 3.0412 train_time: 10.9m tok/s: 422211
+385/20000 val_loss: 2.9840 val_bpb: 1.2968
+stopping_early: wallclock_cap train_time: 721155ms step: 385/20000
+peak memory allocated: 31227 MiB reserved: 32096 MiB
+ema:applying EMA weights
+pre-quantization post-ema val_loss:4.20579686 val_bpb:1.82779086 eval_time:33823ms
+Serialized model: 132414985 bytes
+Code size: 76885 bytes
+GPTQ:collecting Hessians from calibration data...
+GPTQ:collected 66 Hessians in 17.1s
+GPTQ quantization: 66 layers with full GPTQ, 0 fallback to clip-search
+Serialized model int6+brotli: 9739025 bytes
+Total submission size int6+brotli: 9815910 bytes
+final_int6_roundtrip val_loss:4.30866408 val_bpb:1.87249577 eval_time:43127ms
+final_int6_sliding_window val_loss:4.30683821 val_bpb:1.87170227 eval_time:1169493ms

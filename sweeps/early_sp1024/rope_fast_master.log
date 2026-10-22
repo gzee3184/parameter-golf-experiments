@@ -1,0 +1,8 @@
+=============================================
+  RoPE Dimension Sweep (fast: 1200s)
+  Mon Mar 30 04:26:16 AM CDT 2026
+=============================================
+--- Batch 1: rope_8 (GPU0) + rope_24 (GPU1) ---
+[04:26:16] START rope_8 on GPU0 → <project>/parameter-golf/records/track_10min_16mb/rope_fast_results/rope_8.log
+[04:26:16] START rope_24 on GPU1 → <project>/parameter-golf/records/track_10min_16mb/rope_fast_results/rope_24.log
+[05:17:06] DONE  rope_8 — val_bpb=2.56134235 step_avg=1433.70ms steps=838 elapsed=3050s exit=0

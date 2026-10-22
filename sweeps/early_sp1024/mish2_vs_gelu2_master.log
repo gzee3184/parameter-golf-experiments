@@ -1,0 +1,22 @@
+=============================================
+  mish2 vs gelu2 — Head-to-Head Comparison
+  Mon Mar 30 02:52:41 AM CDT 2026
+=============================================
+Training script: <project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py
+Wallclock: 2400s | Seed: 1337 | TTT: off
+
+[02:52:41] START mish2 on GPU0 → <project>/parameter-golf/records/track_10min_16mb/mish2_vs_gelu2_results/mish2.log
+[02:52:41] START gelu2 on GPU1 → <project>/parameter-golf/records/track_10min_16mb/mish2_vs_gelu2_results/gelu2.log
+[04:13:35] DONE  gelu2 — val_bpb=1.40128971 step_avg=1504.85ms steps=1595 elapsed=4854s exit=0
+[04:14:17] DONE  mish2 — val_bpb=1.36516821 step_avg=1435.18ms steps=1673 elapsed=4896s exit=0
+
+=============================================
+  RESULTS SUMMARY
+=============================================
+  mish2     val_bpb=1.36516821    sliding=1.36516821    roundtrip=1.39112116    steps=1673   avg=1435.18ms  artifact=6
+9650053
+  gelu2     val_bpb=1.40128971    sliding=1.40128971    roundtrip=1.42796307    steps=1595   avg=1504.85ms  artifact=6
+9233861
+
+Previous overnight gelu2 result: val_bpb=1.36577345, step_avg=1426.74ms, steps=1683
+Done at Mon Mar 30 04:14:17 AM CDT 2026

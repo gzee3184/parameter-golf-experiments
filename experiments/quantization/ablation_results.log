@@ -1,0 +1,28 @@
+GPTQ Ablation Test
+Checkpoint: <project>/parameter-golf/final_model.pt
+Device: cuda:0
+
+============================================================
+Test 0: RTN only (no GPTQ)
+  RTN only (no GPTQ)
+============================================================
+  RTN quantized in 0.6s
+  Compression in 239.7s
+  >> unpruned=16.25MB  budget=15.19MB  prune=43.4%  cands=9877110
+
+============================================================
+Test A: Original (baseline)
+  recurrence=False, pre_damping=True, stale_perm=True
+  real_data=False, n_calib_seqs=64
+============================================================
+Traceback (most recent call last):
+  File "<project>/h100_deploy/test_gptq_ablation.py", line 637, in <module>
+    results['A'] = run_test("A: Original (baseline)",
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<project>/h100_deploy/test_gptq_ablation.py", line 600, in run_test
+    hgm.load_state_dict(us, strict=False)
+  File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2639, in load_state_dict
+    raise RuntimeError(
+RuntimeError: Error(s) in loading state_dict for _HG:
+	size mismatch for lm: copying a param with shape torch.Size([]) from checkpoint, the shape in current model is torch.Size([4]).
+	size mismatch for ves.scale: copying a param with shape torch.Size([]) from checkpoint, the shape in current model is torch.Size([1]).

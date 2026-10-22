@@ -1,0 +1,75 @@
+Thu Apr  2 05:21:24 PM CDT 2026 === GRID SEARCH GPU1 START (no TTT) ===
+Thu Apr  2 05:21:24 PM CDT 2026 === screen_mlp3.0_q86 ===
+  screen_mlp3.0_q86: val=3.86375689 sliding=— artifact=6.45MB
+Thu Apr  2 05:28:25 PM CDT 2026 === screen_mlp3.5_q86 ===
+  screen_mlp3.5_q86: val=3.88250139 sliding=— artifact=7.02MB
+Thu Apr  2 05:35:32 PM CDT 2026 === screen_mlp3.5_q85 ===
+  screen_mlp3.5_q85: val= sliding=— artifact=—MB
+Thu Apr  2 05:42:24 PM CDT 2026 === screen_mlp3.5_q66 ===
+  screen_mlp3.5_q66: val=3.88251904 sliding=— artifact=4.70MB
+Thu Apr  2 05:49:19 PM CDT 2026 === screen_mlp3.5_q65 ===
+  screen_mlp3.5_q65: val=3.88252176 sliding=— artifact=4.01MB
+Thu Apr  2 05:56:14 PM CDT 2026 === screen_mlp4.0_q86 ===
+  screen_mlp4.0_q86: val=3.89200100 sliding=— artifact=7.51MB
+Thu Apr  2 06:03:32 PM CDT 2026 === screen_mlp4.0_q85 ===
+  screen_mlp4.0_q85: val=3.89198755 sliding=— artifact=6.90MB
+Thu Apr  2 06:10:46 PM CDT 2026 === screen_mlp4.0_q65 ===
+  screen_mlp4.0_q65: val=3.89200207 sliding=— artifact=4.22MB
+Thu Apr  2 06:17:34 PM CDT 2026 === screen_mlp4.5_q85 ===
+  screen_mlp4.5_q85: val=3.79999747 sliding=— artifact=7.44MB
+Thu Apr  2 06:24:00 PM CDT 2026 === screen_mlp4.5_q65 ===
+  screen_mlp4.5_q65: val=3.80011826 sliding=— artifact=4.44MB
+Thu Apr  2 06:29:41 PM CDT 2026 === screen_mlp3.5_q88 ===
+  screen_mlp3.5_q88: val=3.77334473 sliding=— artifact=8.29MB
+Thu Apr  2 06:34:45 PM CDT 2026 === screen_mlp4.0_q88 ===
+  screen_mlp4.0_q88: val=3.78353131 sliding=— artifact=8.76MB
+Thu Apr  2 06:40:08 PM CDT 2026 === screen_compress_lzma ===
+  screen_compress_lzma: sliding=— artifact=7.08MB
+Thu Apr  2 06:45:14 PM CDT 2026 === screen_compress_brotli ===
+  screen_compress_brotli: sliding=— artifact=6.67MB
+Thu Apr  2 06:50:36 PM CDT 2026 === screen_gptq_calib4 ===
+  screen_gptq_calib4: sliding=—
+Thu Apr  2 06:55:34 PM CDT 2026 === screen_gptq_calib8 ===
+  screen_gptq_calib8: sliding=—
+Thu Apr  2 07:00:40 PM CDT 2026 === screen_gptq_calib16 ===
+  screen_gptq_calib16: sliding=—
+Thu Apr  2 07:06:06 PM CDT 2026 === screen_gptq_calib32 ===
+  screen_gptq_calib32: sliding=—
+
+Thu Apr  2 07:12:11 PM CDT 2026 === GRID SEARCH GPU1 COMPLETE ===
+Results:
+  screen_bigram_v2048_d128: val=3.75773661 sliding=— artifact=7.08MB
+  screen_bigram_v3072_d112: val=3.87310193 sliding=— artifact=6.99MB
+  screen_bigram_v3072_d128: val=3.75944246 sliding=— artifact=7.11MB
+  screen_bigram_v4096_d112: val=3.76120868 sliding=— artifact=7.11MB
+  screen_bigram_v4096_d96: val=3.75966957 sliding=— artifact=7.08MB
+  screen_compress_brotli: val=3.77332594 sliding=— artifact=6.67MB
+  screen_compress_lzma: val=3.77333651 sliding=— artifact=7.08MB
+  screen_gptq_calib16: val=3.77338124 sliding=— artifact=7.07MB
+  screen_gptq_calib32: val=3.77336764 sliding=— artifact=7.08MB
+  screen_gptq_calib4: val=3.77334967 sliding=— artifact=7.06MB
+  screen_gptq_calib8: val=3.77333603 sliding=— artifact=7.09MB
+  screen_mlp3.0_q86: val=3.86375689 sliding=— artifact=6.45MB
+  screen_mlp3.5_q65: val=3.88252176 sliding=— artifact=4.01MB
+  screen_mlp3.5_q66: val=3.88251904 sliding=— artifact=4.70MB
+  screen_mlp3.5_q85: val= sliding=— artifact=—MB
+  screen_mlp3.5_q86: val=3.88250139 sliding=— artifact=7.02MB
+  screen_mlp3.5_q88: val=3.77334473 sliding=— artifact=8.29MB
+  screen_mlp4.0_q65: val=3.89200207 sliding=— artifact=4.22MB
+  screen_mlp4.0_q85: val=3.89198755 sliding=— artifact=6.90MB
+  screen_mlp4.0_q86: val=3.89200100 sliding=— artifact=7.51MB
+  screen_mlp4.0_q88: val=3.78353131 sliding=— artifact=8.76MB
+  screen_mlp4.5_q65: val=3.80011826 sliding=— artifact=4.44MB
+  screen_mlp4.5_q85: val=3.79999747 sliding=— artifact=7.44MB
+  screen_muon_wd0.02: val=3.87309366 sliding=— artifact=7.03MB
+  screen_muon_wd0.04: val=3.87306458 sliding=— artifact=7.01MB
+  screen_muon_wd0.06: val= sliding=— artifact=—MB
+  screen_muon_wd0.08: val=3.87311056 sliding=— artifact=7.01MB
+  screen_muon_wd0.15: val=3.87308758 sliding=— artifact=7.01MB
+  screen_muon_wd0.1: val=3.87311413 sliding=— artifact=7.01MB
+  screen_muon_wd0.2: val=3.87311636 sliding=— artifact=7.01MB
+  screen_warmdown1000: val=3.74742768 sliding=— artifact=7.10MB
+  screen_warmdown2000: val=3.75260209 sliding=— artifact=7.09MB
+  screen_warmdown4000: val=3.75775662 sliding=— artifact=7.11MB
+  screen_warmdown6000: val=3.76066095 sliding=— artifact=7.09MB
+  screen_warmdown8000: val=3.76671623 sliding=— artifact=7.07MB

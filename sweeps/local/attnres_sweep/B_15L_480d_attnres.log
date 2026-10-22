@@ -1,0 +1,136 @@
+logs/86f32e52-85cc-4098-8059-e7b22f0a94b0.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:40021560
+arch_config: vocab_size=4096 num_layers=15 model_dim=480 mlp_mult=4.0 muon_wd=0.12 adam_wd=0.02 embed_wd=0.12 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True coprime_stride=True qk_gain_init=4.0
+XSA:last_15 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:900.000
+seed:1337
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+step:0/20000 val_loss:8.3151 val_bpb:3.6136 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3153 train_time:3284ms step_avg:3283.80ms
+step:2/20000 train_loss:13.3872 train_time:6603ms step_avg:3301.60ms
+step:3/20000 train_loss:13.0124 train_time:10034ms step_avg:3344.75ms
+step:4/20000 train_loss:12.3726 train_time:13470ms step_avg:3367.49ms
+step:5/20000 train_loss:11.5958 train_time:16910ms step_avg:3381.96ms
+step:6/20000 train_loss:10.7923 train_time:20354ms step_avg:3392.25ms
+step:7/20000 train_loss:10.0247 train_time:23803ms step_avg:3400.41ms
+step:8/20000 train_loss:9.2921 train_time:27260ms step_avg:3407.44ms
+step:9/20000 train_loss:8.6704 train_time:30720ms step_avg:3413.36ms
+step:10/20000 train_loss:8.1280 train_time:34185ms step_avg:3418.45ms
+swa:start step:50
+step:100/20000 train_loss:4.9748 train_time:346688ms step_avg:3466.88ms
+step:200/20000 train_loss:4.6564 train_time:693841ms step_avg:3469.20ms
+step:260/20000 val_loss:4.5685 val_bpb:1.9854 train_time:903387ms step_avg:3474.57ms
+stopping_early: wallclock_cap train_time:903387ms step:260/20000
+peak memory allocated: 56445 MiB reserved: 62488 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:8.2390 val_bpb:3.5806 eval_time:58653ms
+Serialized model: 156160574 bytes
+Code size: 79426 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (64 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 64 sequences in 297.6s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 90 layers
+quant_config: bits_mlp=6 bits_attn=6 bits_embed=6
+budget: artifact_limit=16777216 code=79426 model_budget=16697790 (15.92MB)
+selective_prune: 10486338 +/-1 candidates, model_unpruned=6.13MB model_budget=15.92MB
+selective_prune: already fits, no pruning needed
+Serialized model brotli: 6427010 bytes
+Total submission size brotli: 6506436 bytes
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 1673, in <module>
+[rank0]:     main()
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 1655, in main
+[rank0]:     eval_model.load_state_dict(deq_state, strict=True)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 2639, in load_state_dict
+[rank0]:     raise RuntimeError(
+[rank0]: RuntimeError: Error(s) in loading state_dict for GPT:
+[rank0]: 	Unexpected key(s) in state_dict: "ar_queries". 
+[rank0]:[W406 04:48:59.981616711 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0406 04:49:01.778000 1069256 torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 1069459) of binary: <venv>/bin/python3
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-06_04:49:01
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1069459)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

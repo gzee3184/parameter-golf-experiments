@@ -1,0 +1,120 @@
+W0409 17:40:50.441000 27373 torch/distributed/run.py:803] 
+W0409 17:40:50.441000 27373 torch/distributed/run.py:803] *****************************************
+W0409 17:40:50.441000 27373 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0409 17:40:50.441000 27373 torch/distributed/run.py:803] *****************************************
+logs/fb743538-824b-401d-b931-75a432e0a51d.txt
+tokenizer:./data/tokenizers/fineweb_4096_bpe.model
+dataset:fineweb10B_sp4096 train_shards:143 val_tokens:45508608
+RESUME:loading /workspace/parameter-golf/final_model.pt
+RESUME post_ema val_loss:2.5563 val_bpb:1.1110 eval_time:10548ms
+gptq:building hessian model...
+gptq:calib 64x2048 t=0.8
+gptq:64 seqs in 250.8s
+gptq:hs...
+gptq:collected hs for 73 layers
+quant_config: bits_mlp=6 bits_attn=5 bits_embed=8
+budget: limit=16000000 code=21789 model=15978211 (15.24MB)
+prune: 11057628 cands unpruned=15.62MB budget=15.24MB
+prune: full=12.39MB
+prune: 1386083/11057628 (12.5%)
+Serialized model brotli: 15977292 bytes
+Total submission size brotli: 15999081 bytes
+final_int6_roundtrip val_loss:2.6335 val_bpb:1.1445 eval_time:2335ms
+final_int6_roundtrip_exact val_loss:2.63350793 val_bpb:1.14449221
+[rank7]: Traceback (most recent call last):
+[rank7]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank7]:     main()
+[rank7]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank7]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank7]:             ^^^^^^^^^^^^^^^^
+[rank7]: NameError: name 'eval_val_sliding' is not defined
+[rank5]: Traceback (most recent call last):
+[rank5]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank5]:     main()
+[rank5]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank5]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank5]:             ^^^^^^^^^^^^^^^^
+[rank5]: NameError: name 'eval_val_sliding' is not defined
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank2]:     main()
+[rank2]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank2]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank2]:             ^^^^^^^^^^^^^^^^
+[rank2]: NameError: name 'eval_val_sliding' is not defined
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank0]:     main()
+[rank0]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank0]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank0]:             ^^^^^^^^^^^^^^^^
+[rank0]: NameError: name 'eval_val_sliding' is not defined
+[rank4]: Traceback (most recent call last):
+[rank4]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank4]:     main()
+[rank4]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank4]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank4]:             ^^^^^^^^^^^^^^^^
+[rank4]: NameError: name 'eval_val_sliding' is not defined
+[rank6]: Traceback (most recent call last):
+[rank6]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank6]:     main()
+[rank6]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank6]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank6]:             ^^^^^^^^^^^^^^^^
+[rank6]: NameError: name 'eval_val_sliding' is not defined
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank3]:     main()
+[rank3]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank3]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank3]:             ^^^^^^^^^^^^^^^^
+[rank3]: NameError: name 'eval_val_sliding' is not defined
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/workspace/parameter-golf/train_gpt.py", line 1217, in <module>
+[rank1]:     main()
+[rank1]:   File "/workspace/parameter-golf/train_gpt.py", line 996, in main
+[rank1]:     swl,swb=eval_val_sliding(a,em,rank,wz,device,vt,bbl,hll,ibl)
+[rank1]:             ^^^^^^^^^^^^^^^^
+[rank1]: NameError: name 'eval_val_sliding' is not defined
+[rank0]:[W409 18:22:22.859330579 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+W0409 18:22:23.341000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27441 closing signal SIGTERM
+W0409 18:22:23.344000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27442 closing signal SIGTERM
+W0409 18:22:23.345000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27443 closing signal SIGTERM
+W0409 18:22:23.346000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27445 closing signal SIGTERM
+W0409 18:22:23.347000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27446 closing signal SIGTERM
+W0409 18:22:23.348000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27447 closing signal SIGTERM
+W0409 18:22:23.350000 27373 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 27448 closing signal SIGTERM
+E0409 18:22:24.144000 27373 torch/distributed/elastic/multiprocessing/api.py:882] failed (exitcode: 1) local_rank: 3 (pid: 27444) of binary: /usr/local/bin/python
+Traceback (most recent call last):
+  File "/usr/local/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/distributed/launcher/api.py", line 293, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-09_18:22:23
+  host      : fbe5809a4b63
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 27444)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

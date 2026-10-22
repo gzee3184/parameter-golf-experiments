@@ -1,0 +1,69 @@
+logs/6dd6ade3-f0c8-42af-ac5d-f6b105a7199b.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+ttt_only:loading <project>/local_tests/v4R_13L_wd012_q65.ptz
+ttt_only:model loaded, params=39613544
+final_int6_roundtrip val_loss:2.6059 val_bpb:1.1325 eval_time:78306ms
+final_int6_roundtrip_exact val_loss:2.60586697 val_bpb:1.13247976
+final_int6_sliding_window val_loss:2.6216 val_bpb:1.1393 stride:64 eval_time:4162995ms
+final_int6_sliding_window_exact val_loss:2.62159608 val_bpb:1.13932749
+ttt_sliding:start chunks=1389 chunk_tokens=32768 total_windows=711072 stride=64 ttt_lr=0.0001 ttt_epochs=3 freeze_blocks=2 ngram=False
+ttt_sliding:params unfrozen=39609432 frozen=4112 qttt=False
+  ttt_chunk [1/1389] bpb=1.227807 time=5.8s
+  ttt_chunk [11/1389] bpb=1.143543 time=66.2s
+  ttt_chunk [21/1389] bpb=1.133649 time=126.6s
+  ttt_chunk [31/1389] bpb=1.137044 time=187.1s
+  ttt_chunk [41/1389] bpb=1.141824 time=247.6s
+  ttt_chunk [51/1389] bpb=1.138031 time=297.6s
+  ttt_chunk [61/1389] bpb=1.133992 time=320.2s
+  ttt_chunk [71/1389] bpb=1.132253 time=345.5s
+  ttt_chunk [81/1389] bpb=1.133586 time=406.2s
+  ttt_chunk [91/1389] bpb=1.129345 time=446.5s
+  ttt_chunk [101/1389] bpb=1.127129 time=498.8s
+  ttt_chunk [111/1389] bpb=1.126733 time=559.3s
+  ttt_chunk [121/1389] bpb=1.129321 time=619.8s
+  ttt_chunk [131/1389] bpb=1.129906 time=680.3s
+  ttt_chunk [141/1389] bpb=1.131815 time=740.8s
+  ttt_chunk [151/1389] bpb=1.130578 time=801.3s
+  ttt_chunk [161/1389] bpb=1.130552 time=861.8s
+  ttt_chunk [171/1389] bpb=1.130732 time=922.3s
+  ttt_chunk [181/1389] bpb=1.130207 time=982.7s
+  ttt_chunk [191/1389] bpb=1.130197 time=1043.3s
+  ttt_chunk [201/1389] bpb=1.128616 time=1103.8s
+  ttt_chunk [211/1389] bpb=1.130116 time=1164.3s
+  ttt_chunk [221/1389] bpb=1.130040 time=1224.8s
+  ttt_chunk [231/1389] bpb=1.130726 time=1285.3s
+  ttt_chunk [241/1389] bpb=1.131065 time=1345.7s
+  ttt_chunk [251/1389] bpb=1.130070 time=1406.2s
+  ttt_chunk [261/1389] bpb=1.130666 time=1466.7s
+W0404 08:07:35.956000 478052 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0404 08:07:35.957000 478052 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 478121 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 478052 got signal: 15

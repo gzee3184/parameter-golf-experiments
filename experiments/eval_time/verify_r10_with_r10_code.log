@@ -1,0 +1,18 @@
+Using train_gpt.py: <project>/h100_deploy/run10/train_gpt.py
+Loading checkpoint: <project>/h100_deploy/run10/final_model_r10.pt
+Checkpoint has 55 keys
+Building model: vs=8192 nl=11 md=512 recur=[3, 4, 5]
+Model has 55 keys
+Only in checkpoint: 0  []
+Only in model:      0  []
+Shape mismatches: 0
+Missing after load: []  (total 0)
+Unexpected: []  (total 0)
+Virtual layer plan (recur active): [(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+Running eval on val...
+Val tokens: 40,540,161
+
+RESULT: val_loss=3.8634  val_bpb=1.4956  time=76.9s
+Expected: val_bpb approximately 1.1033 (Run #10c post-EMA)
+Delta vs reported: +0.3923
+WARN: BPB differs from report by more than 0.02 — investigate.

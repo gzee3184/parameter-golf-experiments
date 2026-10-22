@@ -1,0 +1,65 @@
+logs/fd6f1fa8-5dcf-411a-8f3d-1f8c9347354a.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_1024_bpe.model
+train_loader:dataset:fineweb10B_sp1024 train_shards:80
+val_loader:shards pattern=./data/datasets/fineweb10B_sp1024/fineweb_val_*.bin tokens:62021632
+model_params:29951068
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.025 scalar_lr:0.025
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:60.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:6.9301 val_bpb:4.1044 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:6.9305 train_time:1505ms step_avg:1504.75ms
+late_qat:enabled step:1 scale:0.0097
+step:2/20000 train_loss:8.6009 train_time:3015ms step_avg:1507.52ms
+step:3/20000 train_loss:8.6060 train_time:4653ms step_avg:1550.87ms
+step:4/20000 train_loss:8.5728 train_time:6291ms step_avg:1572.78ms
+step:5/20000 train_loss:8.5177 train_time:7930ms step_avg:1585.92ms
+step:6/20000 train_loss:8.5012 train_time:9567ms step_avg:1594.57ms
+step:7/20000 train_loss:8.4442 train_time:11204ms step_avg:1600.56ms
+step:8/20000 train_loss:8.4058 train_time:12840ms step_avg:1605.04ms
+step:9/20000 train_loss:8.3265 train_time:14477ms step_avg:1608.58ms
+step:10/20000 train_loss:8.2774 train_time:16116ms step_avg:1611.64ms
+step:37/20000 val_loss:7.5724 val_bpb:4.4848 train_time:60422ms step_avg:1633.02ms
+stopping_early: wallclock_cap train_time:60422ms step:37/20000
+peak memory allocated: 24693 MiB reserved: 24942 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:6.3418 val_bpb:3.7560 eval_time:39459ms
+Serialized model: 117823926 bytes
+Code size: 129290 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (4 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 4 sequences in 12.6s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 68 layers
+quant_config: mode=int6 bits_mlp=8 bits_attn=6 cats={'mlp', 'attn'}
+selective_prune: 5539735 +/-1 candidates, unpruned=7.07MB target=15.9MB
+selective_prune: already fits, no pruning needed
+Serialized model lzma: 7279180 bytes
+Total submission size lzma: 7408470 bytes
+final_int6_roundtrip val_loss:6.3711 val_bpb:3.7733 eval_time:38192ms
+final_int6_roundtrip_exact val_loss:6.37114286 val_bpb:3.77334967
+skip_sliding:1 — skipping sliding window and TTT evals (screening mode)

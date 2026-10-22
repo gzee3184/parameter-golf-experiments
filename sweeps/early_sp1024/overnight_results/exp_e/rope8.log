@@ -1,0 +1,78 @@
+logs/ae6d3ddb-f778-4d01-b0fb-abab82dfbf27.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_1024_bpe.model
+train_loader:dataset:fineweb10B_sp1024 train_shards:80
+val_loader:shards pattern=./data/datasets/fineweb10B_sp1024/fineweb_val_*.bin tokens:62021632
+model_params:26928220
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_4 active_layers:[7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.025 scalar_lr:0.025
+train_batch_tokens:786432 train_seq_len:2048 iterations:9000 warmup_steps:20 max_wallclock_seconds:2400.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/9000 val_loss:6.9304 val_bpb:4.1046 train_time:0ms step_avg:0.01ms
+step:1/9000 train_loss:6.9310 train_time:1336ms step_avg:1335.54ms
+step:2/9000 train_loss:8.6914 train_time:2634ms step_avg:1317.10ms
+step:3/9000 train_loss:8.0373 train_time:4054ms step_avg:1351.39ms
+step:4/9000 train_loss:7.2585 train_time:5474ms step_avg:1368.59ms
+step:5/9000 train_loss:6.6693 train_time:6901ms step_avg:1380.28ms
+step:6/9000 train_loss:6.4020 train_time:8325ms step_avg:1387.48ms
+step:7/9000 train_loss:6.2128 train_time:9747ms step_avg:1392.42ms
+step:8/9000 train_loss:6.1482 train_time:11168ms step_avg:1396.06ms
+step:9/9000 train_loss:6.1466 train_time:12595ms step_avg:1399.45ms
+step:10/9000 train_loss:6.0423 train_time:14019ms step_avg:1401.89ms
+step:50/9000 train_loss:3.9656 train_time:71426ms step_avg:1428.51ms
+step:100/9000 train_loss:3.3737 train_time:143638ms step_avg:1436.38ms
+step:150/9000 train_loss:3.0617 train_time:215547ms step_avg:1436.98ms
+step:200/9000 train_loss:2.8163 train_time:287216ms step_avg:1436.08ms
+W0330 02:50:41.820000 95748 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0330 02:50:41.820000 95748 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 95820 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 95748 got signal: 15

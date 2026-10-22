@@ -1,0 +1,31 @@
+Fri Apr  3 01:57:17 AM CDT 2026 === VOCAB4096 SWEEP GPU0 ===
+Fri Apr  3 01:57:17 AM CDT 2026 === v4_ema0.99 ===
+  v4_ema0.99: prequant=3.2713 quant=3.28272499 steps=37 step_ms=1671.03 art=7.46MB params=33841752
+Fri Apr  3 02:02:27 AM CDT 2026 === v4_ema0.993 ===
+  v4_ema0.993: prequant=3.2938 quant=3.30507096 steps=36 step_ms=1685.10 art=7.40MB params=33841752
+Fri Apr  3 02:07:35 AM CDT 2026 === v4_ema0.995 ===
+  v4_ema0.995: prequant=3.3407 quant=3.35346558 steps=36 step_ms=1685.67 art=7.36MB params=33841752
+Fri Apr  3 02:12:43 AM CDT 2026 === v4_ema0.997 ===
+  v4_ema0.997: prequant=3.4231 quant=3.43583603 steps=36 step_ms=1688.76 art=7.28MB params=33841752
+Fri Apr  3 02:17:51 AM CDT 2026 === v4_layers9 ===
+  v4_layers9: prequant=3.3886 quant=3.40214994 steps=44 step_ms=1390.86 art=6.09MB params=28069960
+Fri Apr  3 02:22:57 AM CDT 2026 === v4_layers10 ===
+  v4_layers10: prequant=3.4056 quant=3.41895346 steps=40 step_ms=1535.48 art=6.69MB params=30956112
+Fri Apr  3 02:28:28 AM CDT 2026 === v4_layers11 ===
+  v4_layers11: prequant=3.4231 quant=3.43584076 steps=36 step_ms=1686.23 art=7.28MB params=33841752
+Fri Apr  3 02:33:33 AM CDT 2026 === v4_layers12 ===
+  v4_layers12: prequant=3.4368 quant=3.44969362 steps=33 step_ms=1827.59 art=7.88MB params=36727904
+Fri Apr  3 02:39:50 AM CDT 2026 === v4_layers13 ===
+  v4_layers13: prequant=3.4464 quant=3.45898668 steps=31 step_ms=1970.68 art=8.49MB params=39613544
+Fri Apr  3 02:46:29 AM CDT 2026 === v4_wd0.04 ===
+  v4_wd0.04: prequant=3.4231 quant=3.43584272 steps=36 step_ms=1686.14 art=7.28MB params=33841752
+Fri Apr  3 02:51:35 AM CDT 2026 === v4_wd0.06 ===
+  v4_wd0.06: prequant=3.4231 quant=3.43589698 steps=36 step_ms=1687.28 art=7.28MB params=33841752
+Fri Apr  3 02:56:40 AM CDT 2026 === v4_wd0.085 ===
+  v4_wd0.085: prequant=3.4231 quant=3.43583626 steps=36 step_ms=1686.09 art=7.28MB params=33841752
+Fri Apr  3 03:01:44 AM CDT 2026 === v4_wd0.12 ===
+  v4_wd0.12: prequant=3.4231 quant=3.43591464 steps=36 step_ms=1686.90 art=7.28MB params=33841752
+Fri Apr  3 03:06:49 AM CDT 2026 === v4_wd0.15 ===
+  v4_wd0.15: prequant=3.4232 quant=3.43593191 steps=36 step_ms=1688.72 art=7.28MB params=33841752
+
+Fri Apr  3 03:11:55 AM CDT 2026 === VOCAB4096 SWEEP GPU0 COMPLETE ===

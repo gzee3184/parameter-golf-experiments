@@ -1,0 +1,12 @@
+logs/2911ff09-c979-4858-b2e3-12df9a4ef285.txt
+tokenizer:<project>/parameter-golf/data/tokenizers/fineweb_8192_bpe.model
+dataset:fineweb10B_sp8192 train_shards:10 val_tokens:40540160
+model_params:36064348
+arch: vs=8192 nl=11 dim=512 mlp=4.0 mwd=0.09 awd=0.02 ewd=0.09 mlr=0.02 ss=True bs=True qk=5.0 rl=[3, 4, 5] rs=2000 ve=False vd=128 vl=[] ps=7
+XSA:last_11 layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] ws:1 ga:8 heads:8/4
+tie:True elr:0.035 hlr:0.0 mlr:0.02 slr:0.02
+tbt:786432 tsl:2048 iters:20000 wu:20 wc:600.000 seed:1337
+resume:loading final_model.pt
+resume:recurrence activated, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+resume:post_ema val_loss:3.4707 val_bpb:1.3436 eval_time:64358ms
+expDS:early_exit after post_ema eval

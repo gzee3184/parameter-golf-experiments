@@ -1,0 +1,173 @@
+Thu Apr  2 11:45:18 PM CDT 2026 sweep2 GPU1 done, starting 600s train + TTT sweep
+Thu Apr  2 11:45:18 PM CDT 2026 === STEP 1: Training best config for 600s ===
+Thu Apr  2 11:59:32 PM CDT 2026 Model saved to <project>/local_tests/best_600s.ptz (8769536 bytes)
+Thu Apr  2 11:59:32 PM CDT 2026 === STEP 2: Running TTT sweep ===
+Thu Apr  2 11:59:32 PM CDT 2026 === SWEEP 3 TTT (GPU 1, model=<project>/local_tests/best_600s.ptz) ===
+Thu Apr  2 11:59:32 PM CDT 2026 === s3_chunk4096 ===
+s3_chunk4096 FAILED
+  s3_chunk4096: ttt=— sliding=—
+Thu Apr  2 11:59:35 PM CDT 2026 === s3_chunk8192 ===
+s3_chunk8192 FAILED
+  s3_chunk8192: ttt=— sliding=—
+Thu Apr  2 11:59:38 PM CDT 2026 === s3_chunk16384 ===
+s3_chunk16384 FAILED
+  s3_chunk16384: ttt=— sliding=—
+Thu Apr  2 11:59:42 PM CDT 2026 === s3_chunk32768 ===
+s3_chunk32768 FAILED
+  s3_chunk32768: ttt=— sliding=—
+Thu Apr  2 11:59:45 PM CDT 2026 === s3_chunk65536 ===
+s3_chunk65536 FAILED
+  s3_chunk65536: ttt=— sliding=—
+Thu Apr  2 11:59:49 PM CDT 2026 === s3_chunk131072 ===
+s3_chunk131072 FAILED
+  s3_chunk131072: ttt=— sliding=—
+Thu Apr  2 11:59:52 PM CDT 2026 === s3_spectral0 ===
+s3_spectral0 FAILED
+  s3_spectral0: ttt=— sliding=—
+Thu Apr  2 11:59:56 PM CDT 2026 === s3_spectral2 ===
+s3_spectral2 FAILED
+  s3_spectral2: ttt=— sliding=—
+Thu Apr  2 11:59:59 PM CDT 2026 === s3_spectral4 ===
+s3_spectral4 FAILED
+  s3_spectral4: ttt=— sliding=—
+Fri Apr  3 12:00:03 AM CDT 2026 === s3_spectral8 ===
+s3_spectral8 FAILED
+  s3_spectral8: ttt=— sliding=—
+Fri Apr  3 12:00:07 AM CDT 2026 === s3_spectral16 ===
+s3_spectral16 FAILED
+  s3_spectral16: ttt=— sliding=—
+Fri Apr  3 12:00:10 AM CDT 2026 === s3_chunk8192_spec4 ===
+s3_chunk8192_spec4 FAILED
+  s3_chunk8192_spec4: ttt=— sliding=—
+Fri Apr  3 12:00:14 AM CDT 2026 === s3_chunk8192_spec8 ===
+s3_chunk8192_spec8 FAILED
+  s3_chunk8192_spec8: ttt=— sliding=—
+Fri Apr  3 12:00:18 AM CDT 2026 === s3_chunk16384_spec4 ===
+s3_chunk16384_spec4 FAILED
+  s3_chunk16384_spec4: ttt=— sliding=—
+Fri Apr  3 12:00:22 AM CDT 2026 === s3_chunk16384_spec8 ===
+s3_chunk16384_spec8 FAILED
+  s3_chunk16384_spec8: ttt=— sliding=—
+Fri Apr  3 12:00:25 AM CDT 2026 === s3_lr0.0003_ep1 ===
+s3_lr0.0003_ep1 FAILED
+  s3_lr0.0003_ep1: ttt=— sliding=—
+Fri Apr  3 12:00:29 AM CDT 2026 === s3_lr0.0003_ep2 ===
+s3_lr0.0003_ep2 FAILED
+  s3_lr0.0003_ep2: ttt=— sliding=—
+Fri Apr  3 12:00:33 AM CDT 2026 === s3_lr0.0003_ep3 ===
+s3_lr0.0003_ep3 FAILED
+  s3_lr0.0003_ep3: ttt=— sliding=—
+Fri Apr  3 12:00:36 AM CDT 2026 === s3_lr0.0003_ep5 ===
+s3_lr0.0003_ep5 FAILED
+  s3_lr0.0003_ep5: ttt=— sliding=—
+Fri Apr  3 12:00:39 AM CDT 2026 === s3_lr0.0005_ep1 ===
+s3_lr0.0005_ep1 FAILED
+  s3_lr0.0005_ep1: ttt=— sliding=—
+Fri Apr  3 12:00:42 AM CDT 2026 === s3_lr0.0005_ep2 ===
+s3_lr0.0005_ep2 FAILED
+  s3_lr0.0005_ep2: ttt=— sliding=—
+Fri Apr  3 12:00:45 AM CDT 2026 === s3_lr0.0005_ep3 ===
+s3_lr0.0005_ep3 FAILED
+  s3_lr0.0005_ep3: ttt=— sliding=—
+Fri Apr  3 12:00:49 AM CDT 2026 === s3_lr0.0005_ep5 ===
+s3_lr0.0005_ep5 FAILED
+  s3_lr0.0005_ep5: ttt=— sliding=—
+Fri Apr  3 12:00:52 AM CDT 2026 === s3_lr0.001_ep1 ===
+s3_lr0.001_ep1 FAILED
+  s3_lr0.001_ep1: ttt=— sliding=—
+Fri Apr  3 12:00:55 AM CDT 2026 === s3_lr0.001_ep2 ===
+s3_lr0.001_ep2 FAILED
+  s3_lr0.001_ep2: ttt=— sliding=—
+Fri Apr  3 12:00:59 AM CDT 2026 === s3_lr0.001_ep3 ===
+s3_lr0.001_ep3 FAILED
+  s3_lr0.001_ep3: ttt=— sliding=—
+Fri Apr  3 12:01:02 AM CDT 2026 === s3_lr0.001_ep5 ===
+s3_lr0.001_ep5 FAILED
+  s3_lr0.001_ep5: ttt=— sliding=—
+Fri Apr  3 12:01:05 AM CDT 2026 === s3_lr0.002_ep1 ===
+s3_lr0.002_ep1 FAILED
+  s3_lr0.002_ep1: ttt=— sliding=—
+Fri Apr  3 12:01:08 AM CDT 2026 === s3_lr0.002_ep2 ===
+s3_lr0.002_ep2 FAILED
+  s3_lr0.002_ep2: ttt=— sliding=—
+Fri Apr  3 12:01:11 AM CDT 2026 === s3_lr0.002_ep3 ===
+s3_lr0.002_ep3 FAILED
+  s3_lr0.002_ep3: ttt=— sliding=—
+Fri Apr  3 12:01:15 AM CDT 2026 === s3_lr0.002_ep5 ===
+s3_lr0.002_ep5 FAILED
+  s3_lr0.002_ep5: ttt=— sliding=—
+Fri Apr  3 12:01:19 AM CDT 2026 === s3_lr0.003_ep1 ===
+s3_lr0.003_ep1 FAILED
+  s3_lr0.003_ep1: ttt=— sliding=—
+Fri Apr  3 12:01:22 AM CDT 2026 === s3_lr0.003_ep2 ===
+s3_lr0.003_ep2 FAILED
+  s3_lr0.003_ep2: ttt=— sliding=—
+Fri Apr  3 12:01:25 AM CDT 2026 === s3_lr0.003_ep3 ===
+s3_lr0.003_ep3 FAILED
+  s3_lr0.003_ep3: ttt=— sliding=—
+Fri Apr  3 12:01:29 AM CDT 2026 === s3_lr0.003_ep5 ===
+s3_lr0.003_ep5 FAILED
+  s3_lr0.003_ep5: ttt=— sliding=—
+Fri Apr  3 12:01:32 AM CDT 2026 === s3_tttwd0.0 ===
+s3_tttwd0.0 FAILED
+  s3_tttwd0.0: ttt=— sliding=—
+Fri Apr  3 12:01:35 AM CDT 2026 === s3_tttwd0.001 ===
+s3_tttwd0.001 FAILED
+  s3_tttwd0.001: ttt=— sliding=—
+Fri Apr  3 12:01:38 AM CDT 2026 === s3_tttwd0.005 ===
+s3_tttwd0.005 FAILED
+  s3_tttwd0.005: ttt=— sliding=—
+Fri Apr  3 12:01:42 AM CDT 2026 === s3_tttwd0.01 ===
+s3_tttwd0.01 FAILED
+  s3_tttwd0.01: ttt=— sliding=—
+Fri Apr  3 12:01:45 AM CDT 2026 === s3_tttwd0.02 ===
+s3_tttwd0.02 FAILED
+  s3_tttwd0.02: ttt=— sliding=—
+Fri Apr  3 12:01:49 AM CDT 2026 === s3_tttwd0.05 ===
+s3_tttwd0.05 FAILED
+  s3_tttwd0.05: ttt=— sliding=—
+
+Fri Apr  3 12:01:52 AM CDT 2026 === SWEEP 3 TTT COMPLETE ===
+All results (sorted by TTT BPB):
+— s3_chunk131072 sliding=—
+— s3_chunk16384 sliding=—
+— s3_chunk16384_spec4 sliding=—
+— s3_chunk16384_spec8 sliding=—
+— s3_chunk32768 sliding=—
+— s3_chunk4096 sliding=—
+— s3_chunk65536 sliding=—
+— s3_chunk8192 sliding=—
+— s3_chunk8192_spec4 sliding=—
+— s3_chunk8192_spec8 sliding=—
+— s3_lr0.0003_ep1 sliding=—
+— s3_lr0.0003_ep2 sliding=—
+— s3_lr0.0003_ep3 sliding=—
+— s3_lr0.0003_ep5 sliding=—
+— s3_lr0.0005_ep1 sliding=—
+— s3_lr0.0005_ep2 sliding=—
+— s3_lr0.0005_ep3 sliding=—
+— s3_lr0.0005_ep5 sliding=—
+— s3_lr0.001_ep1 sliding=—
+— s3_lr0.001_ep2 sliding=—
+— s3_lr0.001_ep3 sliding=—
+— s3_lr0.001_ep5 sliding=—
+— s3_lr0.002_ep1 sliding=—
+— s3_lr0.002_ep2 sliding=—
+— s3_lr0.002_ep3 sliding=—
+— s3_lr0.002_ep5 sliding=—
+— s3_lr0.003_ep1 sliding=—
+— s3_lr0.003_ep2 sliding=—
+— s3_lr0.003_ep3 sliding=—
+— s3_lr0.003_ep5 sliding=—
+— s3_spectral0 sliding=—
+— s3_spectral16 sliding=—
+— s3_spectral2 sliding=—
+— s3_spectral4 sliding=—
+— s3_spectral8 sliding=—
+— s3_tttwd0.001 sliding=—
+— s3_tttwd0.005 sliding=—
+— s3_tttwd0.01 sliding=—
+— s3_tttwd0.02 sliding=—
+— s3_tttwd0.05 sliding=—
+— s3_tttwd0.0 sliding=—
+Fri Apr  3 12:01:52 AM CDT 2026 === ALL DONE ===

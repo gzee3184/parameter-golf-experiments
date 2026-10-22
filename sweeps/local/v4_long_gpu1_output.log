@@ -1,0 +1,74 @@
+Fri Apr  3 03:55:31 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 1: 600s runs (GPU 1) — complementary configs
+═══════════════════════════════════════
+Fri Apr  3 03:55:31 AM CDT 2026 === v4L_wd015 ===
+  v4L_wd015: prequant=3.3982 quant=3.71331326 steps=347 step_ms=1731.69 art=8.52MB params=33841752
+Fri Apr  3 04:10:16 AM CDT 2026 === v4L_12L ===
+  v4L_12L: prequant=3.2681 quant=3.55146231 steps=319 step_ms=1883.27 art=9.06MB params=36727904
+Fri Apr  3 04:26:15 AM CDT 2026 === v4L_12L_wd012 ===
+  v4L_12L_wd012: prequant=3.2677 quant=3.58290310 steps=319 step_ms=1883.69 art=9.04MB params=36727904
+Fri Apr  3 04:41:29 AM CDT 2026 === v4L_mlp45 ===
+  v4L_mlp45: prequant=3.3255 quant=3.60914563 steps=331 step_ms=1815.29 art=9.00MB params=36725336
+Fri Apr  3 04:57:16 AM CDT 2026 === v4L_mlp45_wd012 ===
+  v4L_mlp45_wd012: prequant=3.3263 quant=3.60563374 steps=331 step_ms=1814.27 art=8.98MB params=36725336
+Fri Apr  3 05:12:20 AM CDT 2026 === v4L_ema993 ===
+  v4L_ema993: prequant=2.3517 quant=2.78293250 steps=348 step_ms=1729.01 art=9.35MB params=33841752
+
+Fri Apr  3 05:27:09 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 1 COMPLETE — selecting top 2 configs
+═══════════════════════════════════════
+
+All Phase 1 GPU1 results (sorted by post-quant BPB):
+  v4L_ema993: prequant=2.3517 quant=2.78293250 steps=348 step_ms=1729.01ms art=9.35MB
+  v4L_12L: prequant=3.2681 quant=3.55146231 steps=319 step_ms=1883.27ms art=9.06MB
+  v4L_12L_wd012: prequant=3.2677 quant=3.58290310 steps=319 step_ms=1883.69ms art=9.04MB
+  v4L_mlp45_wd012: prequant=3.3263 quant=3.60563374 steps=331 step_ms=1814.27ms art=8.98MB
+  v4L_mlp45: prequant=3.3255 quant=3.60914563 steps=331 step_ms=1815.29ms art=9.00MB
+  v4L_wd015: prequant=3.3982 quant=3.71331326 steps=347 step_ms=1731.69ms art=8.52MB
+
+TOP 1: v4L_ema993 (2.78293250 BPB)
+TOP 2: v4L_12L (3.55146231 BPB)
+
+Fri Apr  3 05:27:09 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 2: ~7000-step runs on top 2 configs
+═══════════════════════════════════════
+Fri Apr  3 05:27:09 AM CDT 2026 === v4F_ema993 ===
+  v4F_ema993: prequant=1.1070 quant=1.14496097 steps=6928 step_ms=1732.13 art=19.40MB params=33841752
+Fri Apr  3 09:10:35 AM CDT 2026 === v4F_12L ===
+  v4F_12L: prequant=1.1032 quant=1.13620161 steps=6374 step_ms=1882.75 art=20.97MB params=36727904
+
+Fri Apr  3 12:56:08 PM CDT 2026 ═══════════════════════════════════════
+  PHASE 2 COMPLETE — picking best for TTT
+═══════════════════════════════════════
+Full run 1 (ema993): 1.14496097 BPB
+Full run 2 (12L): 1.13620161 BPB
+Best: 12L → <project>/local_tests/v4F_12L.ptz
+
+Fri Apr  3 12:56:08 PM CDT 2026 ═══════════════════════════════════════
+  PHASE 3: TTT evaluation on best model
+═══════════════════════════════════════
+Fri Apr  3 12:56:08 PM CDT 2026 === v4T_g1_sgd ===
+  v4T_g1_sgd: prequant= quant=1.12692017 steps= step_ms= art=—MB params=
+Fri Apr  3 02:03:21 PM CDT 2026 === v4T_g1_adamw_con ===
+  v4T_g1_adamw_con: prequant= quant=1.12692017 steps= step_ms= art=—MB params=
+Fri Apr  3 03:10:43 PM CDT 2026 === v4T_g1_adamw_agg ===
+  v4T_g1_adamw_agg: prequant= quant=1.12692017 steps= step_ms= art=—MB params=
+
+Fri Apr  3 04:18:05 PM CDT 2026 ═══════════════════════════════════════
+  ALL PHASES COMPLETE (GPU 1)
+═══════════════════════════════════════
+
+=== FINAL SUMMARY ===
+  v4L_wd015: roundtrip=3.71331326 sliding= ttt=
+  v4L_12L: roundtrip=3.55146231 sliding= ttt=
+  v4L_12L_wd012: roundtrip=3.58290310 sliding= ttt=
+  v4L_mlp45: roundtrip=3.60914563 sliding= ttt=
+  v4L_mlp45_wd012: roundtrip=3.60563374 sliding= ttt=
+  v4L_ema993: roundtrip=2.78293250 sliding= ttt=
+  v4F_12L: roundtrip=1.13620161 sliding=1.13620161 ttt=
+  v4F_13L: roundtrip=1.12568148 sliding=1.12568148 ttt=
+  v4F_ema993: roundtrip=1.14496097 sliding=1.14496097 ttt=
+  v4F_ema995: roundtrip=1.14224279 sliding=1.14224279 ttt=
+  v4T_g1_adamw_agg: roundtrip=1.12692017 sliding=1.13620161 ttt=1.14789563
+  v4T_g1_adamw_con: roundtrip=1.12692017 sliding=1.13620161 ttt=1.10160118
+  v4T_g1_sgd: roundtrip=1.12692017 sliding=1.13620161 ttt=1.10469959

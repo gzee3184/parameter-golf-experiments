@@ -1,0 +1,19 @@
+Fri Apr  3 08:35:45 PM CDT 2026 ═══════════════════════════════════════
+  PHASE 1: 13L full training (~7000 steps)
+═══════════════════════════════════════
+Fri Apr  3 08:35:45 PM CDT 2026 === v4R_13L ===
+  v4R_13L: prequant=1.0970 quant=1.13350144 sliding= steps=6125 step_ms=1959.29 art=15.89MB params=39613544
+
+Sat Apr  4 12:38:46 AM CDT 2026 ═══════════════════════════════════════
+  PHASE 2: TTT on 13L model
+═══════════════════════════════════════
+Sat Apr  4 12:38:46 AM CDT 2026 === v4R_ttt_sgd ===
+  v4R_ttt_sgd: ttt=1.10482571 roundtrip=1.12623125 sliding=
+Sat Apr  4 01:49:20 AM CDT 2026 === v4R_ttt_adamw_con ===
+  v4R_ttt_adamw_con: ttt=1.10264603 roundtrip=1.12623125 sliding=
+Sat Apr  4 03:00:12 AM CDT 2026 === v4R_ttt_adamw_mod ===
+  v4R_ttt_adamw_mod: ttt=1.11364365 roundtrip=1.12623125 sliding=
+
+Sat Apr  4 04:11:07 AM CDT 2026 ═══════════════════════════════════════
+  ALL DONE
+═══════════════════════════════════════

@@ -1,0 +1,5 @@
+Sat Apr  4 07:18:27 PM CDT 2026 === 16L_13unique on GPU0 ===
+  total_layers=16 num_unique_attn=13
+  16L_13unique: prequant=1.0975 quant=1.27467631 steps=5007 ms/step=2397.04 params=45912192
+  selective_prune: pruning 10501366/13734675 +/-1 values (76.5%) to fit 15.9MB
+Sat Apr  4 11:18:38 PM CDT 2026 === 16L_13unique DONE ===

@@ -1,0 +1,52 @@
+logs/e6aade95-5fb3-41de-a763-c0f17cd0bff2.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:29127784
+arch_config: vocab_size=4096 num_layers=13 model_dim=512 mlp_mult=4.0 muon_wd=0.12 adam_wd=0.02 embed_wd=0.12 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True coprime_stride=True qk_gain_init=4.0
+XSA:last_13 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+mlp_sharing: pairs=0:12,1:11,2:10,3:9,4:8 unique_mlp=8/13
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:12000.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3154 val_bpb:3.6138 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3157 train_time:1794ms step_avg:1793.69ms
+step:2/20000 train_loss:13.5170 train_time:3570ms step_avg:1785.09ms
+step:3/20000 train_loss:11.6294 train_time:5485ms step_avg:1828.46ms
+step:4/20000 train_loss:9.3752 train_time:7405ms step_avg:1851.35ms
+step:5/20000 train_loss:7.7334 train_time:9328ms step_avg:1865.51ms
+step:6/20000 train_loss:7.0607 train_time:11254ms step_avg:1875.60ms
+step:7/20000 train_loss:6.8824 train_time:13181ms step_avg:1882.98ms
+step:8/20000 train_loss:6.7903 train_time:15107ms step_avg:1888.34ms
+step:9/20000 train_loss:6.6502 train_time:17035ms step_avg:1892.76ms
+step:10/20000 train_loss:6.4580 train_time:18967ms step_avg:1896.70ms
+W0405 14:29:00.997000 919582 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0405 14:29:00.998000 919582 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 919675 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper

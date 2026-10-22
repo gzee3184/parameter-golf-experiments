@@ -1,0 +1,178 @@
+logs/fa1639b0-cb61-4097-a805-3daf23f7a0bd.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_1024_bpe.model
+train_loader:dataset:fineweb10B_sp1024 train_shards:80
+val_loader:shards pattern=./data/datasets/fineweb10B_sp1024/fineweb_val_*.bin tokens:62021632
+model_params:29951068
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.025 scalar_lr:0.025
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:60.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:6.9301 val_bpb:4.1044 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:6.9305 train_time:1473ms step_avg:1472.97ms
+late_qat:enabled step:1 scale:0.0099
+step:2/20000 train_loss:8.6009 train_time:2941ms step_avg:1470.34ms
+step:3/20000 train_loss:8.6058 train_time:4535ms step_avg:1511.70ms
+step:4/20000 train_loss:8.5722 train_time:6132ms step_avg:1533.03ms
+step:5/20000 train_loss:8.5162 train_time:7731ms step_avg:1546.18ms
+step:6/20000 train_loss:8.4991 train_time:9332ms step_avg:1555.33ms
+step:7/20000 train_loss:8.4414 train_time:10936ms step_avg:1562.25ms
+step:8/20000 train_loss:8.4020 train_time:12543ms step_avg:1567.82ms
+step:9/20000 train_loss:8.3222 train_time:14153ms step_avg:1572.57ms
+step:10/20000 train_loss:8.2723 train_time:15766ms step_avg:1576.61ms
+step:38/20000 val_loss:7.5389 val_bpb:4.4650 train_time:61472ms step_avg:1617.68ms
+stopping_early: wallclock_cap train_time:61472ms step:38/20000
+peak memory allocated: 24693 MiB reserved: 24942 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:6.3285 val_bpb:3.7481 eval_time:39398ms
+Serialized model: 117823926 bytes
+Code size: 128887 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (8 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 8 sequences in 20.6s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 68 layers
+quant_config: mode=int6 bits_mlp=8 bits_attn=6 cats={'mlp', 'attn'}
+selective_prune: 5565111 +/-1 candidates, unpruned=7.09MB target=15.9MB
+selective_prune: already fits, no pruning needed
+Serialized model lzma: 7305528 bytes
+Total submission size lzma: 7434415 bytes
+final_int6_roundtrip val_loss:6.3572 val_bpb:3.7651 eval_time:38085ms
+final_int6_roundtrip_exact val_loss:6.35724930 val_bpb:3.76512112
+final_int6_sliding_window val_loss:6.3571 val_bpb:3.7651 stride:64 eval_time:1233521ms
+final_int6_sliding_window_exact val_loss:6.35712840 val_bpb:3.76505948
+final_int8_zlib_roundtrip_exact val_loss:6.35712840 val_bpb:3.76505948
+ttt_sliding:start chunks=1893 chunk_tokens=32768 total_windows=969088 stride=64 ttt_lr=0.001 ttt_epochs=3 freeze_blocks=0 ngram=False
+ttt_sliding:params unfrozen=29951068 frozen=0 qttt=False
+  ttt_chunk [1/1893] bpb=3.690889 time=1.6s
+  ttt_chunk [11/1893] bpb=3.292614 time=19.1s
+  ttt_chunk [21/1893] bpb=3.118525 time=36.7s
+  ttt_chunk [31/1893] bpb=2.973725 time=54.2s
+  ttt_chunk [41/1893] bpb=2.853657 time=71.8s
+  ttt_chunk [51/1893] bpb=2.781600 time=89.4s
+  ttt_chunk [61/1893] bpb=2.715153 time=107.0s
+  ttt_chunk [71/1893] bpb=2.662369 time=124.5s
+  ttt_chunk [81/1893] bpb=2.623291 time=142.1s
+  ttt_chunk [91/1893] bpb=2.590187 time=159.7s
+  ttt_chunk [101/1893] bpb=2.556010 time=177.3s
+  ttt_chunk [111/1893] bpb=2.525252 time=194.9s
+  ttt_chunk [121/1893] bpb=2.499887 time=212.4s
+  ttt_chunk [131/1893] bpb=2.472437 time=230.0s
+  ttt_chunk [141/1893] bpb=2.448158 time=247.6s
+  ttt_chunk [151/1893] bpb=2.427643 time=265.2s
+  ttt_chunk [161/1893] bpb=2.410620 time=282.8s
+  ttt_chunk [171/1893] bpb=2.393469 time=300.3s
+  ttt_chunk [181/1893] bpb=2.379867 time=317.9s
+  ttt_chunk [191/1893] bpb=2.369359 time=335.5s
+  ttt_chunk [201/1893] bpb=2.355938 time=353.1s
+  ttt_chunk [211/1893] bpb=2.342678 time=370.6s
+  ttt_chunk [221/1893] bpb=2.331256 time=388.2s
+  ttt_chunk [231/1893] bpb=2.320232 time=405.8s
+  ttt_chunk [241/1893] bpb=2.310267 time=423.3s
+  ttt_chunk [251/1893] bpb=2.300549 time=440.9s
+  ttt_chunk [261/1893] bpb=2.289524 time=458.5s
+  ttt_chunk [271/1893] bpb=2.280803 time=476.0s
+  ttt_chunk [281/1893] bpb=2.271855 time=493.6s
+  ttt_chunk [291/1893] bpb=2.261447 time=511.1s
+  ttt_chunk [301/1893] bpb=2.251971 time=528.7s
+  ttt_chunk [311/1893] bpb=2.242734 time=546.3s
+  ttt_chunk [321/1893] bpb=2.234367 time=563.8s
+  ttt_chunk [331/1893] bpb=2.225761 time=581.4s
+  ttt_chunk [341/1893] bpb=2.216452 time=599.0s
+  ttt_chunk [351/1893] bpb=2.208359 time=616.5s
+  ttt_chunk [361/1893] bpb=2.202829 time=634.1s
+  ttt_chunk [371/1893] bpb=2.195801 time=651.7s
+  ttt_chunk [381/1893] bpb=2.189367 time=669.3s
+  ttt_chunk [391/1893] bpb=2.183325 time=686.9s
+  ttt_chunk [401/1893] bpb=2.177068 time=704.4s
+  ttt_chunk [411/1893] bpb=2.170140 time=722.0s
+  ttt_chunk [421/1893] bpb=2.164263 time=739.6s
+  ttt_chunk [431/1893] bpb=2.158385 time=757.2s
+  ttt_chunk [441/1893] bpb=2.151574 time=774.8s
+  ttt_chunk [451/1893] bpb=2.144717 time=792.3s
+  ttt_chunk [461/1893] bpb=2.137954 time=809.9s
+  ttt_chunk [471/1893] bpb=2.131762 time=827.5s
+  ttt_chunk [481/1893] bpb=2.126328 time=845.1s
+  ttt_chunk [491/1893] bpb=2.121110 time=862.7s
+  ttt_chunk [501/1893] bpb=2.114658 time=880.2s
+  ttt_chunk [511/1893] bpb=2.108601 time=897.8s
+  ttt_chunk [521/1893] bpb=2.102951 time=915.4s
+  ttt_chunk [531/1893] bpb=2.097868 time=933.0s
+  ttt_chunk [541/1893] bpb=2.091230 time=950.6s
+  ttt_chunk [551/1893] bpb=2.084797 time=968.2s
+  ttt_chunk [561/1893] bpb=2.078401 time=985.8s
+  ttt_chunk [571/1893] bpb=2.072298 time=1003.4s
+  ttt_chunk [581/1893] bpb=2.066353 time=1021.0s
+  ttt_chunk [591/1893] bpb=2.060317 time=1038.6s
+  ttt_chunk [601/1893] bpb=2.054908 time=1056.2s
+  ttt_chunk [611/1893] bpb=2.048714 time=1073.8s
+  ttt_chunk [621/1893] bpb=2.043069 time=1091.4s
+  ttt_chunk [631/1893] bpb=2.037092 time=1109.0s
+  ttt_chunk [641/1893] bpb=2.030845 time=1126.6s
+  ttt_chunk [651/1893] bpb=2.024952 time=1144.2s
+  ttt_chunk [661/1893] bpb=2.019477 time=1161.8s
+  ttt_chunk [671/1893] bpb=2.013679 time=1179.4s
+  ttt_chunk [681/1893] bpb=2.007886 time=1197.0s
+  ttt_chunk [691/1893] bpb=2.002771 time=1214.6s
+  ttt_chunk [701/1893] bpb=1.996961 time=1232.1s
+  ttt_chunk [711/1893] bpb=1.992444 time=1249.7s
+  ttt_chunk [721/1893] bpb=1.987672 time=1267.3s
+  ttt_chunk [731/1893] bpb=1.983295 time=1284.9s
+  ttt_chunk [741/1893] bpb=1.978548 time=1302.5s
+  ttt_chunk [751/1893] bpb=1.973624 time=1320.1s
+  ttt_chunk [761/1893] bpb=1.969682 time=1337.7s
+  ttt_chunk [771/1893] bpb=1.965148 time=1355.3s
+  ttt_chunk [781/1893] bpb=1.961146 time=1372.9s
+W0402 16:22:25.355000 130226 torch/distributed/elastic/agent/server/api.py:739] Received 15 death signal, shutting down workers
+W0402 16:22:25.355000 130226 torch/distributed/elastic/multiprocessing/api.py:1012] Sending process 130301 closing signal SIGTERM
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 308, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 134, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 731, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 908, in _invoke_run
+    time.sleep(monitor_interval)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 86, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 130226 got signal: 15

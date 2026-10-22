@@ -1,0 +1,82 @@
+logs/adb7bbfc-15b8-4c38-b86d-6b47c5151cf0.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:39613544
+arch_config: vocab_size=4096 num_layers=13 model_dim=512 mlp_mult=4.0 muon_wd=0.085 adam_wd=0.02 embed_wd=0.085 matrix_lr=0.02 sigmoid_skip=True smear_enabled=False byte_shuffle=True coprime_stride=True qk_gain_init=4.0
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_13 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:12000.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:8.3154 val_bpb:3.6138 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3157 train_time:1829ms step_avg:1828.94ms
+step:2/20000 train_loss:13.5178 train_time:3646ms step_avg:1822.98ms
+step:3/20000 train_loss:11.6188 train_time:5605ms step_avg:1868.22ms
+step:4/20000 train_loss:9.3579 train_time:7572ms step_avg:1892.88ms
+step:5/20000 train_loss:7.7219 train_time:9533ms step_avg:1906.68ms
+step:6/20000 train_loss:7.0616 train_time:11496ms step_avg:1915.92ms
+step:7/20000 train_loss:6.8827 train_time:13456ms step_avg:1922.30ms
+step:8/20000 train_loss:6.7860 train_time:15418ms step_avg:1927.29ms
+step:9/20000 train_loss:6.6477 train_time:17381ms step_avg:1931.23ms
+step:10/20000 train_loss:6.4518 train_time:19343ms step_avg:1934.31ms
+step:500/20000 train_loss:3.0797 train_time:978400ms step_avg:1956.80ms
+step:1000/20000 train_loss:2.9373 train_time:1956354ms step_avg:1956.35ms
+step:1500/20000 train_loss:2.8554 train_time:2934669ms step_avg:1956.45ms
+step:2000/20000 train_loss:2.7559 train_time:3915127ms step_avg:1957.56ms
+step:2500/20000 train_loss:2.7843 train_time:4896024ms step_avg:1958.41ms
+step:3000/20000 train_loss:2.7456 train_time:5876457ms step_avg:1958.82ms
+step:3500/20000 train_loss:2.6924 train_time:6856493ms step_avg:1959.00ms
+step:4000/20000 train_loss:2.6927 train_time:7837135ms step_avg:1959.28ms
+step:4000/20000 val_loss:2.6702 val_bpb:1.1604 train_time:7837273ms step_avg:1959.32ms
+step:4500/20000 train_loss:2.6453 train_time:8817946ms step_avg:1959.54ms
+step:5000/20000 train_loss:2.6285 train_time:9798029ms step_avg:1959.61ms
+swa:start step:5350
+step:5500/20000 train_loss:2.6040 train_time:10777379ms step_avg:1959.52ms
+step:6000/20000 train_loss:2.5289 train_time:11755841ms step_avg:1959.31ms
+step:6125/20000 val_loss:2.5269 val_bpb:1.0982 train_time:12000656ms step_avg:1959.29ms
+stopping_early: wallclock_cap train_time:12000656ms step:6125/20000
+peak memory allocated: 30532 MiB reserved: 30714 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:2.5243 val_bpb:1.0970 eval_time:33955ms
+Serialized model: 154278069 bytes
+Code size: 141096 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (8 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 8 sequences in 25.1s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 78 layers
+quant_config: mode=int6 bits_mlp=6 bits_attn=5 cats={'mlp', 'attn'}
+selective_prune: 11524723 +/-1 candidates, unpruned=16.38MB target=15.9MB
+selective_prune: full +/-1 prune=12.88MB
+selective_prune: pruning 1676938/11524723 +/-1 values (14.6%) to fit 15.9MB
+Serialized model brotli: 16531206 bytes
+Total submission size brotli: 16672302 bytes
+final_int6_roundtrip val_loss:2.5915 val_bpb:1.1262 eval_time:33975ms
+final_int6_roundtrip_exact val_loss:2.59148897 val_bpb:1.12623125
+final_int6_sliding_window val_loss:2.6082 val_bpb:1.1335 stride:64 eval_time:1151833ms
+final_int6_sliding_window_exact val_loss:2.60819032 val_bpb:1.13350144
+final_int8_zlib_roundtrip_exact val_loss:2.60819032 val_bpb:1.13350144

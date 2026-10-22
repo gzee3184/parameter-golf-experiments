@@ -1,0 +1,105 @@
+logs/4d384e5e-815c-4c03-8908-9bd4937d1382.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_1024_bpe.model
+train_loader:dataset:fineweb10B_sp1024 train_shards:80
+val_loader:shards pattern=./data/datasets/fineweb10B_sp1024/fineweb_val_*.bin tokens:62021632
+model_params:32575076
+mtp_num_heads:0 mtp_loss_weight:0.2 mtp_params:0
+XSA:last_11 active_layers:[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.025 scalar_lr:0.025
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:60.000
+seed:1337
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+step:0/20000 val_loss:6.9301 val_bpb:4.1044 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:6.9305 train_time:1629ms step_avg:1628.77ms
+late_qat:enabled step:1 scale:0.0089
+step:2/20000 train_loss:8.5652 train_time:3282ms step_avg:1641.05ms
+step:3/20000 train_loss:8.5736 train_time:5060ms step_avg:1686.50ms
+step:4/20000 train_loss:8.5439 train_time:6838ms step_avg:1709.48ms
+step:5/20000 train_loss:8.4923 train_time:8616ms step_avg:1723.24ms
+step:6/20000 train_loss:8.4795 train_time:10396ms step_avg:1732.66ms
+step:7/20000 train_loss:8.4268 train_time:12181ms step_avg:1740.08ms
+step:8/20000 train_loss:8.3937 train_time:13960ms step_avg:1745.05ms
+step:9/20000 train_loss:8.3178 train_time:15741ms step_avg:1748.97ms
+step:10/20000 train_loss:8.2734 train_time:17524ms step_avg:1752.45ms
+step:34/20000 val_loss:7.7279 val_bpb:4.5769 train_time:60330ms step_avg:1774.42ms
+stopping_early: wallclock_cap train_time:60330ms step:34/20000
+peak memory allocated: 26625 MiB reserved: 26828 MiB
+ema:applying EMA weights
+DIAGNOSTIC post_ema val_loss:6.3840 val_bpb:3.7809 eval_time:42753ms
+Serialized model: 128321146 bytes
+Code size: 134941 bytes
+gptq:building non-banked model for Hessian collection...
+gptq:generating AR calibration data (8 seqs x 2048 tokens, temp=0.8)...
+gptq:generated 8 sequences in 22.2s
+gptq:collecting hessians from AR data...
+gptq:collected hessians for 74 layers
+quant_config: mode=int6 bits_mlp=8 bits_attn=4 cats={'attn', 'mlp'}
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 2722, in <module>
+[rank0]:     main()
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 2549, in main
+[rank0]:     quant_result, quant_meta = mixed_quantize_int6(
+[rank0]:                                ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 1971, in mixed_quantize_int6
+[rank0]:     clip = _bits_to_clip_range(bits)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 1951, in _bits_to_clip_range
+[rank0]:     return {5: 15, 6: 31, 8: 127}[bits]
+[rank0]:            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+[rank0]: KeyError: 4
+[rank0]:[W402 22:36:11.533208333 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0402 22:36:13.242000 208327 torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 208398) of binary: <venv>/bin/python3
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-02_22:36:13
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 208398)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

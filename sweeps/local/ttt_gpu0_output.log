@@ -1,0 +1,16 @@
+Wed Apr  1 08:18:52 PM CDT 2026 ====== TTT VARIANTS GPU0 START ======
+
+Wed Apr  1 08:18:52 PM CDT 2026 === RUN 1/3: Standard TTT (SGD, momentum=0.9) ===
+Wed Apr  1 09:39:55 PM CDT 2026 === RUN 1 DONE ===
+
+Wed Apr  1 09:39:55 PM CDT 2026 === RUN 2/3: qTTT (query-only, AdamW) ===
+Wed Apr  1 10:57:40 PM CDT 2026 === RUN 2 DONE ===
+
+Wed Apr  1 10:57:40 PM CDT 2026 === RUN 3/3: No TTT (baseline) ===
+Wed Apr  1 11:26:26 PM CDT 2026 === RUN 3 DONE ===
+
+Wed Apr  1 11:26:26 PM CDT 2026 ====== GPU0 RESULTS ======
+  ttt_standard_sgd: steps=203 sliding=3.40715212 ttt=2.82472306
+  ttt_qttt_adamw: steps=202 sliding=3.40342638 ttt=3.36357870
+  ttt_none_baseline: steps=202 sliding=3.40375563 ttt=N/A
+Wed Apr  1 11:26:26 PM CDT 2026 ====== DONE ======

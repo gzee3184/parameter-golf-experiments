@@ -1,0 +1,304 @@
+logs/3bbb3ea0-94f2-4a04-9a8a-62659753c3c5.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_4096_bpe.model
+train_loader:dataset:fineweb10B_sp4096 train_shards:143
+val_loader:shards pattern=./data/datasets/fineweb10B_sp4096/fineweb_val_*.bin tokens:45508608
+model_params:37552732
+arch_config: vocab_size=4096 num_layers=11 model_dim=512 mlp_mult=4.0 muon_wd=0.09 adam_wd=0.02 embed_wd=0.09 matrix_lr=0.02 sigmoid_skip=True byte_shuffle=True qk_gain_init=5.0 recur_layers=[3, 4, 5] recur_start_step=1000 ve_enabled=True ve_dim=128 ve_layers=[9, 10] parallel_start_layer=7
+XSA:last_11 active_layers:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+world_size:1 grad_accum_steps:8
+sdp_backends:cudnn=False flash=True mem_efficient=False math=False
+attention_mode:gqa num_heads:8 num_kv_heads:4
+tie_embeddings:True embed_lr:0.035 head_lr:0.0 matrix_lr:0.02 scalar_lr:0.02
+train_batch_tokens:786432 train_seq_len:2048 iterations:20000 warmup_steps:20 max_wallclock_seconds:3600.000
+seed:1337
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+warmup_step:1/20
+warmup_step:2/20
+warmup_step:3/20
+warmup_step:4/20
+warmup_step:5/20
+warmup_step:6/20
+warmup_step:7/20
+warmup_step:8/20
+warmup_step:9/20
+warmup_step:10/20
+warmup_step:11/20
+warmup_step:12/20
+warmup_step:13/20
+warmup_step:14/20
+warmup_step:15/20
+warmup_step:16/20
+warmup_step:17/20
+warmup_step:18/20
+warmup_step:19/20
+warmup_step:20/20
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+<venv>/lib/python3.12/site-packages/torch/_inductor/lowering.py:7836: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+step:0/20000 val_loss:8.3161 val_bpb:3.6141 train_time:0ms step_avg:0.01ms
+step:1/20000 train_loss:8.3151 train_time:1902ms step_avg:1901.94ms
+step:2/20000 train_loss:14.0726 train_time:3776ms step_avg:1888.18ms
+step:3/20000 train_loss:11.9566 train_time:5800ms step_avg:1933.45ms
+step:4/20000 train_loss:9.7451 train_time:7830ms step_avg:1957.48ms
+step:5/20000 train_loss:8.1848 train_time:9862ms step_avg:1972.40ms
+step:6/20000 train_loss:7.2805 train_time:11893ms step_avg:1982.24ms
+step:7/20000 train_loss:6.8689 train_time:13927ms step_avg:1989.53ms
+step:8/20000 train_loss:6.7188 train_time:15964ms step_avg:1995.45ms
+step:9/20000 train_loss:6.6246 train_time:18003ms step_avg:2000.32ms
+step:10/20000 train_loss:6.5092 train_time:20041ms step_avg:2004.06ms
+step:100/20000 train_loss:4.2225 train_time:204902ms step_avg:2049.02ms
+step:200/20000 train_loss:3.4145 train_time:409757ms step_avg:2048.79ms
+step:300/20000 train_loss:3.2012 train_time:614851ms step_avg:2049.50ms
+step:400/20000 train_loss:3.0987 train_time:819767ms step_avg:2049.42ms
+step:500/20000 train_loss:3.0368 train_time:1024903ms step_avg:2049.81ms
+step:600/20000 train_loss:2.9600 train_time:1230534ms step_avg:2050.89ms
+step:700/20000 train_loss:2.9461 train_time:1435625ms step_avg:2050.89ms
+step:800/20000 train_loss:2.9082 train_time:1640999ms step_avg:2051.25ms
+step:900/20000 train_loss:2.8771 train_time:1846269ms step_avg:2051.41ms
+step:1000/20000 train_loss:2.8609 train_time:2051625ms step_avg:2051.62ms
+recurrence:activated at step 1000, virtual_layers=[(0, False), (1, False), (2, False), (3, False), (4, False), (5, False), (3, True), (4, True), (5, True), (6, False), (7, False), (8, False), (9, False), (10, False)]
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 1956, in <module>
+[rank0]:     main()
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 1686, in main
+[rank0]:     loss = model(x, y)
+[rank0]:            ^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 472, in __call__
+[rank0]:     return super().__call__(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1024, in compile_wrapper
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 2316, in __call__
+[rank0]:     result = self._torchdynamo_orig_backend(
+[rank0]:              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 729, in __call__
+[rank0]:     result = _compile(
+[rank0]:              ^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1827, in _compile
+[rank0]:     guarded_code, tracer_output = compile_inner(code, one_graph, hooks)
+[rank0]:                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_utils_internal.py", line 96, in wrapper_function
+[rank0]:     return function(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1500, in compile_inner
+[rank0]:     return _compile_inner(code, one_graph, hooks)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1534, in _compile_inner
+[rank0]:     dynamo_output = compile_frame(
+[rank0]:                     ^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1408, in compile_frame
+[rank0]:     bytecode, tracer_output = transform_code_object(code, transform)
+[rank0]:                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/bytecode_transformation.py", line 1608, in transform_code_object
+[rank0]:     tracer_output = transformations(instructions, code_options)
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1380, in transform
+[rank0]:     tracer_output = trace_frame(
+[rank0]:                     ^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 341, in _fn
+[rank0]:     return fn(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 863, in trace_frame
+[rank0]:     run_tracer()
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 844, in run_tracer
+[rank0]:     tracer.run()
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1794, in run
+[rank0]:     while self.step():
+[rank0]:           ^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1459, in step
+[rank0]:     self.dispatch_table[inst.opcode](self, inst)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1001, in wrapper
+[rank0]:     return inner_fn(self, inst)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 4093, in CALL
+[rank0]:     self._call(inst)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 4084, in _call
+[rank0]:     self.call_function(fn, args, kwargs)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1360, in call_function
+[rank0]:     self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 1510, in call_function
+[rank0]:     return super().call_function(tx, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 691, in call_function
+[rank0]:     return super().call_function(tx, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 403, in call_function
+[rank0]:     return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)  # type: ignore[attr-defined]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1387, in inline_user_function_return
+[rank0]:     return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 5668, in inline_call
+[rank0]:     return tracer.inline_call_()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 5882, in inline_call_
+[rank0]:     self.run()
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1794, in run
+[rank0]:     while self.step():
+[rank0]:           ^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1459, in step
+[rank0]:     self.dispatch_table[inst.opcode](self, inst)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1001, in wrapper
+[rank0]:     return inner_fn(self, inst)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 4093, in CALL
+[rank0]:     self._call(inst)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 4084, in _call
+[rank0]:     self.call_function(fn, args, kwargs)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1360, in call_function
+[rank0]:     self.push(fn.call_function(self, args, kwargs))  # type: ignore[arg-type]
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 1510, in call_function
+[rank0]:     return super().call_function(tx, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 691, in call_function
+[rank0]:     return super().call_function(tx, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/functions.py", line 403, in call_function
+[rank0]:     return tx.inline_user_function_return(self, [*self.self_args(), *args], kwargs)  # type: ignore[attr-defined]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1387, in inline_user_function_return
+[rank0]:     return InliningInstructionTranslator.inline_call(self, fn, args, kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 5668, in inline_call
+[rank0]:     return tracer.inline_call_()
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 5882, in inline_call_
+[rank0]:     self.run()
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1794, in run
+[rank0]:     while self.step():
+[rank0]:           ^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1459, in step
+[rank0]:     self.dispatch_table[inst.opcode](self, inst)
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 1001, in wrapper
+[rank0]:     return inner_fn(self, inst)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 480, in impl
+[rank0]:     self.push(fn_var.call_function(self, self.popn(nargs), {}))
+[rank0]:               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builtin.py", line 1440, in call_function
+[rank0]:     return handler(tx, args, kwargs)  # type: ignore[return-value]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builtin.py", line 1023, in <lambda>
+[rank0]:     return lambda tx, args, kwargs: obj.call_function(
+[rank0]:                                     ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builtin.py", line 1440, in call_function
+[rank0]:     return handler(tx, args, kwargs)  # type: ignore[return-value]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builtin.py", line 1399, in _handle_insert_op_in_graph
+[rank0]:     return wrap_fx_proxy(tx, proxy)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builder.py", line 3032, in wrap_fx_proxy
+[rank0]:     return wrap_fx_proxy_cls(target_cls=TensorVariable, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builder.py", line 3107, in wrap_fx_proxy_cls
+[rank0]:     out: VTTypeAlias = _wrap_fx_proxy(
+[rank0]:                        ^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/variables/builder.py", line 3231, in _wrap_fx_proxy
+[rank0]:     example_value = get_fake_value(proxy.node, tx, allow_non_graph_fake=True)
+[rank0]:                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/utils.py", line 3627, in get_fake_value
+[rank0]:     return _get_fake_value_impl(node, tx, allow_non_graph_fake)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/utils.py", line 3818, in _get_fake_value_impl
+[rank0]:     _wrap_graph_break_with_torch_runtime_err(
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/utils.py", line 3616, in _wrap_graph_break_with_torch_runtime_err
+[rank0]:     raise exc.with_traceback(e.__traceback__) from None
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/utils.py", line 3613, in _wrap_graph_break_with_torch_runtime_err
+[rank0]:     gb_fn()
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/utils.py", line 3819, in <lambda>
+[rank0]:     lambda: unimplemented(
+[rank0]:             ^^^^^^^^^^^^^^
+[rank0]:   File "<venv>/lib/python3.12/site-packages/torch/_dynamo/exc.py", line 631, in unimplemented
+[rank0]:     raise Unsupported(
+[rank0]: torch._dynamo.exc.TorchRuntimeError: RuntimeError when making fake tensor call
+[rank0]:   Explanation: Dynamo failed to run FX node with fake tensors: call_function <built-in function getitem>(*(Parameter(FakeTensor(..., device='cuda:0', size=(11, 512), dtype=torch.bfloat16,
+[rank0]:                requires_grad=True)), 11), **{}): got IndexError('index 11 is out of bounds for dimension 0 with size 11')
+[rank0]:   Hint: Your code may result in an error when running in eager. Please double check that your code doesn't contain a similar error when actually running eager/uncompiled. You can do this by removing the `torch.compile` call, or by using `torch.compiler.set_stance("force_eager")`. 
+
+[rank0]:   Developer debug context: 
+
+[rank0]:  For more details about this graph break, please visit: https://meta-pytorch.github.io/compile-graph-break-site/gb/gb4315.html
+
+[rank0]: from user code:
+[rank0]:    File "<project>/parameter-golf/train_gpt.py", line 937, in forward
+[rank0]:     x = self._forward_body(input_ids)
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 901, in _forward_body
+[rank0]:     x = self._attn_res_input(ar_layers, num_enc + vi)
+[rank0]:   File "<project>/parameter-golf/train_gpt.py", line 861, in _attn_res_input
+[rank0]:     q = self.ar_queries[layer_idx].to(dtype=keys.dtype)
+
+[rank0]: Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+[rank0]:[W407 00:14:42.815981646 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0407 00:14:44.513000 1295978 torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 1296051) of binary: <venv>/bin/python3
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-07_00:14:44
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1296051)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

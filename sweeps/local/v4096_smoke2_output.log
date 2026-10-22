@@ -1,0 +1,3 @@
+Fri Apr  3 01:50:08 AM CDT 2026 === v4096_smoke === (GPU 1)
+  v4096_smoke: prequant=3.4276 quant=3.44070947 steps=35 step_ms=1737.66 art=7.28MB params=33841752
+Fri Apr  3 01:55:19 AM CDT 2026 === DONE ===

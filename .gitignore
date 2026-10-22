@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pt
+*.ptz
+venv/
+.venv/
+data/
+logs/tmp/
+.triton_cache/
+torchinductor_*/
+.ipynb_checkpoints/

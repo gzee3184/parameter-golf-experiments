@@ -1,0 +1,46 @@
+logs/476b2840-9243-4e94-9f61-e481e51038bf.txt
+val_bpb:enabled tokenizer_kind=sentencepiece tokenizer_path=./data/tokenizers/fineweb_1024_bpe.model
+train_loader:dataset:fineweb10B_sp1024 train_shards:80
+val_loader:shards pattern=./data/datasets/fineweb10B_sp1024/fineweb_val_*.bin tokens:62021632
+ttt_only:loading <project>/local_tests/best_600s.ptz
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 2722, in <module>
+[rank0]:     main()
+[rank0]:   File "<project>/parameter-golf/records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py", line 2107, in main
+[rank0]:     quant_state = torch.load(io.BytesIO(_decompress(quant_blob_disk)), map_location="cpu")
+[rank0]:                                         ^^^^^^^^^^^
+[rank0]: UnboundLocalError: cannot access local variable '_decompress' where it is not associated with a value
+[rank0]:[W403 00:01:24.284090477 ProcessGroupNCCL.cpp:1575] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())
+E0403 00:01:25.502000 234329 torch/distributed/elastic/multiprocessing/api.py:986] failed (exitcode: 1) local_rank: 0 (pid: 234400) of binary: <venv>/bin/python3
+Traceback (most recent call last):
+  File "<venv>/bin/torchrun", line 6, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 362, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 990, in main
+    run(args)
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/run.py", line 981, in run
+    elastic_launch(
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 170, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<venv>/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 317, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+records/track_10min_16mb/2026-03-27_ActivationSearch/train_gpt.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-04-03_00:01:25
+  host      : workstation
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 234400)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

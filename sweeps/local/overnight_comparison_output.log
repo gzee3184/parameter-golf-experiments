@@ -1,0 +1,30 @@
+Tue Mar 31 08:11:20 PM CDT 2026 ====== OVERNIGHT COMPARISON START ======
+Wallclock per run: 14400s
+
+Tue Mar 31 08:11:20 PM CDT 2026 Launching GPU 0: Leaderboard baseline (leaky05, no Muon+)...
+  PID: 539071
+Tue Mar 31 08:11:30 PM CDT 2026 Launching GPU 1: Our best (mish2 + Muon+)...
+  PID: 539604
+
+Tue Mar 31 08:11:30 PM CDT 2026 Both runs launched.
+  Monitor GPU 0: tail -f <project>/local_tests/comparison_leaderboard.log
+  Monitor GPU 1: tail -f <project>/local_tests/comparison_ours.log
+
+Wed Apr  1 01:27:36 AM CDT 2026 GPU 0 (leaderboard) finished — exit code 0
+Wed Apr  1 01:30:42 AM CDT 2026 GPU 1 (ours) finished — exit code 0
+
+Wed Apr  1 01:30:42 AM CDT 2026 ====== RESULTS SUMMARY ======
+
+  LEADERBOARD(leaky05,noMuon+)
+    steps=9742  pre_quant=1.1272  post_ema=1.1263
+    sliding=1.10690864  ttt=1.10698499  ttt_time=3050.8s
+    artifact=15870427 bytes
+
+  OURS(mish2+Muon+)
+    steps=9134  pre_quant=1.1391  post_ema=1.1381
+    sliding=1.11800366  ttt=1.11808764  ttt_time=3141.2s
+    artifact=15586023 bytes
+
+Reference: Leaderboard #1 = 1.1147 BPB (8xH100)
+Reference: Leaderboard #2 = 1.1194 BPB (8xH100)
+Wed Apr  1 01:30:42 AM CDT 2026 ====== DONE ======
